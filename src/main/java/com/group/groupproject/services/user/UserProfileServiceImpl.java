@@ -1,7 +1,7 @@
-package com.group.groupproject.services;
+package com.group.groupproject.services.user;
 
-import com.group.groupproject.dao.UserProfileDao;
-import com.group.groupproject.entities.UserProfile;
+import com.group.groupproject.dao.user.UserProfileDao;
+import com.group.groupproject.entities.user.UserProfile;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

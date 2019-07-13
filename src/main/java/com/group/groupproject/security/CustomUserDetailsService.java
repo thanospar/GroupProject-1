@@ -1,8 +1,8 @@
 package com.group.groupproject.security;
 
-import com.group.groupproject.entities.User;
-import com.group.groupproject.entities.UserProfile;
-import com.group.groupproject.services.UserService;
+import com.group.groupproject.entities.user.User;
+import com.group.groupproject.entities.user.UserProfile;
+import com.group.groupproject.services.user.UserService;
 import java.util.ArrayList;
 import java.util.List;
 

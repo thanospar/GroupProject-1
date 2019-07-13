@@ -1,6 +1,7 @@
-package com.group.groupproject.dao;
+package com.group.groupproject.dao.user;
 
-import com.group.groupproject.entities.PersistentLogin;
+import com.group.groupproject.dao.AbstractDao;
+import com.group.groupproject.entities.user.PersistentLogin;
 import java.util.Date;
 
 import org.hibernate.Criteria;

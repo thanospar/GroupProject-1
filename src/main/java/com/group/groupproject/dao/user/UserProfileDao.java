@@ -1,6 +1,6 @@
-package com.group.groupproject.dao;
+package com.group.groupproject.dao.user;
 
-import com.group.groupproject.entities.UserProfile;
+import com.group.groupproject.entities.user.UserProfile;
 import java.util.List;
 
 

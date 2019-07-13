@@ -1,9 +1,9 @@
 package com.group.groupproject.controllers;
 
-import com.group.groupproject.entities.User;
-import com.group.groupproject.entities.UserProfile;
-import com.group.groupproject.services.UserProfileService;
-import com.group.groupproject.services.UserService;
+import com.group.groupproject.entities.user.User;
+import com.group.groupproject.entities.user.UserProfile;
+import com.group.groupproject.services.user.UserProfileService;
+import com.group.groupproject.services.user.UserService;
 import java.util.List;
 import java.util.Locale;
 

@@ -2,8 +2,8 @@ package com.group.groupproject.converter;
 //
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
-import com.group.groupproject.entities.UserProfile;
-import com.group.groupproject.services.UserProfileService;
+import com.group.groupproject.entities.user.UserProfile;
+import com.group.groupproject.services.user.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

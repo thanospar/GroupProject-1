@@ -32,6 +32,7 @@ CREATE TABLE `groupprojectdb`.`books` (
   `isbn` VARCHAR(20) NULL,
   `cover` ENUM('Paperback', 'Hardback') NULL,
   `year_published` DATE NULL,
+  `url_path` VARCHAR(100) NULL,
   `publisher_id` INT NULL,
   `book_series_id` INT NULL,
   PRIMARY KEY (`book_id`),
