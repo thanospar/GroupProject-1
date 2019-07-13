@@ -1,0 +1,2 @@
+CREATE SCHEMA `groupprojectdb` DEFAULT CHARACTER SET utf8mb4 ;
+
