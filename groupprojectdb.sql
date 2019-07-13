@@ -31,7 +31,7 @@ CREATE TABLE `groupprojectdb`.`books` (
   `summary` VARCHAR(1000) NULL,
   `isbn` VARCHAR(20) NULL,
   `cover` ENUM('Paperback', 'Hardback') NULL,
-  `year_published` DATE NULL,
+  `year_published` CHAR(4) NULL,
   `url_path` VARCHAR(100) NULL,
   `publisher_id` INT NULL,
   `book_series_id` INT NULL,
@@ -119,3 +119,15 @@ CREATE TABLE groupprojectdb.persistent_logins (
     last_used TIMESTAMP NOT NULL,
     PRIMARY KEY (series)
 );
+
+INSERT INTO `groupprojectdb`.`categories` (`category`) VALUES ('Detective');
+INSERT INTO `groupprojectdb`.`categories` (`category`) VALUES ('Fantasy');
+
+INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('Dioptra', 'info about Dioptra');
+INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('Anubis', 'info about Anubis');
+INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('BELL', 'info about BELL');
+
+INSERT INTO `groupprojectdb`.`book_series` (`title`) VALUES ('Foundation');
+INSERT INTO `groupprojectdb`.`book_series` (`title`) VALUES ('The Dark Tower');
+
+INSERT INTO `groupprojectdb`.`books` (`title`, `summary`, `isbn`, `cover`, `year_published`, `publisher_id`, `book_series_id`) VALUES ('Foundation', 'The best', '9789604972661', 'Paperback', '2016', '2', '1');
