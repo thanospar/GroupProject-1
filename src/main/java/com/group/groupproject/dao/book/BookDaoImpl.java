@@ -1,4 +1,3 @@
-
 package com.group.groupproject.dao.book;
 
 import com.group.groupproject.dao.AbstractDao;
@@ -10,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository("bookDao")
 @Transactional
-public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao{
+public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao {
 
     @Override
     public Book findById(int id) {
@@ -24,18 +23,18 @@ public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao{
     }
 
     @Override
-    public void saveBook(Book book) {
-        persist(book);
+    public boolean saveBook(Book book) {
+        return persist(book);
     }
 
     @Override
-    public void updateBook(Book book) {
-        update(book);
+    public boolean updateBook(Book book) {
+        return update(book);
     }
-    
+
     @Override
-    public void deleteBook(Book book) {
-        delete(book);
+    public boolean deleteBook(Book book) {
+        return delete(book);
     }
-    
+
 }

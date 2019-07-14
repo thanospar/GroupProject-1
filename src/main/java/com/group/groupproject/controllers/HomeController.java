@@ -2,6 +2,7 @@
 package com.group.groupproject.controllers;
 
 import com.group.groupproject.dao.book.BookDao;
+import com.group.groupproject.entities.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,13 +13,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class HomeController {
     
-//    @Autowired
-//    BookDao bookDao;
+    @Autowired
+    BookDao bookDao;
     
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
 //        System.out.println(bookDao.findAllBooks());
-        
+//        Book b  = bookDao.findById(1);
+//        b.setSummary("best best best");
+//        if(bookDao.saveBook(b)){
+//            System.out.println("saved");
+//        }
+//        else{
+//            System.out.println("not saved");
+//        }
+//        if(bookDao.updateBook(b)){
+//            System.out.println("updated");
+//        }
+//        else{
+//            System.out.println("not updated");
+//        }
         return "index";
     }
     

@@ -8,8 +8,8 @@ public interface BookDao {
     
     Book findById(int id);
     List<Book> findAllBooks();
-    void saveBook(Book book);
-    void updateBook(Book book); 
-    void deleteBook(Book book);
+    boolean saveBook(Book book);
+    boolean updateBook(Book book); 
+    boolean deleteBook(Book book);
 
 }
