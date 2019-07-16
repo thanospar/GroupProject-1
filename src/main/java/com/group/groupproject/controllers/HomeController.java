@@ -1,6 +1,7 @@
 
 package com.group.groupproject.controllers;
 
+import com.group.groupproject.dao.author.AuthorDao;
 import com.group.groupproject.dao.book.BookDao;
 import com.group.groupproject.entities.Book;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
     
     @Autowired
-    BookDao bookDao;
+    AuthorDao authorDao;
     
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
+        
+        System.out.println(authorDao.findAllAuthors());
 //        System.out.println(bookDao.findAllBooks());
 //        Book b  = bookDao.findById(1);
 //        b.setSummary("best best best");

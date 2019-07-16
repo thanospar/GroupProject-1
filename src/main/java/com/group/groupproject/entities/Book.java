@@ -1,13 +1,17 @@
 package com.group.groupproject.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Column;
-import javax.persistence.Convert;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,7 +38,7 @@ public class Book implements Serializable {
     private String cover;
 
     @Column(name = "year_published", nullable = false)
-    private String yearPublished;
+    private int yearPublished;
 
     @Column(name = "url_path")
     private String urlPath;
@@ -45,6 +49,12 @@ public class Book implements Serializable {
     @Column(name = "book_series_id", nullable = false)
     private int bookSeriesId;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "written_by", 
+             joinColumns = { @JoinColumn(name = "book_id") }, 
+             inverseJoinColumns = { @JoinColumn(name = "author_id") })
+    private Set<Author> authors = new HashSet();
+    
     public Integer getId() {
         return id;
     }
@@ -85,11 +95,11 @@ public class Book implements Serializable {
         this.cover = cover;
     }
 
-    public String getYearPublished() {
+    public int getYearPublished() {
         return yearPublished;
     }
 
-    public void setYearPublished(String yearPublished) {
+    public void setYearPublished(int yearPublished) {
         this.yearPublished = yearPublished;
     }
 

@@ -31,7 +31,7 @@ CREATE TABLE `groupprojectdb`.`books` (
   `summary` VARCHAR(1000) NULL,
   `isbn` VARCHAR(20) NULL,
   `cover` ENUM('Paperback', 'Hardback') NULL,
-  `year_published` CHAR(4) NULL,
+  `year_published` INT(4) NULL,
   `url_path` VARCHAR(100) NULL,
   `publisher_id` INT NULL,
   `book_series_id` INT NULL,
@@ -131,3 +131,8 @@ INSERT INTO `groupprojectdb`.`book_series` (`title`) VALUES ('Foundation');
 INSERT INTO `groupprojectdb`.`book_series` (`title`) VALUES ('The Dark Tower');
 
 INSERT INTO `groupprojectdb`.`books` (`title`, `summary`, `isbn`, `cover`, `year_published`, `publisher_id`, `book_series_id`) VALUES ('Foundation', 'The best', '9789604972661', 'Paperback', '2016', '2', '1');
+
+INSERT INTO `groupprojectdb`.`authors` (`first_name`, `last_name`, `date_of_birth`, `date_of_death`, `biography`) VALUES ('Isaak', 'Asimov', '1920-01-02', '1992-04-06', 'biography');
+
+
+INSERT INTO `groupprojectdb`.`written_by` (`book_id`, `author_id`) VALUES ('1', '1');

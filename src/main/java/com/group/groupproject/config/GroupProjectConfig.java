@@ -1,5 +1,6 @@
 package com.group.groupproject.config;
 
+import com.group.groupproject.converter.LocalDatePersistenceConverter;
 import com.group.groupproject.converter.RoleToUserProfileConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,7 @@ public class GroupProjectConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     RoleToUserProfileConverter roleToUserProfileConverter;
+    
 
     @Bean(name = "GroupProject")
     public ViewResolver viewResolver() {
