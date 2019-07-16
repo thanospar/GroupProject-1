@@ -43,11 +43,11 @@ public class Book implements Serializable {
     @Column(name = "url_path")
     private String urlPath;
 
+    @Column(name = "book_series", nullable = false)
+    private String bookSeries;
+    
     @Column(name = "publisher_id", nullable = false)
     private int publisherId;
-
-    @Column(name = "book_series_id", nullable = false)
-    private int bookSeriesId;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "written_by", 
@@ -119,12 +119,12 @@ public class Book implements Serializable {
         this.publisherId = publisherId;
     }
 
-    public int getBookSeriesId() {
-        return bookSeriesId;
+    public String getBookSeriesId() {
+        return bookSeries;
     }
 
-    public void setBookSeriesId(int bookSeriesId) {
-        this.bookSeriesId = bookSeriesId;
+    public void setBookSeries(String bookSeriesId) {
+        this.bookSeries = bookSeries;
     }
 
     public Set<Author> getAuthors() {
@@ -137,7 +137,7 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "Book{" + "id=" + id + ", title=" + title + ", summary=" + summary + ", isbn=" + isbn + ", cover=" + cover + ", yearPublished=" + yearPublished + ", urlPath=" + urlPath + ", publisherId=" + publisherId + ", bookSeriesId=" + bookSeriesId + '}';
+        return "Book{" + "id=" + id + ", title=" + title + ", summary=" + summary + ", isbn=" + isbn + ", cover=" + cover + ", yearPublished=" + yearPublished + ", urlPath=" + urlPath + ", publisherId=" + publisherId + ", bookSeries=" + bookSeries + '}';
     }
 
 }

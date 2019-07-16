@@ -15,10 +15,10 @@ CREATE TABLE `groupprojectdb`.`publishers` (
   `info` VARCHAR(1000) NULL,
   PRIMARY KEY (`publisher_id`));
 
-CREATE TABLE `groupprojectdb`.`book_series` (
-  `book_series_id` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`book_series_id`));
+CREATE TABLE `groupprojectdb`.`quantities` (
+  `quantity_id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT(3) NOT NULL,
+  PRIMARY KEY (`quantity_id`));
 
 CREATE TABLE `groupprojectdb`.`categories` (
   `category_id` INT NOT NULL AUTO_INCREMENT,
@@ -33,13 +33,14 @@ CREATE TABLE `groupprojectdb`.`books` (
   `cover` ENUM('Paperback', 'Hardback') NULL,
   `year_published` INT(4) NULL,
   `url_path` VARCHAR(100) NULL,
+  `book_series` VARCHAR(100) NULL,
   `publisher_id` INT NULL,
-  `book_series_id` INT NULL,
+  `quantity_id` INT NULL,
   PRIMARY KEY (`book_id`),
   CONSTRAINT `FK_Books_1`
     FOREIGN KEY (`publisher_id`) REFERENCES `groupprojectdb`.`publishers` (`publisher_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_Books_2`
-    FOREIGN KEY (`book_series_id`) REFERENCES `groupprojectdb`.`book_series` (`book_series_id`) ON DELETE NO ACTION ON UPDATE NO ACTION);
+    FOREIGN KEY (`quantity_id`) REFERENCES `groupprojectdb`.`quantities` (`quantity_id`) ON DELETE NO ACTION ON UPDATE NO ACTION);
     
 CREATE TABLE `groupprojectdb`.`written_by` (
   `written_by_id` INT NOT NULL AUTO_INCREMENT,
@@ -127,10 +128,7 @@ INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('Dioptra', '
 INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('Anubis', 'info about Anubis');
 INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('BELL', 'info about BELL');
 
-INSERT INTO `groupprojectdb`.`book_series` (`title`) VALUES ('Foundation');
-INSERT INTO `groupprojectdb`.`book_series` (`title`) VALUES ('The Dark Tower');
-
-INSERT INTO `groupprojectdb`.`books` (`title`, `summary`, `isbn`, `cover`, `year_published`, `publisher_id`, `book_series_id`) VALUES ('Foundation', 'The best', '9789604972661', 'Paperback', '2016', '2', '1');
+INSERT INTO `groupprojectdb`.`books` (`title`, `summary`, `isbn`, `cover`, `year_published`, `book_series`, `publisher_id`) VALUES ('Foundation', 'The best', '9789604972661', 'Paperback', '2016', 'Foundation', '2');
 
 INSERT INTO `groupprojectdb`.`authors` (`first_name`, `last_name`, `date_of_birth`, `date_of_death`, `biography`) VALUES ('Isaak', 'Asimov', '1920-01-02', '1992-04-06', 'biography');
 
