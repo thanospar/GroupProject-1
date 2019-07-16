@@ -17,9 +17,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "books")
 public class Book implements Serializable {
-    
+
 //    private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id", nullable = false)
@@ -45,16 +44,21 @@ public class Book implements Serializable {
 
     @Column(name = "book_series", nullable = false)
     private String bookSeries;
-    
+
     @Column(name = "publisher_id", nullable = false)
-    private int publisherId;
+    private Integer publisherId;
+
+    @Column(name = "quantity_id", nullable = true)
+    private Integer quantityId;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "written_by", 
-             joinColumns = { @JoinColumn(name = "book_id") }, 
-             inverseJoinColumns = { @JoinColumn(name = "author_id") })
+    @JoinTable(name = "written_by",
+            joinColumns = {
+                @JoinColumn(name = "book_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "author_id")})
     private Set<Author> authors = new HashSet();
-    
+
     public Integer getId() {
         return id;
     }
@@ -111,20 +115,28 @@ public class Book implements Serializable {
         this.urlPath = urlPath;
     }
 
-    public int getPublisherId() {
+    public Integer getPublisherId() {
         return publisherId;
     }
 
-    public void setPublisherId(int publisherId) {
+    public void setPublisherId(Integer publisherId) {
         this.publisherId = publisherId;
     }
 
-    public String getBookSeriesId() {
+    public String getBookSeries() {
         return bookSeries;
     }
 
     public void setBookSeries(String bookSeriesId) {
         this.bookSeries = bookSeries;
+    }
+
+    public Integer getQuantityId() {
+        return quantityId;
+    }
+
+    public void setQuantityId(Integer quantityId) {
+        this.quantityId = quantityId;
     }
 
     public Set<Author> getAuthors() {
