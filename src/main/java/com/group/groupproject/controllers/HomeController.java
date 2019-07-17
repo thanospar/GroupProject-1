@@ -15,13 +15,14 @@ public class HomeController {
 
     @Autowired
     AuthorDao authorDao;
+    
     @Autowired
     BookDao bookDao;
 
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
 
-        //System.out.println(authorDao.findAllAuthors().get(0).getBooks());
+//        System.out.println(authorDao.findAllAuthors().get(0).getBooks());
 //        System.out.println(bookDao.findAllBooks());
 //        Book b  = bookDao.findById(1);
 //        b.setSummary("best best best");
