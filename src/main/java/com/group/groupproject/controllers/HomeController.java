@@ -22,7 +22,7 @@ public class HomeController {
     public String sayHello(ModelMap model) {
 
         //System.out.println(authorDao.findAllAuthors().get(0).getBooks());
-        System.out.println(bookDao.findAllBooks());
+//        System.out.println(bookDao.findAllBooks());
 //        Book b  = bookDao.findById(1);
 //        b.setSummary("best best best");
 //        if(bookDao.saveBook(b)){
