@@ -22,7 +22,7 @@ CREATE TABLE `groupprojectdb`.`quantities` (
 
 CREATE TABLE `groupprojectdb`.`categories` (
   `category_id` INT NOT NULL AUTO_INCREMENT,
-  `category` VARCHAR(45) NOT NULL,
+  `category` VARCHAR(45) NOT NULL UNIQUE,
   PRIMARY KEY (`category_id`));
 
 CREATE TABLE `groupprojectdb`.`books` (
@@ -33,6 +33,7 @@ CREATE TABLE `groupprojectdb`.`books` (
   `cover` ENUM('Paperback', 'Hardback') NULL,
   `year_published` INT(4) NULL,
   `url_path` VARCHAR(100) NULL,
+  `price` INT(3) NULL,
   `book_series` VARCHAR(100) NULL,
   `publisher_id` INT NULL,
   `quantity_id` INT NULL,
@@ -120,6 +121,21 @@ CREATE TABLE groupprojectdb.persistent_logins (
     last_used TIMESTAMP NOT NULL,
     PRIMARY KEY (series)
 );
+CREATE TABLE `groupprojectdb`.`invoices` (
+  `invoice_id` INT NOT NULL,
+  `date` DATE NULL,
+  `user_id` BIGINT NOT NULL,
+  PRIMARY KEY (`invoice_id`),
+  CONSTRAINT `FK_Invoices_1` FOREIGN KEY (`user_id`) REFERENCES `groupprojectdb`.`APP_USER` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);
+
+CREATE TABLE `groupprojectdb`.`bought` (
+  `bought_id` INT NOT NULL AUTO_INCREMENT,
+  `price` INT(3) NOT NULL,
+  `invoice_id` INT NOT NULL,
+  `book_id` INT NOT NULL,
+  PRIMARY KEY (`bought_id`),
+  CONSTRAINT `FK_Bought_1` FOREIGN KEY (`invoice_id`) REFERENCES `groupprojectdb`.`invoices` (`invoice_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_Bought_2` FOREIGN KEY (`book_id`) REFERENCES `groupprojectdb`.`books` (`book_id`) ON DELETE NO ACTION ON UPDATE NO ACTION);
 
 INSERT INTO `groupprojectdb`.`categories` (`category`) VALUES ('Detective');
 INSERT INTO `groupprojectdb`.`categories` (`category`) VALUES ('Fantasy');
