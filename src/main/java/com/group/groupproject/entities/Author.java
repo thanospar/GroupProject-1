@@ -1,6 +1,7 @@
 package com.group.groupproject.entities;
 
 import com.group.groupproject.converter.LocalDatePersistenceConverter;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,10 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "authors")
-public class Author {
+public class Author implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,9 +41,14 @@ public class Author {
 
     @Column(name = "biography", nullable = true)
     private String biography;
-
-    @ManyToMany(mappedBy = "authors",fetch = FetchType.EAGER)
+    
+    @NotEmpty
+    @ManyToMany(mappedBy = "authors",fetch = FetchType.LAZY)
     private Set<Book> books = new HashSet();
+
+    public Author() {
+    }
+
 
     public Integer getId() {
         return id;
@@ -101,7 +108,7 @@ public class Author {
 
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", dateOfDeath=" + dateOfDeath + ", biography=" + biography + ", books=" + books + '}';
+        return "Author{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", dateOfDeath=" + dateOfDeath + ", biography=" + biography + '}';
     }
     
     

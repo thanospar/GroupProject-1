@@ -39,9 +39,9 @@ CREATE TABLE `groupprojectdb`.`books` (
   `quantity_id` INT NULL,
   PRIMARY KEY (`book_id`),
   CONSTRAINT `FK_Books_1`
-    FOREIGN KEY (`publisher_id`) REFERENCES `groupprojectdb`.`publishers` (`publisher_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY (`publisher_id`) REFERENCES `groupprojectdb`.`publishers` (`publisher_id`),
   CONSTRAINT `FK_Books_2`
-    FOREIGN KEY (`quantity_id`) REFERENCES `groupprojectdb`.`quantities` (`quantity_id`) ON DELETE NO ACTION ON UPDATE NO ACTION);
+    FOREIGN KEY (`quantity_id`) REFERENCES `groupprojectdb`.`quantities` (`quantity_id`));
     
 CREATE TABLE `groupprojectdb`.`written_by` (
   `written_by_id` INT NOT NULL AUTO_INCREMENT,
@@ -49,9 +49,9 @@ CREATE TABLE `groupprojectdb`.`written_by` (
   `author_id` INT NOT NULL,
   PRIMARY KEY (`written_by_id`),
   CONSTRAINT `FK_Written_by_1`
-    FOREIGN KEY (`book_id`) REFERENCES `groupprojectdb`.`books` (`book_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY (`book_id`) REFERENCES `groupprojectdb`.`books` (`book_id`),
   CONSTRAINT `FK_Written_by_2`
-    FOREIGN KEY (`author_id`) REFERENCES `groupprojectdb`.`authors` (`author_id`) ON DELETE NO ACTION ON UPDATE NO ACTION);
+    FOREIGN KEY (`author_id`) REFERENCES `groupprojectdb`.`authors` (`author_id`));
     
 CREATE TABLE `groupprojectdb`.`belongs` (
   `belong_id` INT NOT NULL AUTO_INCREMENT,
@@ -59,9 +59,9 @@ CREATE TABLE `groupprojectdb`.`belongs` (
   `category_id` INT NOT NULL,
   PRIMARY KEY (`belong_id`),
   CONSTRAINT `FK_Belongs_1`
-    FOREIGN KEY (`book_id`) REFERENCES `groupprojectdb`.`books` (`book_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY (`book_id`) REFERENCES `groupprojectdb`.`books` (`book_id`),
   CONSTRAINT `FK_Belongs_2`
-    FOREIGN KEY (`category_id`) REFERENCES `groupprojectdb`.`categories` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION);
+    FOREIGN KEY (`category_id`) REFERENCES `groupprojectdb`.`categories` (`category_id`));
     
 /*All User's gets stored in APP_USER table*/
 create table groupprojectdb.APP_USER (
@@ -126,7 +126,7 @@ CREATE TABLE `groupprojectdb`.`invoices` (
   `date` DATE NULL,
   `user_id` BIGINT NOT NULL,
   PRIMARY KEY (`invoice_id`),
-  CONSTRAINT `FK_Invoices_1` FOREIGN KEY (`user_id`) REFERENCES `groupprojectdb`.`APP_USER` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);
+  CONSTRAINT `FK_Invoices_1` FOREIGN KEY (`user_id`) REFERENCES `groupprojectdb`.`APP_USER` (`id`));
 
 CREATE TABLE `groupprojectdb`.`bought` (
   `bought_id` INT NOT NULL AUTO_INCREMENT,
@@ -134,8 +134,8 @@ CREATE TABLE `groupprojectdb`.`bought` (
   `invoice_id` INT NOT NULL,
   `book_id` INT NOT NULL,
   PRIMARY KEY (`bought_id`),
-  CONSTRAINT `FK_Bought_1` FOREIGN KEY (`invoice_id`) REFERENCES `groupprojectdb`.`invoices` (`invoice_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_Bought_2` FOREIGN KEY (`book_id`) REFERENCES `groupprojectdb`.`books` (`book_id`) ON DELETE NO ACTION ON UPDATE NO ACTION);
+  CONSTRAINT `FK_Bought_1` FOREIGN KEY (`invoice_id`) REFERENCES `groupprojectdb`.`invoices` (`invoice_id`),
+  CONSTRAINT `FK_Bought_2` FOREIGN KEY (`book_id`) REFERENCES `groupprojectdb`.`books` (`book_id`));
 
 INSERT INTO `groupprojectdb`.`categories` (`category`) VALUES ('Detective');
 INSERT INTO `groupprojectdb`.`categories` (`category`) VALUES ('Fantasy');
@@ -150,3 +150,5 @@ INSERT INTO `groupprojectdb`.`authors` (`first_name`, `last_name`, `date_of_birt
 
 
 INSERT INTO `groupprojectdb`.`written_by` (`book_id`, `author_id`) VALUES ('1', '1');
+
+INSERT INTO `groupprojectdb`.`belongs` (`book_id`, `category_id`) VALUES ('1', '2');

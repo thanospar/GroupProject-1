@@ -4,16 +4,22 @@ import com.group.groupproject.dao.AbstractDao;
 import com.group.groupproject.entities.Book;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository("bookDao")
-@Transactional
 public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao {
 
     @Override
     public Book findById(int id) {
-        return getByKey(id);
+        Book b = getByKey(id);
+        if (b != null) {
+            Hibernate.initialize(b.getAuthors());
+            
+            Hibernate.initialize(b.getCategories());
+        }
+        return b;
     }
 
     @SuppressWarnings("unchecked")

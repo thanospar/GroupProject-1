@@ -12,13 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "books")
 public class Book implements Serializable {
 
-//    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id", nullable = false)
@@ -45,19 +47,50 @@ public class Book implements Serializable {
     @Column(name = "book_series", nullable = false)
     private String bookSeries;
 
-    @Column(name = "publisher_id", nullable = false)
-    private Integer publisherId;
-
     @Column(name = "quantity_id", nullable = true)
     private Integer quantityId;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+@NotEmpty
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "written_by",
             joinColumns = {
                 @JoinColumn(name = "book_id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "author_id")})
     private Set<Author> authors = new HashSet();
+@NotEmpty
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "belongs",
+            joinColumns = {
+                @JoinColumn(name = "book_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "category_id")})
+    private Set<Category> categories = new HashSet();
+
+    
+
+    @Column(name = "publisher_id")
+    private Integer publisherId;
+
+    public Book() {
+    }
+
+    
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+    public Integer getPublisherId() {
+        return publisherId;
+    }
+
+    public void setPublisherId(Integer publisherId) {
+        this.publisherId = publisherId;
+    }
 
     public Integer getId() {
         return id;
@@ -115,14 +148,6 @@ public class Book implements Serializable {
         this.urlPath = urlPath;
     }
 
-    public Integer getPublisherId() {
-        return publisherId;
-    }
-
-    public void setPublisherId(Integer publisherId) {
-        this.publisherId = publisherId;
-    }
-
     public String getBookSeries() {
         return bookSeries;
     }
@@ -145,11 +170,6 @@ public class Book implements Serializable {
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" + "id=" + id + ", title=" + title + ", summary=" + summary + ", isbn=" + isbn + ", cover=" + cover + ", yearPublished=" + yearPublished + ", urlPath=" + urlPath + ", publisherId=" + publisherId + ", bookSeries=" + bookSeries + '}';
     }
 
 }
