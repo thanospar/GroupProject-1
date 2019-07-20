@@ -31,6 +31,17 @@ public class Publisher implements Serializable {
 
     @Column(name = "info", nullable = true)
     private String info;
+    
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
+    private Set<Book> books;
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 
     public Integer getId() {
         return id;

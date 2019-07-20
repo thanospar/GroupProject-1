@@ -69,9 +69,19 @@ public class Book implements Serializable {
 
     
 
-    @Column(name = "publisher_id")
-    private Integer publisherId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "publisher_id")
+    private Publisher publisher;
 
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+    
+    
     public Book() {
     }
 
@@ -82,14 +92,6 @@ public class Book implements Serializable {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
-    }
-
-    public Integer getPublisherId() {
-        return publisherId;
-    }
-
-    public void setPublisherId(Integer publisherId) {
-        this.publisherId = publisherId;
     }
 
     public Integer getId() {

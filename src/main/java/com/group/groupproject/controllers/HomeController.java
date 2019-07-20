@@ -30,10 +30,12 @@ public class HomeController {
     public String sayHello(ModelMap model) {
 
 //        System.out.println(authorDao.findAllAuthors().get(0).getBooks());
-//Book b =bookDao.findById(1);
-        System.out.println(bookService.findById(1).getAuthors());
+        Book b =bookService.findById(1);
+
+        System.out.println(b.getAuthors());
         
-        System.out.println(bookService.findById(1).getCategories());
+        System.out.println(b.getPublisher());
+        System.out.println(b.getCategories());
 //        Book b  = bookDao.findById(1);
 //        System.out.println(b);
 //        b.setSummary("best best best");
