@@ -1,6 +1,6 @@
 <%-- 
-    Document   : categoryformUpdate
-    Created on : 20 Ιουλ 2019, 9:24:58 μμ
+    Document   : publisherform
+    Created on : 21 Ιουλ 2019, 2:41:03 μμ
     Author     : filippos
 --%>
 
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update category</title>
+        <title>Publisher Form</title>
     </head>
     <body>
-        <h1>Publisher form for update it (publisherid)</h1>
+        <h1>Publisher Form for insert/save</h1>
     </body>
 </html>

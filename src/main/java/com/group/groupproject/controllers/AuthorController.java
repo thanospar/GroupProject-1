@@ -21,16 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthorController {
     
     @Autowired
-    AuthorService authorservice;
+    private AuthorService authorservice;
     
-    @GetMapping(value = "authors")
+    @GetMapping("authors")
     public String findAllAuthors(ModelMap model) {
         List<Author> authors = authorservice.findAllAuthors();
         model.addAttribute("authors", authors);
         return "/author/listofauthors";
     }
     
-    @GetMapping(value = "authors/{authorid}")
+    @GetMapping("authors/{authorid}")
     public String findAuthor(ModelMap model, @PathVariable("authorid") int id) {
         Author author = authorservice.findById(id);
         model.addAttribute("author", author);

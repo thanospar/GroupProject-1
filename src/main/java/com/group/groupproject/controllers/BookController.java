@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BookController {
 
     @Autowired
-    BookService bookservice;
+    private BookService bookservice;
 
-    @GetMapping(value = "books")
+    @GetMapping("books")
     public String findAllBooks(ModelMap model) {
         List<Book> books = bookservice.findAllBooks();
         model.addAttribute("books", books);
         return "/book/listofbooks";
     }
 
-    @GetMapping(value = "books/{bookid}")
+    @GetMapping("books/{bookid}")
     public String findBook(ModelMap model, @PathVariable("bookid") int id) {
         Book book = bookservice.findById(id);
         model.addAttribute("book", book);

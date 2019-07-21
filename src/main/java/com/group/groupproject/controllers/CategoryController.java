@@ -21,16 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CategoryController {
 
     @Autowired
-    CategoryService categoryservice;
+    private CategoryService categoryservice;
 
-    @GetMapping(value = "categories")
+    @GetMapping("categories")
     public String findAllCategories(ModelMap model) {
         List<Category> categories = categoryservice.findAllCategories();
         model.addAttribute("categories", categories);
         return "/category/listofcategories";
     }
 
-    @GetMapping(value = "categories/{categoryid}")
+    @GetMapping("categories/{categoryid}")
     public String findCategory(ModelMap model, @PathVariable("categoryid") int id) {
         Category category = categoryservice.findById(id);
         model.addAttribute("category", category);
