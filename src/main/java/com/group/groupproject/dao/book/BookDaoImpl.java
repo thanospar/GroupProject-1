@@ -14,7 +14,7 @@ public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao {
 
     
     @Override
-    public List<Book> findByName(String search) {
+    public List<Book> findByTitleOrISBN(String search) {
         Criteria criteria = createEntityCriteria();
         
 	criteria.add(Restrictions.or(Restrictions.ilike("title", search,MatchMode.ANYWHERE),

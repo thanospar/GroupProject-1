@@ -15,8 +15,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public List<Book> findByName(String search) {
-        return bookdao.findByName(search);
+    public List<Book> findByTitleOrISBN(String search) {
+        return bookdao.findByTitleOrISBN(search);
     }
     
     @Override

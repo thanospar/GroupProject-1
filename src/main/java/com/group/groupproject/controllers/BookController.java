@@ -28,7 +28,7 @@ public class BookController {
     @GetMapping(value = "books")
     public String findAllBooks(@RequestParam String search, ModelMap model) {
         System.out.println(search);
-        List<Book> books = bookservice.findByName(search);
+        List<Book> books = bookservice.findByTitleOrISBN(search);
         List<Author> authors = authorservice.findByLastName(search);
         model.addAttribute("books", books);
         model.addAttribute("authors", authors);

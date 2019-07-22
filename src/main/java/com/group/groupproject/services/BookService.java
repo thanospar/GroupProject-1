@@ -9,7 +9,7 @@ public interface BookService {
 
     List<Book> findAllBooks();
 
-    List<Book> findByName(String search);
+    List<Book> findByTitleOrISBN(String search);
 
     boolean saveBook(Book book);
 
