@@ -24,7 +24,7 @@ public class CategoryController {
     private CategoryService categoryservice;
 
     @GetMapping("categories")
-    public String findAllCategories(ModelMap model) {
+    public String findAllCategories(ModelMap model, @ModelAttribute("isDone") String isDone) {
         List<Category> categories = categoryservice.findAllCategories();
         model.addAttribute("categories", categories);
         return "/category/listofcategories";
@@ -53,7 +53,7 @@ public class CategoryController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/category/listofcategories";
+        return "redirect:/categories";
     }
 
     @GetMapping("categories/formUpdateCategory/{categoryid}")
@@ -72,7 +72,7 @@ public class CategoryController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/category/listofcategories";
+        return "redirect:/categories";
     }
 
     @GetMapping("categories/deleteCategory/{categoryid}")
@@ -85,7 +85,7 @@ public class CategoryController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/category/listofcategories";
+        return "redirect:/categories";
     }
 
 }

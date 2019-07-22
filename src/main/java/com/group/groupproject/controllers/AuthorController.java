@@ -24,7 +24,7 @@ public class AuthorController {
     private AuthorService authorservice;
     
     @GetMapping("authors")
-    public String findAllAuthors(ModelMap model) {
+    public String findAllAuthors(ModelMap model, @ModelAttribute("isDone") String isDone) {
         List<Author> authors = authorservice.findAllAuthors();
         model.addAttribute("authors", authors);
         return "/author/listofauthors";
@@ -53,7 +53,7 @@ public class AuthorController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/author/listofauthors";
+        return "redirect:/authors";
     }
     
     @GetMapping("authors/formUpdateAuthor/{authorid}")
@@ -72,7 +72,7 @@ public class AuthorController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/author/listofauthors";
+        return "redirect:/authors";
     }
     
     @GetMapping("authors/deleteAuthor/{authorid}")
@@ -85,7 +85,7 @@ public class AuthorController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/author/listofauthors";
+        return "redirect:/authors";
     }
     
     

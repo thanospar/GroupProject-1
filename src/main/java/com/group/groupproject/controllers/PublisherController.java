@@ -25,7 +25,7 @@ public class PublisherController {
     private PublisherService publisherservice;
 
     @GetMapping("publishers")
-    public String findAllPublishers(ModelMap model) {
+    public String findAllPublishers(ModelMap model, @ModelAttribute("isDone") String isDone) {
         List<Publisher> publishers = publisherservice.findAllPublishers();
         model.addAttribute("publishers", publishers);
         return "/publisher/listofpublishers";
@@ -54,7 +54,7 @@ public class PublisherController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/publisher/listofpublishers";
+        return "redirect:/publishers";
     }
     
     @GetMapping("publishers/formUpdatePublisher/{publisherid}")
@@ -73,7 +73,7 @@ public class PublisherController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/publisher/listofpublishers";
+        return "redirect:/publishers";
     }
     
     @GetMapping("publishers/deletePublisher/{publisherid}")
@@ -86,7 +86,7 @@ public class PublisherController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/publisher/listofpublishers";
+        return "redirect:/publishers";
     }
 
 }

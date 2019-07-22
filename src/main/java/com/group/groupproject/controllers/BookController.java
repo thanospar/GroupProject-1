@@ -20,24 +20,24 @@ public class BookController {
     private BookService bookservice;
 
     @GetMapping("books")
-    public String findAllBooks(ModelMap model) {
+    public String findAllBooks(ModelMap model, @ModelAttribute("isDone") String isDone) {
         List<Book> books = bookservice.findAllBooks();
         model.addAttribute("books", books);
-        return "/book/listofbooks";
+        return "book/listofbooks";
     }
 
     @GetMapping("books/{bookid}")
     public String findBook(ModelMap model, @PathVariable("bookid") int id) {
         Book book = bookservice.findById(id);
         model.addAttribute("book", book);
-        return "/book/showbook";
+        return "book/showbook";
     }
 
     @GetMapping("books/formAddBook")
     public String showFormForAdd(ModelMap model) {
         Book book = new Book();
         model.addAttribute("book", book);
-        return "/book/bookform";
+        return "book/bookform";
     }
 
     @PostMapping("books/formAddBook")
@@ -49,14 +49,14 @@ public class BookController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/book/listofbooks";
+        return "redirect:/books";
     }
 
     @GetMapping("books/formUpdateBook/{bookid}")
     public String showFormForUpdate(ModelMap model, @PathVariable("bookid") int id) {
         Book book = bookservice.findById(id);
         model.addAttribute("book", book);
-        return "/book/bookformUpdate";
+        return "book/bookformUpdate";
     }
 
     @PostMapping("books/formUpdateBook")
@@ -68,7 +68,7 @@ public class BookController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/book/listofbooks";
+        return "redirect:/books";
     }
 
     @GetMapping("books/deleteBook/{bookid}")
@@ -81,7 +81,7 @@ public class BookController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/book/listofbooks";
+        return "redirect:/books";
     }
 
 }
