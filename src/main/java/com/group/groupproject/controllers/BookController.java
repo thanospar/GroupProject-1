@@ -1,6 +1,8 @@
 package com.group.groupproject.controllers;
 
+import com.group.groupproject.entities.Author;
 import com.group.groupproject.entities.Book;
+import com.group.groupproject.services.AuthorService;
 import com.group.groupproject.services.BookService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,16 @@ public class BookController {
     @Autowired
     BookService bookservice;
 
+    @Autowired
+    AuthorService authorservice;
+
     @GetMapping(value = "books")
     public String findAllBooks(@RequestParam String search, ModelMap model) {
         System.out.println(search);
-        List<Book> books = bookservice.findAllBooks();
+        List<Book> books = bookservice.findByName(search);
+        List<Author> authors = authorservice.findByLastName(search);
         model.addAttribute("books", books);
+        model.addAttribute("authors", authors);
         return "/book/listofbooks";
     }
 

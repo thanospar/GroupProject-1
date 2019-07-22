@@ -7,16 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author Dimitris
- */
 @Service("bookService")
 public class BookServiceImpl implements BookService {
     
     @Autowired
     private BookDao bookdao;
 
+    @Override
+    @Transactional
+    public List<Book> findByName(String search) {
+        return bookdao.findByName(search);
+    }
+    
     @Override
     @Transactional
     public Book findById(int id) {
@@ -46,5 +48,7 @@ public class BookServiceImpl implements BookService {
     public boolean deleteBook(Book book) {
         return bookdao.deleteBook(book);
     }
+
+    
     
 }

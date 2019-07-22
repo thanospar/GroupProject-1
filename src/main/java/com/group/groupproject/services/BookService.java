@@ -9,6 +9,8 @@ public interface BookService {
 
     List<Book> findAllBooks();
 
+    List<Book> findByName(String search);
+
     boolean saveBook(Book book);
 
     boolean updateBook(Book book);
