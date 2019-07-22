@@ -144,11 +144,13 @@ INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('Dioptra', '
 INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('Anubis', 'info about Anubis');
 INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('BELL', 'info about BELL');
 
-INSERT INTO `groupprojectdb`.`books` (`title`, `summary`, `isbn`, `cover`, `year_published`, `book_series`, `publisher_id`) VALUES ('Foundation', 'The best', '9789604972661', 'Paperback', '2016', 'Foundation', '2');
-
 INSERT INTO `groupprojectdb`.`authors` (`first_name`, `last_name`, `date_of_birth`, `date_of_death`, `biography`) VALUES ('Isaak', 'Asimov', '1920-01-02', '1992-04-06', 'biography');
 
 
 INSERT INTO `groupprojectdb`.`written_by` (`book_id`, `author_id`) VALUES ('1', '1');
 
 INSERT INTO `groupprojectdb`.`belongs` (`book_id`, `category_id`) VALUES ('1', '2');
+
+INSERT INTO `groupprojectdb`.`quantities` (`quantity`) VALUES ('5');
+
+INSERT INTO `groupprojectdb`.`books` (`title`, `summary`, `isbn`, `cover`, `year_published`, `book_series`, `publisher_id`,`quantity_id`) VALUES ('Foundation', 'The best', '9789604972661', 'Paperback', '2016', 'Foundation', '2','1');

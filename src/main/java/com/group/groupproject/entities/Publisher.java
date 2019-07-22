@@ -20,7 +20,6 @@ import javax.persistence.Table;
 public class Publisher implements Serializable {
 
     
-    private static final long serialVersionUID = 2L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "publisher_id", nullable = false)

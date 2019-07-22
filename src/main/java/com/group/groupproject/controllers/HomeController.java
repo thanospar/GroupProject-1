@@ -36,6 +36,8 @@ public class HomeController {
         
         System.out.println(b.getPublisher());
         System.out.println(b.getCategories());
+        
+        System.out.println(b.getQuantity().getQuantity());
 //        Book b  = bookDao.findById(1);
 //        System.out.println(b);
 //        b.setSummary("best best best");

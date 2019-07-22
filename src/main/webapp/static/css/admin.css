@@ -1,0 +1,34 @@
+.tm-navbar-container:not(.uk-navbar-transparent) {
+    background-color: #ffffff;
+}
+
+.logo{
+
+      font-family: 'Audiowide', cursive;
+    font-size: 22px;
+    color: white;
+    padding-left: 30px;
+    text-decoration: none !important
+}
+.required{
+  font-size: 11px;
+  color: red;
+}
+
+.logo: hover a{    text-decoration: none !important;
+}
+
+.leftside{
+min-height: 100vh;
+background-color:#306c49;
+color:#ffffff;
+
+}
+
+#main{
+  background-color:#f9f9f9;
+}
+.uk-nav-default > li > a{
+    color:#fff;
+    
+}

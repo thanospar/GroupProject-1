@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -20,7 +21,8 @@ public class BookController {
     BookService bookservice;
 
     @GetMapping(value = "books")
-    public String findAllBooks(ModelMap model) {
+    public String findAllBooks(@RequestParam String search, ModelMap model) {
+        System.out.println(search);
         List<Book> books = bookservice.findAllBooks();
         model.addAttribute("books", books);
         return "/book/listofbooks";
