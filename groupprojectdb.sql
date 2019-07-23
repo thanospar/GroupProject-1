@@ -122,7 +122,7 @@ CREATE TABLE groupprojectdb.persistent_logins (
     PRIMARY KEY (series)
 );
 CREATE TABLE `groupprojectdb`.`invoices` (
-  `invoice_id` INT NOT NULL,
+  `invoice_id` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NULL,
   `user_id` BIGINT NOT NULL,
   PRIMARY KEY (`invoice_id`),

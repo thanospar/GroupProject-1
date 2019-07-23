@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
 public class AuthorDaoImpl extends AbstractDao<Integer, Author> implements AuthorDao {
 
     @Override
@@ -30,7 +29,7 @@ public class AuthorDaoImpl extends AbstractDao<Integer, Author> implements Autho
         return (List<Author>) criteria.list();
     }
     
-    @Override
+    @SuppressWarnings("unchecked")
     public List<Author> findAllAuthors() {
         Criteria criteria = createEntityCriteria();
         return (List<Author>) criteria.list();
