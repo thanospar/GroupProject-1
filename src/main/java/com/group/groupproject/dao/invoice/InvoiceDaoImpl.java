@@ -5,6 +5,7 @@ import com.group.groupproject.dao.AbstractDao;
 import com.group.groupproject.entities.Invoice;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 
@@ -13,6 +14,10 @@ public class InvoiceDaoImpl extends AbstractDao<Integer, Invoice> implements Inv
 
     @Override
     public Invoice findById(int id) {
+        Invoice invoice = getByKey(id);
+        if(invoice != null){
+            Hibernate.initialize(invoice.getBoughts());
+        }
         return getByKey(id);
     }
 

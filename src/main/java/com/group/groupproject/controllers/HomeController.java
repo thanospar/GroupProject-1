@@ -39,10 +39,11 @@ public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
         
-        Invoice i = new Invoice();
-        i.setDate(LocalDate.now());
-        i.setUser(userService.findById(1));
-        invoiceService.saveInvoice(i);
+//        Invoice i = new Invoice();
+//        i.setDate(LocalDate.now());
+//        i.setUser(userService.findById(1));
+        invoiceService.findById(1);
+        System.out.println(invoiceService.findById(1).getBoughts());
 //
 //        Book b =bookService.findById(1);
 //

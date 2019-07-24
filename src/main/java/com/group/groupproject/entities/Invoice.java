@@ -5,6 +5,8 @@ import com.group.groupproject.converter.LocalDatePersistenceConverter;
 import com.group.groupproject.entities.user.User;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +34,9 @@ public class Invoice implements Serializable {
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;
+    
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
+    private Set<Bought> boughts;
 
     public Integer getId() {
         return id;
@@ -54,6 +60,14 @@ public class Invoice implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Bought> getBoughts() {
+        return boughts;
+    }
+
+    public void setBoughts(Set<Bought> boughts) {
+        this.boughts = boughts;
     }
 
     @Override
