@@ -7,6 +7,7 @@ CREATE TABLE `groupprojectdb`.`authors` (
   `date_of_birth` DATE NULL,
   `date_of_death` DATE NULL,
   `biography` VARCHAR(1000) NULL,
+  `url_path` VARCHAR(100) NULL,
   PRIMARY KEY (`author_id`));
 
 CREATE TABLE `groupprojectdb`.`publishers` (
