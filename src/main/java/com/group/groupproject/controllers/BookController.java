@@ -29,8 +29,6 @@ public class BookController {
     private CategoryService categoryservice;
 
 
-    @Autowired
-    AuthorService authorservice;
 
     @GetMapping(value = "books")
     public String findAllBooks(@RequestParam String search, ModelMap model) {
