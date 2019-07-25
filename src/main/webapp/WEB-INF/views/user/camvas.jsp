@@ -1,21 +1,22 @@
-<div class="uk-width-1-5 leftside  uk-light uk-visible@l">
+<div id="offcanvas-usage" uk-offcanvas>
+                <div class="uk-offcanvas-bar">
 
-                    <div class="uk-navbar-left uk-light">
+                    <button class="uk-offcanvas-close" type="button" uk-close></button>
 
-                        <img class="uk-align-center " data-src="<c:url value='/static/images/booklogowhite.png' />" width="131" height="100" alt="" uk-img>
+                    <div class="uk-navbar-left">
+
+                        <a class="uk-navbar-item uk-logo" href="#">Boox</a>
                     </div>
-                    <ul class="uk-nav-default uk-nav-parent-icon uk-padding-small " uk-nav>
+                    <ul class="uk-nav-default uk-nav-parent-icon uk-padding-small" uk-nav>
                         <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: desktop"></span> Dashboard</a></li>
-                    </ul
-                    
-                    >
+                    </ul>
                     <ul class="uk-nav-default uk-nav-parent-icon uk-padding-small" uk-nav>
                         <li class="uk-nav-header">Users</li>
                         <li class="uk-parent"><a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Users</a>
 
-                            <ul class="uk-nav-sub uk-light">
+                            <ul class="uk-nav-sub">
                                 <li><a href="<c:url value='/user/newuser' />">Add new</a></li>
-                                <li><a href="<c:url value='/user/' />">All Users</a></li>
+                                <li><a href="#">All Users</a></li>
                             </ul>
                         </li>
 
@@ -23,8 +24,8 @@
                         <li class="uk-parent"><a href="#"><span class="uk-margin-small-right" uk-icon="icon:  tag"></span> Products </a>
 
                             <ul class="uk-nav-sub">
-                                <li><a href="<c:url value='/user/newuser' />">Add New Book</a></li>
-                                <li><a href="<c:url value='/books' />">View all</a></li>
+                                <li><a href="#">Add new</a></li>
+                                <li><a href="#">View all</a></li>
                                 <li class="uk-nav-sub"><a href="#"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Category </a>
 
 
@@ -53,9 +54,10 @@
                             </ul>
                         </li>
                         <li class="uk-nav-divider"></li>
-                        <li><a href="<c:url value="/user/logout" />" ><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Log out</a></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Log out</a></li>
                     </ul>
 
 
 
                 </div>
+            </div>

@@ -28,16 +28,21 @@ public class BookController {
     @Autowired
     private CategoryService categoryservice;
 
+    @GetMapping("books")
+    public String findAllBooks(ModelMap model, @ModelAttribute("isDone") String isDone) {
+        List<Book> books = bookservice.findAllBooks();
+        model.addAttribute("books", books);
+        return "book/listofbooks";
+    }
 
-
-    @GetMapping(value = "books")
+    @GetMapping(value = "searchbooks")
     public String findAllBooks(@RequestParam String search, ModelMap model) {
         System.out.println(search);
         List<Book> books = bookservice.findByTitleOrISBN(search);
         List<Author> authors = authorservice.findByLastName(search);
         model.addAttribute("books", books);
         model.addAttribute("authors", authors);
-        return "/book/listofbooks";
+        return "/shop";
 
     }
 
@@ -56,7 +61,7 @@ public class BookController {
         model.addAttribute("book", book);
         model.addAttribute("authors", authors);
         model.addAttribute("categories", categories);
-        return "book/bookform";
+        return "book/bookregister";
     }
 
     @PostMapping("books/formAddBook")

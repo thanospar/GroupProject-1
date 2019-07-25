@@ -11,10 +11,13 @@ import com.group.groupproject.services.BookService;
 import com.group.groupproject.services.invoice.InvoiceService;
 import com.group.groupproject.services.user.UserService;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,22 +41,22 @@ public class HomeController {
     
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
-        
-//        Invoice i = new Invoice();
-//        i.setDate(LocalDate.now());
-//        i.setUser(userService.findById(1));
-        invoiceService.findById(1);
-        System.out.println(invoiceService.findById(1).getBoughts());
-//
-//        Book b =bookService.findById(1);
-//
-//        System.out.println(b.getAuthors());
-//        
-//        System.out.println(b.getPublisher());
-//        System.out.println(b.getCategories());
-//        
-//        System.out.println(b.getQuantity().getQuantity());
+        bookService.findById(1).getAuthors().get(0).getLastName();
         return "index";
     }
+    
+    @GetMapping(value = "shop")
+    public String shop(ModelMap model) {
+        List<Book> books = bookService.findAllBooks();
+        model.addAttribute("books", books);
+        return "/shop";
+    }
+    
+    @RequestMapping(value = { "/single-product-{id}" }, method = RequestMethod.GET)
+	public String singleProduct(@PathVariable("id") int id, ModelMap model) {
+		Book book = bookService.findById(id);
+                model.addAttribute("book", book);
+		return "/singleproduct";
+	}
 
 }
