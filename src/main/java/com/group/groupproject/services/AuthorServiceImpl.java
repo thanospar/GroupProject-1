@@ -1,3 +1,4 @@
+
 package com.group.groupproject.services;
 
 import com.group.groupproject.dao.author.AuthorDao;
@@ -7,16 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author filippos
- */
-@Service
-public class AuthorServiceImpl implements AuthorService{
-    
+@Service("authorService")
+public class AuthorServiceImpl implements AuthorService {
+
     @Autowired
     private AuthorDao authorDao;
-
+    
     @Override
     @Transactional
     public Author findById(int id) {
@@ -27,6 +24,12 @@ public class AuthorServiceImpl implements AuthorService{
     @Transactional
     public List<Author> findAllAuthors() {
         return authorDao.findAllAuthors();
+    }
+
+    @Override
+    @Transactional
+    public List<Author> findByLastName(String search) {
+        return authorDao.findByLastName(search);
     }
 
     @Override

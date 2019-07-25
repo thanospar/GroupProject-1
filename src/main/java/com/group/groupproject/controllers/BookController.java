@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -27,11 +28,19 @@ public class BookController {
     @Autowired
     private CategoryService categoryservice;
 
-    @GetMapping("books")
-    public String findAllBooks(ModelMap model, @ModelAttribute("isDone") String isDone) {
-        List<Book> books = bookservice.findAllBooks();
+
+    @Autowired
+    AuthorService authorservice;
+
+    @GetMapping(value = "books")
+    public String findAllBooks(@RequestParam String search, ModelMap model) {
+        System.out.println(search);
+        List<Book> books = bookservice.findByTitleOrISBN(search);
+        List<Author> authors = authorservice.findByLastName(search);
         model.addAttribute("books", books);
-        return "book/listofbooks";
+        model.addAttribute("authors", authors);
+        return "/book/listofbooks";
+
     }
 
     @GetMapping("books/{bookid}")

@@ -37,6 +37,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
             getSession().persist(entity);
             ok = true;
         } catch (HibernateException e) {
+            System.out.println(e);
         }
         return ok;
     }
