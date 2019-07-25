@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,5 +14,12 @@
     </head>
     <body>
         <h1>Book Form for Insert/Save</h1>
+        <form:form modelAttribute="book" >
+            
+            <form:select path="authors" multiple="multiple" size="2" >
+                <form:options items="${authors}" itemLabel="lastName" itemValue="id" />
+            </form:select>
+            
+        </form:form>
     </body>
 </html>
