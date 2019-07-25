@@ -9,11 +9,12 @@ import com.group.groupproject.dao.AbstractDao;
 import com.group.groupproject.entities.Author;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
 public class AuthorDaoImpl extends AbstractDao<Integer, Author> implements AuthorDao {
 
     @Override
@@ -22,6 +23,13 @@ public class AuthorDaoImpl extends AbstractDao<Integer, Author> implements Autho
     }
 
     @Override
+    public List<Author> findByLastName(String search) {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.ilike("lastName", search,MatchMode.ANYWHERE));
+        return (List<Author>) criteria.list();
+    }
+    
+    @SuppressWarnings("unchecked")
     public List<Author> findAllAuthors() {
         Criteria criteria = createEntityCriteria();
         return (List<Author>) criteria.list();

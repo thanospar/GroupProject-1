@@ -5,12 +5,23 @@ import com.group.groupproject.entities.Book;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository("bookDao")
 public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao {
 
+    
+    @Override
+    public List<Book> findByTitleOrISBN(String search) {
+        Criteria criteria = createEntityCriteria();
+        
+	criteria.add(Restrictions.or(Restrictions.ilike("title", search,MatchMode.ANYWHERE),
+                Restrictions.eq("isbn", search)));
+        return (List<Book>) criteria.list();
+    }
+    
     @Override
     public Book findById(int id) {
         Book b = getByKey(id);

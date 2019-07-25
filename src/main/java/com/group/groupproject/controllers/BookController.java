@@ -1,6 +1,8 @@
 package com.group.groupproject.controllers;
 
+import com.group.groupproject.entities.Author;
 import com.group.groupproject.entities.Book;
+import com.group.groupproject.services.AuthorService;
 import com.group.groupproject.services.BookService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -19,10 +22,16 @@ public class BookController {
     @Autowired
     BookService bookservice;
 
+    @Autowired
+    AuthorService authorservice;
+
     @GetMapping(value = "books")
-    public String findAllBooks(ModelMap model) {
-        List<Book> books = bookservice.findAllBooks();
+    public String findAllBooks(@RequestParam String search, ModelMap model) {
+        System.out.println(search);
+        List<Book> books = bookservice.findByTitleOrISBN(search);
+        List<Author> authors = authorservice.findByLastName(search);
         model.addAttribute("books", books);
+        model.addAttribute("authors", authors);
         return "/book/listofbooks";
     }
 

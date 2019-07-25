@@ -41,14 +41,16 @@ public class Author implements Serializable {
 
     @Column(name = "biography", nullable = true)
     private String biography;
-    
+
+    @Column(name = "url_path")
+    private String urlPath;
+
     @NotEmpty
-    @ManyToMany(mappedBy = "authors",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
     private Set<Book> books = new HashSet();
 
     public Author() {
     }
-
 
     public Integer getId() {
         return id;
@@ -110,7 +112,5 @@ public class Author implements Serializable {
     public String toString() {
         return "Author{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", dateOfDeath=" + dateOfDeath + ", biography=" + biography + '}';
     }
-    
-    
 
 }

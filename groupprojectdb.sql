@@ -7,6 +7,7 @@ CREATE TABLE `groupprojectdb`.`authors` (
   `date_of_birth` DATE NULL,
   `date_of_death` DATE NULL,
   `biography` VARCHAR(1000) NULL,
+  `url_path` VARCHAR(100) NULL,
   PRIMARY KEY (`author_id`));
 
 CREATE TABLE `groupprojectdb`.`publishers` (
@@ -122,13 +123,13 @@ CREATE TABLE groupprojectdb.persistent_logins (
     PRIMARY KEY (series)
 );
 CREATE TABLE `groupprojectdb`.`invoices` (
-  `invoice_id` INT NOT NULL,
+  `invoice_id` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NULL,
   `user_id` BIGINT NOT NULL,
   PRIMARY KEY (`invoice_id`),
   CONSTRAINT `FK_Invoices_1` FOREIGN KEY (`user_id`) REFERENCES `groupprojectdb`.`APP_USER` (`id`));
 
-CREATE TABLE `groupprojectdb`.`bought` (
+CREATE TABLE `groupprojectdb`.`boughts` (
   `bought_id` INT NOT NULL AUTO_INCREMENT,
   `price` INT(3) NOT NULL,
   `invoice_id` INT NOT NULL,
@@ -144,11 +145,24 @@ INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('Dioptra', '
 INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('Anubis', 'info about Anubis');
 INSERT INTO `groupprojectdb`.`publishers` (`brand`, `info`) VALUES ('BELL', 'info about BELL');
 
-INSERT INTO `groupprojectdb`.`books` (`title`, `summary`, `isbn`, `cover`, `year_published`, `book_series`, `publisher_id`) VALUES ('Foundation', 'The best', '9789604972661', 'Paperback', '2016', 'Foundation', '2');
+INSERT INTO `groupprojectdb`.`authors` (`first_name`, `last_name`, `date_of_birth`, `date_of_death`, `biography`) VALUES ('Isaac', 'Asimov', '1920-01-02', '1992-04-06', 'Isaac Asimov (/ˈaɪzᵻk ˈæzᵻmɒv/; born Isaak Yudovich Ozimov; circa January 2, 1920 - April 6, 1992) was an American author and professor of biochemistry at Boston University, best known for his works of science fiction and for his popular science books. Asimov was prolific and wrote or edited more than 500 books and an estimated 90,000 letters and postcards. His books have been published in 9 of the 10 major categories of the Dewey Decimal Classification.');
 
-INSERT INTO `groupprojectdb`.`authors` (`first_name`, `last_name`, `date_of_birth`, `date_of_death`, `biography`) VALUES ('Isaak', 'Asimov', '1920-01-02', '1992-04-06', 'biography');
+INSERT INTO `groupprojectdb`.`quantities` (`quantity`) VALUES ('5');
+INSERT INTO `groupprojectdb`.`quantities` (`quantity`) VALUES ('2');
+INSERT INTO `groupprojectdb`.`quantities` (`quantity`) VALUES ('7');
 
+INSERT INTO `groupprojectdb`.`books` (`title`, `summary`, `isbn`, `cover`, `year_published`, `book_series`, `price`, `publisher_id`,`quantity_id`) VALUES ('Foundation', 'The Foundation series is Isaac Asimov’s iconic masterpiece. Unfolding against the backdrop of a crumbling Galactic Empire, the story of Hari Seldon’s two Foundations is a lasting testament to an extraordinary imagination, one whose unprecedented scale shaped science fiction as we know it today. The Galactic Empire has prospered for twelve thousand years. Nobody suspects that the heart of the thriving Empire is rotten, until psychohistorian Hari Seldon uses his new science to foresee its terrible fate. Exiled to the desolate planet Terminus, Seldon establishes a colony of the greatest minds in the Empire, a Foundation which holds the key to changing the fate of the galaxy. However, the death throes of the Empire breed hostile new enemies, and the young Foundation’s fate will be threatened first.', '9789604972661', 'Paperback', '2011', 'Foundation', '9', '2','1');
+INSERT INTO `groupprojectdb`.`books` (`title`, `summary`, `isbn`, `cover`, `year_published`, `book_series`, `price`, `publisher_id`,`quantity_id`) VALUES ('Foundation and Empire', 'The Foundation series is Isaac Asimov s iconic masterpiece. Unfolding against the backdrop of a crumbling Galactic Empire, the story of Hari Seldon s two Foundations is a lasting testament to an extraordinary imagination, one whose unprecedented scale shaped science fiction as we know it today. The First Foundation survived two centuries of barbarism as the once-mighty Galactic Empire descended into chaos. Now it mist prepare for war against the remnants of the Empire as the Imperial fleet advances on their planet, Terminus. Hari Seldon predicted this war; he even prepared his Foundation for it. But he couldn t foresee the birth of the mutant Mule. In possession of a power which reduces fearsome opposition to devoted slaves, the Mule poses a terrible threat to Seldon s Foundation.', '9789604972661', 'Paperback', '2012', 'Foundation', '9', '2','2');
+INSERT INTO `groupprojectdb`.`books` (`title`, `summary`, `isbn`, `cover`, `year_published`, `book_series`, `price`, `publisher_id`,`quantity_id`) VALUES ('Second Foundation', 'The Foundation series is Isaac Asimov’s iconic masterpiece. Unfolding against the backdrop of a crumbling Galactic Empire, the story of Hari Seldon’s two Foundations is a lasting testament to an extraordinary imagination, one whose unprecedented scale shaped science fiction as we know it today. The Galactic Empire has prospered for twelve thousand years. Nobody suspects that the heart of the thriving Empire is rotten, until psychohistorian Hari Seldon uses his new science to foresee its terrible fate. Exiled to the desolate planet Terminus, Seldon establishes a colony of the greatest minds in the Empire, a Foundation which holds the key to changing the fate of the galaxy. However, the death throes of the Empire breed hostile new enemies, and the young Foundation’s fate will be threatened first.', '9789604972661', 'Paperback', '2014', 'Foundation', '9', '2','3');
 
 INSERT INTO `groupprojectdb`.`written_by` (`book_id`, `author_id`) VALUES ('1', '1');
 
 INSERT INTO `groupprojectdb`.`belongs` (`book_id`, `category_id`) VALUES ('1', '2');
+INSERT INTO `groupprojectdb`.`belongs` (`book_id`, `category_id`) VALUES ('2', '2');
+INSERT INTO `groupprojectdb`.`belongs` (`book_id`, `category_id`) VALUES ('3', '2');
+
+INSERT INTO `groupprojectdb`.`invoices` (`date`, `user_id`) VALUES ('2019-03-21', '1');
+
+INSERT INTO `groupprojectdb`.`boughts` (`price`, `invoice_id`, `book_id`) VALUES ('3', '1', '1');
+INSERT INTO `groupprojectdb`.`boughts` (`price`, `invoice_id`, `book_id`) VALUES ('4', '1', '2');
+INSERT INTO `groupprojectdb`.`boughts` (`price`, `invoice_id`, `book_id`) VALUES ('1', '1', '3');

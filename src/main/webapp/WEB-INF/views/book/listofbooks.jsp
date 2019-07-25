@@ -8,5 +8,7 @@
     <body>
         <h1>List of books</h1>
         <p>${books}</p>
+        <h1>List of authors</h1>
+        <p>${authors}</p>
     </body>
 </html>

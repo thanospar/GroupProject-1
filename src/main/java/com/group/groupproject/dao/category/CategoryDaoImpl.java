@@ -14,14 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository("categoryDao")
 @Transactional
-public class CategoryDaoImpl  extends AbstractDao<Integer, Category> implements CategoryDao  {
+public class CategoryDaoImpl extends AbstractDao<Integer, Category> implements CategoryDao {
 
     @Override
     public Category findById(int id) {
         return getByKey(id);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
     public List<Category> findAllCategories() {
         Criteria criteria = createEntityCriteria();
         return (List<Category>) criteria.list();
