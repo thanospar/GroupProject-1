@@ -1,7 +1,11 @@
 package com.group.groupproject.controllers;
 
+import com.group.groupproject.entities.Author;
 import com.group.groupproject.entities.Book;
+import com.group.groupproject.entities.Category;
+import com.group.groupproject.services.AuthorService;
 import com.group.groupproject.services.BookService;
+import com.group.groupproject.services.CategoryService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,10 @@ public class BookController {
 
     @Autowired
     private BookService bookservice;
+    @Autowired
+    private AuthorService authorservice;
+    @Autowired
+    private CategoryService categoryservice;
 
     @GetMapping("books")
     public String findAllBooks(ModelMap model, @ModelAttribute("isDone") String isDone) {
@@ -36,7 +44,11 @@ public class BookController {
     @GetMapping("books/formAddBook")
     public String showFormForAdd(ModelMap model) {
         Book book = new Book();
+        List<Author> authors = authorservice.findAllAuthors();
+        List<Category> categories = categoryservice.findAllCategories();
         model.addAttribute("book", book);
+        model.addAttribute("authors", authors);
+        model.addAttribute("categories", categories);
         return "book/bookform";
     }
 
