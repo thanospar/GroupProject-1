@@ -1,7 +1,9 @@
 package com.group.groupproject.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Column;
@@ -44,6 +46,9 @@ public class Book implements Serializable {
     @Column(name = "url_path")
     private String urlPath;
 
+    @Column(name = "price", nullable = false)
+    private int price;
+
     @Column(name = "book_series", nullable = false)
     private String bookSeries;
 
@@ -58,7 +63,8 @@ public class Book implements Serializable {
                 @JoinColumn(name = "book_id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "author_id")})
-    private Set<Author> authors = new HashSet();
+    private List<Author> authors = new ArrayList();
+
     @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "belongs",
@@ -81,6 +87,14 @@ public class Book implements Serializable {
     }
 
     public Book() {
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public Set<Category> getCategories() {
@@ -163,11 +177,11 @@ public class Book implements Serializable {
         this.quantity = quantity;
     }
 
-    public Set<Author> getAuthors() {
+    public List<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<Author> authors) {
+    public void setAuthors(List<Author> authors) {
         this.authors = authors;
     }
 
@@ -175,5 +189,5 @@ public class Book implements Serializable {
     public String toString() {
         return "Book{" + "id=" + id + ", title=" + title + ", summary=" + summary + ", isbn=" + isbn + ", cover=" + cover + ", yearPublished=" + yearPublished + ", urlPath=" + urlPath + ", bookSeries=" + bookSeries + ", quantity=" + quantity + ", publisher=" + publisher + '}';
     }
-    
+
 }

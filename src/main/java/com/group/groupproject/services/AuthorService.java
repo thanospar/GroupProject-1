@@ -5,7 +5,7 @@ import com.group.groupproject.entities.Author;
 import java.util.List;
 
 public interface AuthorService {
-    
+
     Author findById(int id);
 
     List<Author> findAllAuthors();

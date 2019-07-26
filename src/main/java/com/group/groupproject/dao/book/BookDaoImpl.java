@@ -12,22 +12,26 @@ import org.springframework.stereotype.Repository;
 @Repository("bookDao")
 public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao {
 
-    
     @Override
     public List<Book> findByTitleOrISBN(String search) {
         Criteria criteria = createEntityCriteria();
-        
-	criteria.add(Restrictions.or(Restrictions.ilike("title", search,MatchMode.ANYWHERE),
+
+        criteria.add(Restrictions.or(Restrictions.ilike("title", search, MatchMode.ANYWHERE),
                 Restrictions.eq("isbn", search)));
-        return (List<Book>) criteria.list();
+        List<Book> books = (List<Book>) criteria.list();
+
+        for (int i = 0; i < books.size(); i++) {
+            Hibernate.initialize(books.get(i).getAuthors());
+            Hibernate.initialize(books.get(i).getCategories());
+        }
+        return books;
     }
-    
+
     @Override
     public Book findById(int id) {
         Book b = getByKey(id);
         if (b != null) {
             Hibernate.initialize(b.getAuthors());
-            
             Hibernate.initialize(b.getCategories());
         }
         return b;
@@ -36,7 +40,13 @@ public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao {
     @SuppressWarnings("unchecked")
     public List<Book> findAllBooks() {
         Criteria criteria = createEntityCriteria();
-        return (List<Book>) criteria.list();
+        List<Book> books = (List<Book>) criteria.list();
+
+        for (int i = 0; i < books.size(); i++) {
+            Hibernate.initialize(books.get(i).getAuthors());
+            Hibernate.initialize(books.get(i).getCategories());
+        }
+        return books;
     }
 
     @Override

@@ -1,14 +1,107 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
+
+
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+    <!--<![endif]-->
+
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>List of books</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="<c:url value='/static/css/uikit.css' />" rel="stylesheet"></link>
+        <link href="<c:url value='/static/css/admin.css' />" rel="stylesheet"></link>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+
+        <link href="https://fonts.googleapis.com/css?family=Audiowide&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit-icons.min.js"></script> 
+
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+
+        <script>$(document).ready( function () {
+    $('#tbl').DataTable();
+        } );  </script>   
+        
     </head>
+
     <body>
-        <h1>List of books</h1>
-        <p>${books}</p>
-        <h1>List of authors</h1>
-        <p>${authors}</p>
+        <div>
+            <!-- camvas -->
+             <%@include file="../user/camvas.jsp" %>
+            <!-- main menu -->
+            <div class="uk-grid uk-grid-collapse" uk-grid>
+                <%@include file="../user/authheader.jsp" %>	
+                <!-- table -->
+
+                <div class="uk-width-4-5 uk-width-expand@s admin">
+                   <%@include file="../user/adminHeader.jsp" %>
+                    <div id="main" class="uk-section">
+                        <div  class="uk-container">
+                              <h3 class="uk-card-title na">Books</h3>
+                                 
+                            <div class="uk-card uk-card-default uk-card-body">
+                                <div class=" uk-padding-small ">
+                                   <a href="<c:url value='/books/formAddBook' />"  class="uk-button uk-button-secondary  "  uk-toggle>Add new</a>
+                                   
+                                </div>
+                                <table id="tbl" class="uk-table uk-table-hover uk-table-divider">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Summary</th>
+                                            <th>Isbn</th>
+                                            <th>Year</th>
+                                           
+                                            <th></th>
+                                            <th></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                            <c:forEach items="${books}" var="book">
+                                            <tr>
+                                                <td>${book.title}</td>
+                                                <td>${book.summary}</td>
+                                                <td>${book.isbn}</td>
+                                                <td>${book.yearPublished}</td>
+                                                <td><a href="<c:url value='/user/edit-user-${book.id}' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
+                                                <td><a href="<c:url value='/user/delete-user-${book.id}' />" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
+                                            </tr>
+                                        </c:forEach>
+                                        
+
+
+                                    </tbody>
+                                </table>
+
+                            </div>    
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+ 
     </body>
+
 </html>
