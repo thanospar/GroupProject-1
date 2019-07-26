@@ -9,6 +9,7 @@ public interface BookDao {
     Book findById(int id);
     List<Book> findAllBooks();
     List<Book> findByTitleOrISBN(String search);
+    List<String> findBookSeries();
     boolean saveBook(Book book);
     boolean updateBook(Book book); 
     boolean deleteBook(Book book);

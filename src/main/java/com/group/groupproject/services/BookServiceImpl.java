@@ -3,6 +3,7 @@ package com.group.groupproject.services;
 import com.group.groupproject.dao.book.BookDao;
 import com.group.groupproject.entities.Book;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,17 @@ public class BookServiceImpl implements BookService {
     public List<Book> findAllBooks() {
         return bookdao.findAllBooks();
     }
-
+    
+    @Override
+    @Transactional
+    public List<String> findBookSeries() {
+        //epistrefei se distinct lista ta bookseries
+        List<String> list= bookdao.findBookSeries();
+        //aferoume ta null
+        while (list.remove(null));
+        return list;
+    }
+    
     @Override
     @Transactional
     public boolean saveBook(Book book) {
