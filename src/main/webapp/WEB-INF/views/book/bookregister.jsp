@@ -142,7 +142,7 @@
                                                     <input type="submit" value="Update" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/books' />">Cancel</a>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <input type="submit" value="Register" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/books' />">Cancel</a>
+                                                    <input type="submit" value="Save" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/books' />">Cancel</a>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
