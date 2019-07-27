@@ -33,53 +33,50 @@
 
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
 
-        <script>$(document).ready( function () {
-    $('#tbl').DataTable();
-        } );  </script>   
-        
+        <script>$(document).ready(function () {
+                $('#tbl').DataTable();
+            });</script>   
+
     </head>
 
     <body>
         <div>
             <!-- camvas -->
-             <%@include file="../user/camvas.jsp" %>
+            <%@include file="../user/camvas.jsp" %>
             <!-- main menu -->
             <div class="uk-grid uk-grid-collapse" uk-grid>
                 <%@include file="../user/authheader.jsp" %>	
                 <!-- table -->
 
                 <div class="uk-width-4-5 uk-width-expand@s admin">
-                   <%@include file="../user/adminHeader.jsp" %>
+                    <%@include file="../user/adminHeader.jsp" %>
                     <div id="main" class="uk-section">
                         <div  class="uk-container">
-                              <h3 class="uk-card-title na">Books</h3>
-                                 
+                            <h3 class="uk-card-title na">Books</h3>
+
                             <div class="uk-card uk-card-default uk-card-body">
-                                <form:form method="POST" modelAttribute="book" class="uk-form-horizontal uk-margin" >
+                                <form:form method="POST" action="/GroupProject/books/formAddBook" modelAttribute="book" class="uk-form-horizontal uk-margin" >
                                     <div class="uk-margin">
-                                        <form:input type="hidden" path="id" id="id"/></div>
-
-
+                                        <form:input type="hidden" path="id" id="id"/>
+                                    </div>
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">Title</label>
                                         <div class="uk-form-controls">
-                               <form:input type="text" path="title" id="title" class="uk-input"/>
+                                            <form:input type="text" path="title" id="title" class="uk-input"/>
                                             <div class="has-error">
                                                 <form:errors path="title" class="help-inline"/>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">Summary</label>
                                         <div class="uk-form-controls">
-                                            <form:input type="text" path="summary" id="summary" class="uk-input" />
+                                            <form:input type="text" path="summary" id="summary" class="uk-textarea" />
                                             <div class="has-error">
                                                 <form:errors path="summary" class="help-inline"/>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">ISBN</label>
                                         <div class="uk-form-controls">
@@ -89,16 +86,45 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="uk-margin">
-                                        <label class="uk-form-label" for="form-horizontal-text">Authors</label>
+                                        <label class="uk-form-label" for="form-horizontal-text">Cover</label>
                                         <div class="uk-form-controls">
-                                            <form:select path="authors" items="${author}" multiple="true" itemValue="id" itemLabel="lastName" class="uk-input" />
+                                            <select path="cover" name="cover" id="cover" class="uk-select">
+                                                <option value="Paperback">Paperback</option>
+                                                <option value="Hardback">Hardback</option>
+                                            </select>
                                             <div class="has-error">
                                                 <form:errors path="cover" class="help-inline"/>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="form-horizontal-text">Authors</label>
+                                        <div class="uk-form-controls">
+                                            <form:select path="authors" items="${authors}" multiple="true" itemValue="id" itemLabel="lastName" class="uk-select" />
+                                            <div class="has-error">
+                                                <form:errors path="authors" class="help-inline"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="form-horizontal-text">Categories</label>
+                                        <div class="uk-form-controls">
+                                            <form:select path="categories" items="${categories}" multiple="true" itemValue="id" itemLabel="category" class="uk-select" />
+                                            <div class="has-error">
+                                                <form:errors path="categories" class="help-inline"/>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="form-horizontal-text">Publisher</label>
+                                        <div class="uk-form-controls">
+                                            <form:select path="publisher" items="${publishers}" itemValue="id" itemLabel="brand" class="uk-select" />
+                                            <div class="has-error">
+                                                <form:errors path="publisher" class="help-inline"/>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">Image Url</label>
@@ -109,31 +135,48 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="form-horizontal-text">Price</label>
+                                        <div class="uk-form-controls">
+                                            <form:input type="number" path="price" id="price" max="300" step="1" class="uk-input" />
+                                            <div class="has-error">
+                                                <form:errors path="urlPath" class="help-inline"/>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">Year Published</label>
                                         <div class="uk-form-controls">
-                                            <form:input type="text" path="yearPublished" id="yearPublished" class="uk-input" />
+                                            <form:input type="number" min="1900" value="1900" max="2030" step="1" path="yearPublished" id="yearPublished" class="uk-input" />
                                             <div class="has-error">
                                                 <form:errors path="yearPublished" class="help-inline"/>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                      <div class="uk-margin">
+                                    <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">Book series</label>
                                         <div class="uk-form-controls">
-                                            <form:input type="text" path="bookSeries" id="bookSeries" class="uk-input" />
+                                            <form:input list="series" type="text" path="bookSeries" id="bookSeries" class="uk-input" />
+                                            <datalist id="series">
+                                                <c:forEach items="${bookSeries}" var="bookserie">
+                                                    <option value="${bookserie}">${bookserie}</option>
+                                                    </c:forEach>
+                                            </datalist>
                                             <div class="has-error">
                                                 <form:errors path="bookSeries" class="help-inline"/>
                                             </div>
                                         </div>
                                     </div>
-                                   
 
-                                   
-                                  
-
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="form-horizontal-text">Quantity</label>
+                                        <div class="uk-form-controls">
+                                            <form:input type="number" min="0" value="0" max="300" step="1" path="quantity" id="quantity" class="uk-input" />
+                                            <div class="has-error">
+                                                <form:errors path="quantity" class="help-inline"/>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text"></label>
                                         <div class="uk-form-controls">
@@ -142,29 +185,17 @@
                                                     <input type="submit" value="Update" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/books' />">Cancel</a>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <input type="submit" value="Register" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/books' />">Cancel</a>
+                                                    <input type="submit" value="Save" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/books' />">Cancel</a>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
                                     </div>
-
-
-
                                 </form:form>
-
-                            </div>    
-
-
+                            </div>
                         </div>
                     </div>
-
-
                 </div>
-
             </div>
-
         </div>
- 
     </body>
-
 </html>

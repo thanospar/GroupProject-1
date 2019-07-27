@@ -23,7 +23,7 @@
                         <li class="uk-parent"><a href="#"><span class="uk-margin-small-right" uk-icon="icon:  tag"></span> Products </a>
 
                             <ul class="uk-nav-sub">
-                                <li><a href="<c:url value='/user/newuser' />">Add New Book</a></li>
+                                <li><a href="<c:url value='/books/formAddBook' />">Add New Book</a></li>
                                 <li><a href="<c:url value='/books' />">View all</a></li>
                                 <li class="uk-nav-sub"><a href="#"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Category </a>
 

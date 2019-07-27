@@ -3,9 +3,12 @@ package com.group.groupproject.controllers;
 import com.group.groupproject.entities.Author;
 import com.group.groupproject.entities.Book;
 import com.group.groupproject.entities.Category;
+import com.group.groupproject.entities.Publisher;
 import com.group.groupproject.services.AuthorService;
 import com.group.groupproject.services.BookService;
 import com.group.groupproject.services.CategoryService;
+import com.group.groupproject.services.PublisherService;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,9 @@ public class BookController {
     private AuthorService authorservice;
     @Autowired
     private CategoryService categoryservice;
+    
+    @Autowired
+    private PublisherService publisherservice;
 
     @GetMapping("books")
     public String findAllBooks(ModelMap model, @ModelAttribute("isDone") String isDone) {
@@ -37,7 +43,6 @@ public class BookController {
 
     @GetMapping(value = "searchbooks")
     public String findAllBooks(@RequestParam String search, ModelMap model) {
-        System.out.println(search);
         List<Book> books = bookservice.findByTitleOrISBN(search);
         List<Author> authors = authorservice.findByLastName(search);
         model.addAttribute("books", books);
@@ -56,11 +61,15 @@ public class BookController {
     @GetMapping("books/formAddBook")
     public String showFormForAdd(ModelMap model) {
         Book book = new Book();
+        List<String> bookSeries = bookservice.findBookSeries();
         List<Author> authors = authorservice.findAllAuthors();
         List<Category> categories = categoryservice.findAllCategories();
+        List<Publisher> publishers = publisherservice.findAllPublishers();
         model.addAttribute("book", book);
+        model.addAttribute("bookSeries", bookSeries);
         model.addAttribute("authors", authors);
         model.addAttribute("categories", categories);
+        model.addAttribute("publishers", publishers);
         return "book/bookregister";
     }
 

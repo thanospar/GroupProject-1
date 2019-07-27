@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +26,13 @@ public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao {
             Hibernate.initialize(books.get(i).getCategories());
         }
         return books;
+    }
+
+    @Override
+    public List<String> findBookSeries() {
+        Criteria criteria = createEntityCriteria();
+        criteria.setProjection(Projections.distinct(Projections.property("bookSeries")));
+        return (List<String>) criteria.list();
     }
 
     @Override

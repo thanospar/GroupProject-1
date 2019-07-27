@@ -11,6 +11,8 @@ public interface BookService {
 
     List<Book> findByTitleOrISBN(String search);
 
+    List<String> findBookSeries();
+    
     boolean saveBook(Book book);
 
     boolean updateBook(Book book);
