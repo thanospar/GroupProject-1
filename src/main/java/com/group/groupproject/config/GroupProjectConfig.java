@@ -1,6 +1,9 @@
 package com.group.groupproject.config;
 
+import com.group.groupproject.converter.AuthorFromFormToEntity;
+import com.group.groupproject.converter.CategoryFromFormToEntity;
 import com.group.groupproject.converter.LocalDatePersistenceConverter;
+import com.group.groupproject.converter.PublisherFromFormToEntity;
 import com.group.groupproject.converter.RoleToUserProfileConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +25,14 @@ public class GroupProjectConfig extends WebMvcConfigurerAdapter {
     @Autowired
     RoleToUserProfileConverter roleToUserProfileConverter;
     
+    @Autowired
+    CategoryFromFormToEntity categoryFromFormToEntity;
+    
+    @Autowired
+    PublisherFromFormToEntity publisherFromFormToEntity;
+    
+    @Autowired
+    AuthorFromFormToEntity authorFromFormToEntity;
 
     @Bean(name = "GroupProject")
     public ViewResolver viewResolver() {
@@ -49,5 +60,8 @@ public class GroupProjectConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(roleToUserProfileConverter);
+        registry.addConverter(categoryFromFormToEntity);
+        registry.addConverter(publisherFromFormToEntity);
+        registry.addConverter(authorFromFormToEntity);
     }
 }

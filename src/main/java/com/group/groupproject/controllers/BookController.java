@@ -64,7 +64,6 @@ public class BookController {
         List<String> bookSeries = bookservice.findBookSeries();
         List<Author> authors = authorservice.findAllAuthors();
         List<Category> categories = categoryservice.findAllCategories();
-        System.out.println(categories);
         List<Publisher> publishers = publisherservice.findAllPublishers();
         model.addAttribute("book", book);
         model.addAttribute("bookSeries", bookSeries);

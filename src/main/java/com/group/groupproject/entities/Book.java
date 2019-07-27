@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -52,9 +53,9 @@ public class Book implements Serializable {
     @Column(name = "book_series", nullable = false)
     private String bookSeries;
 
-    @OneToOne
-    @JoinColumn(name = "quantity_id")
-    private Quantity quantity;
+    @NotNull
+    @Column(name = "quantity")
+    private int quantity;
 
     @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
@@ -91,6 +92,14 @@ public class Book implements Serializable {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void setPrice(int price) {
@@ -165,17 +174,11 @@ public class Book implements Serializable {
         return bookSeries;
     }
 
-    public void setBookSeries(String bookSeriesId) {
+    public void setBookSeries(String bookSeries) {
         this.bookSeries = bookSeries;
     }
 
-    public Quantity getQuantity() {
-        return quantity;
-    }
 
-    public void setQuantity(Quantity quantity) {
-        this.quantity = quantity;
-    }
 
     public List<Author> getAuthors() {
         return authors;
