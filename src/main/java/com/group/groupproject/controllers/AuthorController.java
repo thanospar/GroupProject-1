@@ -1,7 +1,9 @@
 package com.group.groupproject.controllers;
 
 import com.group.groupproject.entities.Author;
+import com.group.groupproject.entities.Book;
 import com.group.groupproject.services.AuthorService;
+import com.group.groupproject.services.BookService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,25 +25,30 @@ public class AuthorController {
     @Autowired
     private AuthorService authorservice;
     
+    @Autowired
+    private BookService bookservice;
+    
     @GetMapping("authors")
     public String findAllAuthors(ModelMap model, @ModelAttribute("isDone") String isDone) {
         List<Author> authors = authorservice.findAllAuthors();
         model.addAttribute("authors", authors);
-        return "/author/listofauthors";
+        return "author/listofauthors";
     }
     
     @GetMapping("authors/{authorid}")
     public String findAuthor(ModelMap model, @PathVariable("authorid") int id) {
         Author author = authorservice.findById(id);
         model.addAttribute("author", author);
-        return "/author/showauthor";
+        return "author/showauthor";
     }
     
     @GetMapping("authors/formAddAuthor")
     public String showFormForAdd(ModelMap model) {
         Author author = new Author();
+        List<Book> books = bookservice.findAllBooks();
+        model.addAttribute("books", books);
         model.addAttribute("author", author);
-        return "/author/authorform";
+        return "author/authorform";
     }
     
     @PostMapping("authors/formAddAuthor")
@@ -60,7 +67,7 @@ public class AuthorController {
     public String showFormForUpdate(ModelMap model, @PathVariable("authorid") int id) {
         Author author = authorservice.findById(id);
         model.addAttribute("author", author);
-        return "/author/authorformUpdate";
+        return "author/authorformUpdate";
     }
     
     @PostMapping("authors/formUpdateAuthor")

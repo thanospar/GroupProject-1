@@ -9,14 +9,14 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AuthorFromFormToEntity implements Converter<Object, Author> {
+public class AuthorFromFormToEntity implements Converter<String, Author> {
 
     @Autowired
     AuthorService authorService;
 
     @Override
-    public Author convert(Object s) {
-        Integer id = Integer.parseInt((String) s);
+    public Author convert(String s) {
+        Integer id = Integer.parseInt( s);
         Author author = authorService.findById(id);
         return author;
     }

@@ -4,8 +4,8 @@ CREATE TABLE `groupprojectdb`.`authors` (
   `author_id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
-  `date_of_birth` DATE NULL,
-  `date_of_death` DATE NULL,
+  `date_of_birth` VARCHAR(10) NULL,
+  `date_of_death` VARCHAR(10) NULL,
   `biography` VARCHAR(1000) NULL,
   `url_path` VARCHAR(100) NULL,
   PRIMARY KEY (`author_id`));
