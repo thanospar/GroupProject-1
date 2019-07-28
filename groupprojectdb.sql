@@ -4,8 +4,8 @@ CREATE TABLE `groupprojectdb`.`authors` (
   `author_id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
-  `date_of_birth` DATE NULL,
-  `date_of_death` DATE NULL,
+  `date_of_birth` VARCHAR(10) NULL,
+  `date_of_death` VARCHAR(10) NULL,
   `biography` VARCHAR(1000) NULL,
   `url_path` VARCHAR(100) NULL,
   PRIMARY KEY (`author_id`));
@@ -99,13 +99,22 @@ VALUES ('DBA');
   
 /* Populate one Admin User which will further create other users for the application using GUI */
 INSERT INTO groupprojectdb.APP_USER(sso_id, password, first_name, last_name, email)
-VALUES ('sam','$2a$10$4eqIF5s/ewJwHK1p8lqlFOEm2QIA0S8g6./Lok.pQxqcxaBZYChRm', 'Sam','Smith','samy@xyz.com');
+VALUES ('admin','$2a$10$4eqIF5s/ewJwHK1p8lqlFOEm2QIA0S8g6./Lok.pQxqcxaBZYChRm', 'admin','admin','admin@xyz.com');
+
+/* Populate one Admin User which will further create other users for the application using GUI */
+INSERT INTO groupprojectdb.APP_USER(sso_id, password, first_name, last_name, email)
+VALUES ('user','$2a$10$4eqIF5s/ewJwHK1p8lqlFOEm2QIA0S8g6./Lok.pQxqcxaBZYChRm', 'user','user','user@xyz.com');
   
   
 /* Populate JOIN Table */
 INSERT INTO groupprojectdb.APP_USER_USER_PROFILE (user_id, user_profile_id)
   SELECT user.id, profile.id FROM groupprojectdb.app_user user, groupprojectdb.user_profile profile
-  where user.sso_id='sam' and profile.type='ADMIN';
+  where user.sso_id='admin' and profile.type='ADMIN';
+  
+  /* Populate JOIN Table */
+INSERT INTO groupprojectdb.APP_USER_USER_PROFILE (user_id, user_profile_id)
+  SELECT user.id, profile.id FROM groupprojectdb.app_user user, groupprojectdb.user_profile profile
+  where user.sso_id='user' and profile.type='USER';
  
 /* Create persistent_logins Table used to store rememberme related stuff*/
 CREATE TABLE groupprojectdb.persistent_logins (

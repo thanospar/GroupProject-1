@@ -9,6 +9,7 @@ import com.group.groupproject.dao.AbstractDao;
 import com.group.groupproject.entities.Author;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,11 @@ public class AuthorDaoImpl extends AbstractDao<Integer, Author> implements Autho
 
     @Override
     public Author findById(int id) {
-        return getByKey(id);
+        Author a =  getByKey(id);
+        if (a != null) {
+            Hibernate.initialize(a.getBooks());
+        }
+        return a;
     }
 
     @Override
@@ -32,7 +37,11 @@ public class AuthorDaoImpl extends AbstractDao<Integer, Author> implements Autho
     @SuppressWarnings("unchecked")
     public List<Author> findAllAuthors() {
         Criteria criteria = createEntityCriteria();
-        return (List<Author>) criteria.list();
+        List<Author> authors =  (List<Author>) criteria.list();
+        for (int i = 0; i < authors.size(); i++) {
+            Hibernate.initialize(authors.get(i).getBooks());
+        }
+        return authors;
     }
 
     @Override

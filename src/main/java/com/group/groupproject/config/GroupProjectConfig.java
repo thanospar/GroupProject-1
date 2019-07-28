@@ -2,6 +2,7 @@ package com.group.groupproject.config;
 
 import com.group.groupproject.converter.AuthorFromFormToEntity;
 import com.group.groupproject.converter.CategoryFromFormToEntity;
+import com.group.groupproject.converter.DateFromFormToEntity;
 import com.group.groupproject.converter.LocalDatePersistenceConverter;
 import com.group.groupproject.converter.PublisherFromFormToEntity;
 import com.group.groupproject.converter.RoleToUserProfileConverter;
@@ -33,6 +34,9 @@ public class GroupProjectConfig extends WebMvcConfigurerAdapter {
     
     @Autowired
     AuthorFromFormToEntity authorFromFormToEntity;
+    
+//    @Autowired
+//    DateFromFormToEntity dateFromFormToEntity;
 
     @Bean(name = "GroupProject")
     public ViewResolver viewResolver() {
@@ -63,5 +67,6 @@ public class GroupProjectConfig extends WebMvcConfigurerAdapter {
         registry.addConverter(categoryFromFormToEntity);
         registry.addConverter(publisherFromFormToEntity);
         registry.addConverter(authorFromFormToEntity);
+//        registry.addConverter(dateFromFormToEntity);
     }
 }

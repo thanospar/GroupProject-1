@@ -3,6 +3,7 @@ package com.group.groupproject.controllers;
 import com.group.groupproject.dao.author.AuthorDao;
 import com.group.groupproject.dao.book.BookDao;
 import com.group.groupproject.dao.publisher.PublisherDao;
+import com.group.groupproject.entities.Author;
 import com.group.groupproject.entities.Book;
 import com.group.groupproject.entities.Invoice;
 import com.group.groupproject.entities.Publisher;
@@ -41,7 +42,7 @@ public class HomeController {
     
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
-        bookService.findById(1).getAuthors().get(0).getLastName();
+
         return "index";
     }
     
