@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,7 +10,9 @@
     </head>
     <body>
         <h1>chat!</h1>
-        
+        <security:authorize access="isAuthenticated()">
+  Hello,   <security:authentication property="principal.username" /> 
+</security:authorize>
         <div id="messages"></div>
         
         <form:form method="POST" action="/GroupProject/chat/" modelAttribute="cmessage" >
