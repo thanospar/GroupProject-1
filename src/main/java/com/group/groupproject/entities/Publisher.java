@@ -1,5 +1,6 @@
 package com.group.groupproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -33,7 +34,7 @@ public class Publisher implements Serializable {
     
     @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
     private Set<Book> books;
-
+@JsonIgnore
     public Set<Book> getBooks() {
         return books;
     }

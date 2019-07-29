@@ -1,9 +1,12 @@
 package com.group.groupproject.controllers;
 
+import com.group.groupproject.entities.Book;
 import com.group.groupproject.entities.ChatMessage;
+import com.group.groupproject.services.BookService;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequestMapping("/chat/")
 public class ChatController {
 
+    
     List<ChatMessage> chatMessages = new ArrayList();
 
     @RequestMapping(method = RequestMethod.GET)
@@ -31,6 +35,7 @@ public class ChatController {
 
         ChatMessage cmessage = new ChatMessage();
         JSONArray messages = new JSONArray(chatMessages);
+        
         model.addAttribute("messages", messages);
         model.addAttribute("cmessage", cmessage);
         return "/chat/index";

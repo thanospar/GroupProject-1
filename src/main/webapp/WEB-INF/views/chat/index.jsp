@@ -27,8 +27,6 @@
             const messageDiv = document.getElementById("messages");
             console.log(messageDiv);
             let messages = ${messages};
-            console.log(messages);
-            
             if(messages !== null){
                 let ps = messages.map(m => '<p>'+m.name+' '+m.message+'</p>').join('');
                 

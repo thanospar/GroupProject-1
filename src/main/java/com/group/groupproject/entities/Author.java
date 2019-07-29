@@ -1,5 +1,6 @@
 package com.group.groupproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.group.groupproject.converter.LocalDatePersistenceConverter;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -46,6 +47,7 @@ public class Author implements Serializable {
     @Column(name = "url_path")
     private String urlPath;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
     private List<Book> books = new ArrayList();
 
