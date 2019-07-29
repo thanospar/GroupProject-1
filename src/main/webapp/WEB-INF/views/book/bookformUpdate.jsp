@@ -55,7 +55,7 @@
                             <h3 class="uk-card-title na">Books</h3>
 
                             <div class="uk-card uk-card-default uk-card-body">
-                                <form:form method="POST" action="/GroupProject/books/formAddBook" modelAttribute="book" class="uk-form-horizontal uk-margin" >
+                                <form:form method="POST" action="/GroupProject/books/formUpdateBook" modelAttribute="book" class="uk-form-horizontal uk-margin" >
                                     <div class="uk-margin">
                                         <form:input type="hidden" path="id" id="id"/>
                                     </div>
