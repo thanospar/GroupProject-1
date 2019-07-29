@@ -98,10 +98,10 @@ public class BookController {
         model.addAttribute("categories", categories);
         model.addAttribute("publishers", publishers);
         model.addAttribute("book", book);
-        return "book/bookregister";
+        return "book/bookformUpdate";
     }
 
-    @PostMapping("books/formUpdateBook/{bookid}")
+    @PostMapping("books/formUpdateBook")
     public String updateBook(ModelMap model, @ModelAttribute("book") Book book) {
         String isDone;
         if (bookservice.updateBook(book)) {
