@@ -40,12 +40,12 @@ public class CategoryController {
     @GetMapping("categories/formAddCategory")
     public String showFormForAdd(ModelMap model) {
         Category category = new Category();
-        model.addAttribute("category", category);
+        model.addAttribute("categ", category);
         return "category/categoryform";
     }
 
     @PostMapping("categories/formAddCategory")
-    public String saveCategory(ModelMap model, @ModelAttribute("category") Category category) {
+    public String saveCategory(ModelMap model, @ModelAttribute("categ") Category category) {
         String isDone;
         if (categoryservice.saveCategory(category)) {
             isDone = "Success";
@@ -59,12 +59,12 @@ public class CategoryController {
     @GetMapping("categories/formUpdateCategory/{categoryid}")
     public String showFormForUpdate(ModelMap model, @PathVariable("categoryid") int id) {
         Category category = categoryservice.findById(id);
-        model.addAttribute("category", category);
-        return "category/categoryform";
+        model.addAttribute("categ", category);
+        return "category/categoryformUpdate";
     }
 
-    @PostMapping("categories/formUpdateCategory/{categoryid}")
-    public String updateCategory(ModelMap model, @ModelAttribute("category") Category category) {
+    @PostMapping("categories/formUpdateCategory")
+    public String updateCategory(ModelMap model, @ModelAttribute("categ") Category category) {
         String isDone;
         if (categoryservice.updateCategory(category)) {
             isDone = "Success";

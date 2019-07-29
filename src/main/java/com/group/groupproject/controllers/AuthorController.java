@@ -69,10 +69,10 @@ public class AuthorController {
         List<Book> books = bookservice.findAllBooks();
         model.addAttribute("books", books);
         model.addAttribute("author", author);
-        return "author/authorform";
+        return "author/authorformUpdate";
     }
     
-    @PostMapping("authors/formUpdateAuthor/{authorid}")
+    @PostMapping("authors/formUpdateAuthor")
     public String updateAuthor(ModelMap model, @ModelAttribute("author") Author author) {
         String isDone;
         if (authorservice.updateAuthor(author)) {

@@ -25,20 +25,20 @@
                             <ul class="uk-nav-sub">
                                 <li><a href="<c:url value='/books/formAddBook' />">Add New Book</a></li>
                                 <li><a href="<c:url value='/books' />">View all</a></li>
-                                <li class="uk-nav-sub"><a href="#"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Category </a>
+                                <li class="uk-nav-sub"><a href="<c:url value='/categories' />"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Category </a>
 
 
                                 </li>
-                                <li class="uk-nav-sub"><a href="#"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Authors </a>
+                                <li class="uk-nav-sub"><a href="<c:url value='/authors' />"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Authors </a>
 
                                 </li>
 
-                                <li class="uk-parent"><a href="#"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Publishers</a>
+                                <li class="uk-parent"><a href="<c:url value='/publishers' />"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Publishers</a>
 
 
                                 </li>
 
-                                <li class="uk-parent"><a href="#"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Quantity</a>
+                                <li class="uk-parent"><a href="<c:url value='/books' />"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Quantity</a>
 
 
                                 </li>
