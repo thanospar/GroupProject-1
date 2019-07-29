@@ -83,8 +83,8 @@
                                                 <td>${author.biography}</td>
                                                 <td>${author.urlPath}</td>
 
-                                                <td><a href="<c:url value='#' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
-                                                <td><a href="<c:url value='#' />" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
+                                                <td><a href="<c:url value='/authors/formUpdateAuthor/${author.id}' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
+                                                <td><a href="<c:url value='/authors/deleteAuthor/${author.id}' />" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
                                             </tr>
                                         </c:forEach>
 
