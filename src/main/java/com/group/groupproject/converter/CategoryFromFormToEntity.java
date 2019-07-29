@@ -7,14 +7,14 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CategoryFromFormToEntity implements Converter<Object, Category> {
+public class CategoryFromFormToEntity implements Converter<String, Category> {
 
     @Autowired
     CategoryService categoryService;
 
     @Override
-    public Category convert(Object s) {
-        Integer id = Integer.parseInt((String) s);
+    public Category convert(String s) {
+        Integer id = Integer.parseInt( s);
         Category category = categoryService.findById(id);
         return category;
     }
