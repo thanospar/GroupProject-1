@@ -66,11 +66,13 @@ public class AuthorController {
     @GetMapping("authors/formUpdateAuthor/{authorid}")
     public String showFormForUpdate(ModelMap model, @PathVariable("authorid") int id) {
         Author author = authorservice.findById(id);
+        List<Book> books = bookservice.findAllBooks();
+        model.addAttribute("books", books);
         model.addAttribute("author", author);
-        return "author/authorformUpdate";
+        return "author/authorform";
     }
     
-    @PostMapping("authors/formUpdateAuthor")
+    @PostMapping("authors/formUpdateAuthor/{authorid}")
     public String updateAuthor(ModelMap model, @ModelAttribute("author") Author author) {
         String isDone;
         if (authorservice.updateAuthor(author)) {

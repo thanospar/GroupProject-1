@@ -58,6 +58,7 @@
                                    <a href="<c:url value='/books/formAddBook' />"  class="uk-button uk-button-secondary  "  uk-toggle>Add new</a>
                                    
                                 </div>
+                                   <h2>${isDone}</h2>
                                 <table id="tbl" class="uk-table uk-table-hover uk-table-divider">
                                     <thead>
                                         <tr>
@@ -79,8 +80,8 @@
                                                 <td>${book.summary}</td>
                                                 <td>${book.isbn}</td>
                                                 <td>${book.yearPublished}</td>
-                                                <td><a href="<c:url value='/user/edit-user-${book.id}' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
-                                                <td><a href="<c:url value='/user/delete-user-${book.id}' />" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
+                                                <td><a href="<c:url value='/books/formUpdateBook/${book.id}' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
+                                                <td><a href="<c:url value='/books/deleteBook/${book.id}' />" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
                                             </tr>
                                         </c:forEach>
                                         
