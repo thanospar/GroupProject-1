@@ -27,21 +27,21 @@ public class CategoryController {
     public String findAllCategories(ModelMap model, @ModelAttribute("isDone") String isDone) {
         List<Category> categories = categoryservice.findAllCategories();
         model.addAttribute("categories", categories);
-        return "/category/listofcategories";
+        return "category/listofcategories";
     }
 
     @GetMapping("categories/{categoryid}")
     public String findCategory(ModelMap model, @PathVariable("categoryid") int id) {
         Category category = categoryservice.findById(id);
         model.addAttribute("category", category);
-        return "/category/showcategory";
+        return "category/showcategory";
     }
 
     @GetMapping("categories/formAddCategory")
     public String showFormForAdd(ModelMap model) {
         Category category = new Category();
         model.addAttribute("category", category);
-        return "/category/categoryform";
+        return "category/categoryform";
     }
 
     @PostMapping("categories/formAddCategory")
@@ -60,10 +60,10 @@ public class CategoryController {
     public String showFormForUpdate(ModelMap model, @PathVariable("categoryid") int id) {
         Category category = categoryservice.findById(id);
         model.addAttribute("category", category);
-        return "/category/categoryformUpdate";
+        return "category/categoryform";
     }
 
-    @PostMapping("categories/formUpdateCategory")
+    @PostMapping("categories/formUpdateCategory/{categoryid}")
     public String updateCategory(ModelMap model, @ModelAttribute("category") Category category) {
         String isDone;
         if (categoryservice.updateCategory(category)) {

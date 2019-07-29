@@ -10,6 +10,7 @@ import com.group.groupproject.services.CategoryService;
 import com.group.groupproject.services.PublisherService;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -88,11 +89,19 @@ public class BookController {
     @GetMapping("books/formUpdateBook/{bookid}")
     public String showFormForUpdate(ModelMap model, @PathVariable("bookid") int id) {
         Book book = bookservice.findById(id);
+        List<String> bookSeries = bookservice.findBookSeries();
+        List<Author> authors = authorservice.findAllAuthors();
+        List<Category> categories = categoryservice.findAllCategories();
+        List<Publisher> publishers = publisherservice.findAllPublishers();
+        model.addAttribute("bookSeries", bookSeries);
+        model.addAttribute("authors", authors);
+        model.addAttribute("categories", categories);
+        model.addAttribute("publishers", publishers);
         model.addAttribute("book", book);
-        return "book/bookformUpdate";
+        return "book/bookregister";
     }
 
-    @PostMapping("books/formUpdateBook")
+    @PostMapping("books/formUpdateBook/{bookid}")
     public String updateBook(ModelMap model, @ModelAttribute("book") Book book) {
         String isDone;
         if (bookservice.updateBook(book)) {
