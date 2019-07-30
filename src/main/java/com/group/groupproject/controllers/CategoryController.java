@@ -17,34 +17,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author filippos
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/categories/")
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryservice;
 
-    @GetMapping("categories")
+    @GetMapping
     public String findAllCategories(ModelMap model, @ModelAttribute("isDone") String isDone) {
         List<Category> categories = categoryservice.findAllCategories();
         model.addAttribute("categories", categories);
         return "category/listofcategories";
     }
 
-    @GetMapping("categories/{categoryid}")
+    @GetMapping("{categoryid}")
     public String findCategory(ModelMap model, @PathVariable("categoryid") int id) {
         Category category = categoryservice.findById(id);
         model.addAttribute("category", category);
         return "category/showcategory";
     }
 
-    @GetMapping("categories/formAddCategory")
+    @GetMapping("formAddCategory")
     public String showFormForAdd(ModelMap model) {
         Category category = new Category();
         model.addAttribute("categ", category);
         return "category/categoryform";
     }
 
-    @PostMapping("categories/formAddCategory")
+    @PostMapping("formAddCategory")
     public String saveCategory(ModelMap model, @ModelAttribute("categ") Category category) {
         String isDone;
         if (categoryservice.saveCategory(category)) {
@@ -53,17 +53,17 @@ public class CategoryController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/categories";
+        return "redirect:/categories/";
     }
 
-    @GetMapping("categories/formUpdateCategory/{categoryid}")
+    @GetMapping("formUpdateCategory/{categoryid}")
     public String showFormForUpdate(ModelMap model, @PathVariable("categoryid") int id) {
         Category category = categoryservice.findById(id);
         model.addAttribute("categ", category);
         return "category/categoryformUpdate";
     }
 
-    @PostMapping("categories/formUpdateCategory")
+    @PostMapping("formUpdateCategory")
     public String updateCategory(ModelMap model, @ModelAttribute("categ") Category category) {
         String isDone;
         if (categoryservice.updateCategory(category)) {
@@ -72,10 +72,10 @@ public class CategoryController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/categories";
+        return "redirect:/categories/";
     }
 
-    @GetMapping("categories/deleteCategory/{categoryid}")
+    @GetMapping("deleteCategory/{categoryid}")
     public String deleteCategory(ModelMap model, @PathVariable("categoryid") int id) {
         Category category = categoryservice.findById(id);
         String isDone;
@@ -85,7 +85,7 @@ public class CategoryController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/categories";
+        return "redirect:/categories/";
     }
 
 }

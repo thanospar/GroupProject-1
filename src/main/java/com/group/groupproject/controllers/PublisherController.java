@@ -1,7 +1,9 @@
 package com.group.groupproject.controllers;
 
+import com.group.groupproject.entities.Book;
 import com.group.groupproject.entities.Category;
 import com.group.groupproject.entities.Publisher;
+import com.group.groupproject.services.BookService;
 import com.group.groupproject.services.PublisherService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +20,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author filippos
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/publishers/")
 public class PublisherController {
 
     @Autowired
     private PublisherService publisherservice;
+    
+    @Autowired
+    private BookService bookservice;
 
-    @GetMapping("publishers")
+    @GetMapping
     public String findAllPublishers(ModelMap model, @ModelAttribute("isDone") String isDone) {
         List<Publisher> publishers = publisherservice.findAllPublishers();
         model.addAttribute("publishers", publishers);
-        return "/publisher/listofpublishers";
+        return "publisher/listofpublishers";
     }
     
-    @GetMapping("publishers/{publisherid}")
+    @GetMapping("{publisherid}")
     public String findPublisher(ModelMap model, @PathVariable("publisherid") int id) {
         Publisher publisher = publisherservice.findById(id);
         model.addAttribute("publisher", publisher);
-        return "/publisher/showpublisher";
+        return "publisher/showpublisher";
     }
     
-    @GetMapping("publishers/formAddPublisher")
+    @GetMapping("formAddPublisher")
     public String showFormForAdd(ModelMap model) {
         Publisher publisher = new Publisher();
+        List<Book> books = bookservice.findAllBooks();
         model.addAttribute("publisher", publisher);
-        return "/publisher/publisherform";
+        model.addAttribute("books", books);
+        return "publisher/publisherform";
     }
     
-    @PostMapping("publishers/formAddPublisher")
+    @PostMapping("formAddPublisher")
     public String savePublisher(ModelMap model, @ModelAttribute("publisher") Publisher publisher) {
         String isDone;
         if (publisherservice.savePublisher(publisher)) {
@@ -54,17 +61,17 @@ public class PublisherController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/publishers";
+        return "redirect:/publishers/";
     }
     
-    @GetMapping("publishers/formUpdatePublisher/{publisherid}")
+    @GetMapping("formUpdatePublisher/{publisherid}")
     public String showFormForUpdate(ModelMap model, @PathVariable("publisherid") int id) {
         Publisher publisher = publisherservice.findById(id);
         model.addAttribute("publisher", publisher);
-        return "/publisher/publisherformUpdate";
+        return "publisher/publisherformUpdate";
     }
     
-    @PostMapping("publishers/formUpdatePublisher")
+    @PostMapping("formUpdatePublisher")
     public String updatePublisher(ModelMap model, @ModelAttribute("publisher") Publisher publisher) {
         String isDone;
         if (publisherservice.updatePublisher(publisher)) {
@@ -73,10 +80,10 @@ public class PublisherController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/publishers";
+        return "redirect:/publishers/";
     }
     
-    @GetMapping("publishers/deletePublisher/{publisherid}")
+    @GetMapping("deletePublisher/{publisherid}")
     public String deleteCategory(ModelMap model, @PathVariable("publisherid") int id) {
         Publisher publisher = publisherservice.findById(id);
         String isDone;
@@ -86,7 +93,7 @@ public class PublisherController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/publishers";
+        return "redirect:/publishers/";
     }
 
 }

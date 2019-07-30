@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/books/")
 public class BookController {
 
     @Autowired
@@ -35,14 +35,14 @@ public class BookController {
     @Autowired
     private PublisherService publisherservice;
 
-    @GetMapping("books")
+    @GetMapping
     public String findAllBooks(ModelMap model, @ModelAttribute("isDone") String isDone) {
         List<Book> books = bookservice.findAllBooks();
         model.addAttribute("books", books);
         return "book/listofbooks";
     }
 
-    @GetMapping(value = "searchbooks")
+    @GetMapping("searchbooks")
     public String findAllBooks(@RequestParam String search, ModelMap model) {
         List<Book> books = bookservice.findByTitleOrISBN(search);
         List<Author> authors = authorservice.findByLastName(search);
@@ -52,14 +52,14 @@ public class BookController {
 
     }
 
-    @GetMapping("books/{bookid}")
+    @GetMapping("{bookid}")
     public String findBook(ModelMap model, @PathVariable("bookid") int id) {
         Book book = bookservice.findById(id);
         model.addAttribute("book", book);
         return "book/showbook";
     }
 
-    @GetMapping("books/formAddBook")
+    @GetMapping("formAddBook")
     public String showFormForAdd(ModelMap model) {
         Book book = new Book();
         List<String> bookSeries = bookservice.findBookSeries();
@@ -74,7 +74,7 @@ public class BookController {
         return "book/bookregister";
     }
 
-    @PostMapping("books/formAddBook")
+    @PostMapping("formAddBook")
     public String saveBook(ModelMap model, @ModelAttribute("book") Book book) {
         String isDone;
         if (bookservice.saveBook(book)) {
@@ -83,10 +83,10 @@ public class BookController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/books";
+        return "redirect:/books/";
     }
 
-    @GetMapping("books/formUpdateBook/{bookid}")
+    @GetMapping("formUpdateBook/{bookid}")
     public String showFormForUpdate(ModelMap model, @PathVariable("bookid") int id) {
         Book book = bookservice.findById(id);
         List<String> bookSeries = bookservice.findBookSeries();
@@ -101,7 +101,7 @@ public class BookController {
         return "book/bookformUpdate";
     }
 
-    @PostMapping("books/formUpdateBook")
+    @PostMapping("formUpdateBook")
     public String updateBook(ModelMap model, @ModelAttribute("book") Book book) {
         String isDone;
         if (bookservice.updateBook(book)) {
@@ -110,10 +110,10 @@ public class BookController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/books";
+        return "redirect:/books/";
     }
 
-    @GetMapping("books/deleteBook/{bookid}")
+    @GetMapping("deleteBook/{bookid}")
     public String deleteBook(ModelMap model, @PathVariable("bookid") int id) {
         Book book = bookservice.findById(id);
         String isDone;
@@ -123,7 +123,7 @@ public class BookController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/books";
+        return "redirect:/books/";
     }
 
 }

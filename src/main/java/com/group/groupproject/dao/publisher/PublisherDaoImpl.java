@@ -4,22 +4,29 @@ import com.group.groupproject.dao.AbstractDao;
 import com.group.groupproject.entities.Publisher;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-@Repository("publisherDao")
-@Transactional
+@Repository
 public class PublisherDaoImpl extends AbstractDao<Integer, Publisher> implements PublisherDao {
 
     @Override
     public Publisher findById(int id) {
-        return getByKey(id);
+        Publisher p = getByKey(id);
+        if (p != null) {
+            Hibernate.initialize(p.getBooks());
+        }
+        return p;
     }
 
     @SuppressWarnings("unchecked")
     public List<Publisher> findAllPublishers() {
         Criteria criteria = createEntityCriteria();
-        return (List<Publisher>) criteria.list();
+        List<Publisher> publishers = (List<Publisher>) criteria.list();
+        for (int i = 0; i < publishers.size(); i++) {
+            Hibernate.initialize(publishers.get(i).getBooks());
+        }
+        return publishers;
     }
 
     @Override

@@ -74,10 +74,10 @@
                                         <div class="uk-form-controls">
                                             <c:choose>
                                                 <c:when test="${edit}">
-                                                    <input type="submit" value="Update" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/authors' />">Cancel</a>
+                                                    <input type="submit" value="Update" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/authors/' />">Cancel</a>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <input type="submit" value="Save" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/authors' />">Cancel</a>
+                                                    <input type="submit" value="Save" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/authors/' />">Cancel</a>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
