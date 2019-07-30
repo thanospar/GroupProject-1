@@ -33,6 +33,8 @@ public class ChatController {
     @RequestMapping(method = RequestMethod.GET)
     public String serveMessages(ModelMap model) {
 
+    chatMessages.add(new ChatMessage("ilias","minima minasd sadsadas saddsaas saddas","Sales"));
+    chatMessages.add(new ChatMessage("dimitris","minima","Sales"));
         ChatMessage cmessage = new ChatMessage();
         JSONArray messages = new JSONArray(chatMessages);
         
