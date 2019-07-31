@@ -14,6 +14,7 @@ import com.group.groupproject.services.user.UserService;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -49,6 +50,10 @@ public class HomeController {
     @GetMapping(value = "shop")
     public String shop(ModelMap model) {
         List<Book> books = bookService.findAllBooks();
+        
+        JSONArray booksArray = new JSONArray(books);
+        model.addAttribute("booksArray", booksArray);
+        
         model.addAttribute("books", books);
         return "/shop";
     }

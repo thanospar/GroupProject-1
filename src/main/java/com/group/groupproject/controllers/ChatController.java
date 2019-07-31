@@ -32,21 +32,21 @@ public class ChatController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String serveMessages(ModelMap model) {
-
-    chatMessages.add(new ChatMessage("ilias","minima minasd sadsadas saddsaas saddas","Sales"));
-    chatMessages.add(new ChatMessage("dimitris","minima","Sales"));
+if(chatMessages.isEmpty()){
+    chatMessages.add(new ChatMessage("ilias","Hello how is going?","Sales"));
+    chatMessages.add(new ChatMessage("giannis","im fine, you?","Sales"));}
         ChatMessage cmessage = new ChatMessage();
         JSONArray messages = new JSONArray(chatMessages);
         
         model.addAttribute("messages", messages);
         model.addAttribute("cmessage", cmessage);
-        return "/chat/index";
+        return "/chat/chat";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String postMessage(@ModelAttribute("cmessage") ChatMessage cmessage, ModelMap model) {
 
-        chatMessages.add(cmessage);
+        chatMessages.add(0,cmessage);
         return "redirect:/chat/";
     }
 

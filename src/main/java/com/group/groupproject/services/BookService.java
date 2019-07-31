@@ -13,6 +13,8 @@ public interface BookService {
 
     List<String> findBookSeries();
     
+    List<String> findBookSpecials();
+    
     boolean saveBook(Book book);
 
     boolean updateBook(Book book);

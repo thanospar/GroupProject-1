@@ -11,6 +11,7 @@ import com.group.groupproject.services.PublisherService;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,6 +39,7 @@ public class BookController {
     @GetMapping
     public String findAllBooks(ModelMap model, @ModelAttribute("isDone") String isDone) {
         List<Book> books = bookservice.findAllBooks();
+        
         model.addAttribute("books", books);
         return "book/listofbooks";
     }
@@ -63,11 +65,13 @@ public class BookController {
     public String showFormForAdd(ModelMap model) {
         Book book = new Book();
         List<String> bookSeries = bookservice.findBookSeries();
+        List<String> specials = bookservice.findBookSpecials();
         List<Author> authors = authorservice.findAllAuthors();
         List<Category> categories = categoryservice.findAllCategories();
         List<Publisher> publishers = publisherservice.findAllPublishers();
         model.addAttribute("book", book);
         model.addAttribute("bookSeries", bookSeries);
+        model.addAttribute("specials", specials);
         model.addAttribute("authors", authors);
         model.addAttribute("categories", categories);
         model.addAttribute("publishers", publishers);
