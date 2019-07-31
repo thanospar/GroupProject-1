@@ -7,14 +7,14 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PublisherFromFormToEntity implements Converter<Object, Publisher> {
+public class PublisherFromFormToEntity implements Converter<String, Publisher> {
 
     @Autowired
     PublisherService publisherService;
 
     @Override
-    public Publisher convert(Object s) {
-        Integer id = Integer.parseInt((String) s);
+    public Publisher convert(String s) {
+        Integer id = Integer.parseInt(s);
         Publisher publisher = publisherService.findById(id);
         return publisher;
     }

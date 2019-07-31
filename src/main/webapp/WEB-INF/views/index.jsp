@@ -35,7 +35,7 @@
                     <h2 class="uk-margin uk-heading-small">Welcome</h2>
                     <p class="uk-margin uk-text-lead">Find your book Now!</p>
                         <div class="uk-margin uk-padding-small">
-    <form action="/GroupProject/searchbooks" class="uk-search uk-search-default">
+    <form action="/GroupProject/books/searchbooks" class="uk-search uk-search-default">
         
         <input class="uk-search-input" type="search" name="search" placeholder="Enter the Title, Author, or ISBN">
         <div> <button type="submit" class="uk-search-icon-flip search" uk-search-icon></button></div>

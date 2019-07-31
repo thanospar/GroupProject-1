@@ -75,8 +75,8 @@
                                                 <td>${categ.id}</td>
                                                 <td>${categ.category}</td>
 
-                                                <td><a href="<c:url value='/categories/formUpdateCategory/${categ.id}' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
-                                                <td><a href="<c:url value='/categories/deleteCategory/${categ.id}' />" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
+                                                <td><a href="<c:url value='formUpdateCategory/${categ.id}' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
+                                                <td><a href="<c:url value='deleteCategory/${categ.id}' />" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
                                             </tr>
                                         </c:forEach>
 
