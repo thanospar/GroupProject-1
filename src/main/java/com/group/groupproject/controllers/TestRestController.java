@@ -1,9 +1,12 @@
 
 package com.group.groupproject.controllers;
 
+import com.group.groupproject.entities.Book;
 import com.group.groupproject.entities.ChatMessage;
+import com.group.groupproject.services.BookService;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +18,18 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/chatapi")
-public class ChatRestController {
+public class TestRestController {
     
     List<ChatMessage> chatMessages = new ArrayList();
     
+    @Autowired
+    private BookService bookservice;
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<ChatMessage>> listAllChats() {
+    public ResponseEntity<List<Book>> listAllChats() {
         
-        chatMessages.add(new ChatMessage("dimitris", "minima"));
+        List<Book> bs = bookservice.findAllBooks();
         
-        return new ResponseEntity<List<ChatMessage>>(chatMessages, HttpStatus.OK);
+        return new ResponseEntity<List<Book>>(bs, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
