@@ -24,7 +24,7 @@
                 <div ng-if="loggedname">
                     <h4>Wellcome {{loggedname}}</h4>
                     <div ng-if="notlogged === false">
-                    <button ng-click="clearSessionName()">Exit</button>
+                        <button ng-click="clearSessionName()">Exit</button>
                     </div>
                 </div>
                 <div ng-if="!loggedname">
@@ -42,22 +42,24 @@
                     <div class="input-group">
                         <form:input style="display:none" path="name" name="name" type="text" id="name" ng-model="loggedname" />
                         <div class="col-auto">
-                        <form:select ng-change="selectChange($event)" path="subject" class="form-control" ng-model="subjectsel" id="subjectsel">
-                            <form:option value="General" label="General"/>
-                            <form:option value="Support" label="Support"/>
-                            <form:option value="Sales" label="Sales"/>
-                        </form:select>
+                            <form:select ng-change="selectChange($event)" path="subject" class="form-control" ng-model="subjectsel" id="subjectsel">
+                                <form:option value="General" label="General"/>
+                                <form:option value="Support" label="Support"/>
+                                <form:option value="Sales" label="Sales"/>
+                            </form:select>
                         </div>
                         <form:input path="message" name="message" type="text" id="message" class="form-control" placeholder="Type a new message"/>
                         <button class="btn btn-warning">Send</button>
                     </div>
                 </form:form>
                 <div id="messeges">
-                    <div class="row m-2" ng-repeat="message in messages | filter:{subject:subjectsel}">
-                        <div class="card bg-light shadow">
-                            <div class="card-body">
-                                <h6 class="card-subtitle">{{message.name}}:</h6>
-                                <p class="card-text">{{message.message}}</p>
+                    <div ng-class="{'row m-2' : true ,'justify-content-end': '{{message.name}}'=== '{{loggedname}}' } "  ng-repeat="message in messages| filter:{subject:subjectsel}">
+                        <div class="col-4 ">
+                            <div class="card bg-light shadow">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle">{{message.name}}:</h6>
+                                    <p class="card-text">{{message.message}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -80,11 +82,11 @@
                             $scope.loggedname = sessionStorage.getItem('name');
                             $scope.notlogged = false;
                         }
-                        
-                        if(sessionStorage.getItem('subject')){
+
+                        if (sessionStorage.getItem('subject')) {
                             $scope.subjectsel = sessionStorage.getItem('subject');
                         }
-                        
+
                         $scope.nameEntered = function (keyEvent) {
                             if (keyEvent.which === 13 && keyEvent.currentTarget.value !== null)
                             {
