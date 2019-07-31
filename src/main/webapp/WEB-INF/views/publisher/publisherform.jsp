@@ -62,7 +62,7 @@
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">Brand</label>
                                         <div class="uk-form-controls">
-                                            <form:input type="text" path="brand" id="brand" class="uk-input"/>
+                                            <form:input type="text" path="brand" id="brand" class="uk-input" required="required" />
                                             <div class="has-error">
                                                 <form:errors path="brand" class="help-inline"/>
                                             </div>

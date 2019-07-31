@@ -34,6 +34,13 @@ public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao {
         criteria.setProjection(Projections.distinct(Projections.property("bookSeries")));
         return (List<String>) criteria.list();
     }
+    
+    @Override
+    public List<String> findBookSpecials() {
+        Criteria criteria = createEntityCriteria();
+        criteria.setProjection(Projections.distinct(Projections.property("special")));
+        return (List<String>) criteria.list();
+    }
 
     @Override
     public Book findById(int id) {
