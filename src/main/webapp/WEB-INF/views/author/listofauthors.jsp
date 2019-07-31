@@ -55,7 +55,7 @@
 
                             <div class="uk-card uk-card-default uk-card-body">
                                 <div class=" uk-padding-small ">
-                                    <a href="<c:url value='/authors/formAddAuthor' />"  class="uk-button uk-button-secondary  "  uk-toggle>Add new</a>
+                                    <a href="<c:url value='formAddAuthor' />"  class="uk-button uk-button-secondary  "  uk-toggle>Add new</a>
 
                                 </div>
                                 <table id="tbl" class="uk-table uk-table-hover uk-table-divider">
@@ -83,8 +83,8 @@
                                                 <td>${author.biography}</td>
                                                 <td>${author.urlPath}</td>
 
-                                                <td><a href="<c:url value='/authors/formUpdateAuthor/${author.id}' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
-                                                <td><a href="<c:url value='/authors/deleteAuthor/${author.id}' />" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
+                                                <td><a href="<c:url value='formUpdateAuthor/${author.id}' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
+                                                <td><a href="<c:url value='deleteAuthor/${author.id}' />" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
                                             </tr>
                                         </c:forEach>
 

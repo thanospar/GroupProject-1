@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author filippos
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/authors/")
 public class AuthorController {
     
     @Autowired
@@ -28,21 +28,21 @@ public class AuthorController {
     @Autowired
     private BookService bookservice;
     
-    @GetMapping("authors")
+    @GetMapping
     public String findAllAuthors(ModelMap model, @ModelAttribute("isDone") String isDone) {
         List<Author> authors = authorservice.findAllAuthors();
         model.addAttribute("authors", authors);
         return "author/listofauthors";
     }
     
-    @GetMapping("authors/{authorid}")
+    @GetMapping("{authorid}")
     public String findAuthor(ModelMap model, @PathVariable("authorid") int id) {
         Author author = authorservice.findById(id);
         model.addAttribute("author", author);
         return "author/showauthor";
     }
     
-    @GetMapping("authors/formAddAuthor")
+    @GetMapping("formAddAuthor")
     public String showFormForAdd(ModelMap model) {
         Author author = new Author();
         List<Book> books = bookservice.findAllBooks();
@@ -51,7 +51,7 @@ public class AuthorController {
         return "author/authorform";
     }
     
-    @PostMapping("authors/formAddAuthor")
+    @PostMapping("formAddAuthor")
     public String saveAuthor(ModelMap model, @ModelAttribute("author") Author author) {
         String isDone;
         if (authorservice.saveAuthor(author)) {
@@ -60,19 +60,19 @@ public class AuthorController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/authors";
+        return "redirect:/authors/";
     }
     
-    @GetMapping("authors/formUpdateAuthor/{authorid}")
+    @GetMapping("formUpdateAuthor/{authorid}")
     public String showFormForUpdate(ModelMap model, @PathVariable("authorid") int id) {
         Author author = authorservice.findById(id);
         List<Book> books = bookservice.findAllBooks();
         model.addAttribute("books", books);
         model.addAttribute("author", author);
-        return "author/authorform";
+        return "author/authorformUpdate";
     }
     
-    @PostMapping("authors/formUpdateAuthor/{authorid}")
+    @PostMapping("formUpdateAuthor")
     public String updateAuthor(ModelMap model, @ModelAttribute("author") Author author) {
         String isDone;
         if (authorservice.updateAuthor(author)) {
@@ -81,10 +81,10 @@ public class AuthorController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/authors";
+        return "redirect:/authors/";
     }
     
-    @GetMapping("authors/deleteAuthor/{authorid}")
+    @GetMapping("deleteAuthor/{authorid}")
     public String deleteAuthor(ModelMap model, @PathVariable("authorid") int id) {
         Author author = authorservice.findById(id);
         String isDone;
@@ -94,7 +94,7 @@ public class AuthorController {
             isDone = "NOT Success";
         }
         model.addAttribute("isDone", isDone);
-        return "redirect:/authors";
+        return "redirect:/authors/";
     }
     
     
