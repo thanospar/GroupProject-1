@@ -40,6 +40,9 @@ public class Book implements Serializable {
 
     @Column(name = "cover", nullable = false)
     private String cover;
+    
+    @Column(name = "special", nullable = true)
+    private String special;
 
     @Column(name = "year_published", nullable = false)
     private int yearPublished;
@@ -92,6 +95,14 @@ public class Book implements Serializable {
 
     public int getPrice() {
         return price;
+    }
+
+    public String getSpecial() {
+        return special;
+    }
+
+    public void setSpecial(String special) {
+        this.special = special;
     }
 
     public int getQuantity() {

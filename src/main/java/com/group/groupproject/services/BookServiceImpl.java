@@ -44,6 +44,16 @@ public class BookServiceImpl implements BookService {
     
     @Override
     @Transactional
+    public List<String> findBookSpecials() {
+        //epistrefei se distinct lista ta bookseries
+        List<String> list= bookdao.findBookSpecials();
+        //aferoume ta null
+        while (list.remove(null));
+        return list;
+    }
+    
+    @Override
+    @Transactional
     public boolean saveBook(Book book) {
         return bookdao.saveBook(book);
     }
