@@ -5,9 +5,11 @@ import com.group.groupproject.entities.Book;
 import com.group.groupproject.services.AuthorService;
 import com.group.groupproject.services.BookService;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,7 +54,10 @@ public class AuthorController {
     }
     
     @PostMapping("formAddAuthor")
-    public String saveAuthor(ModelMap model, @ModelAttribute("author") Author author) {
+    public String saveAuthor(ModelMap model, @Valid @ModelAttribute("author") Author author, BindingResult result) {
+        if (result.hasErrors()){
+            return "author/authorform";
+        }
         String isDone;
         if (authorservice.saveAuthor(author)) {
             isDone = "Success";
@@ -73,7 +78,10 @@ public class AuthorController {
     }
     
     @PostMapping("formUpdateAuthor")
-    public String updateAuthor(ModelMap model, @ModelAttribute("author") Author author) {
+    public String updateAuthor(ModelMap model, @Valid @ModelAttribute("author") Author author, BindingResult result) {
+        if (result.hasErrors()){
+            return "author/authorformUpdate";
+        }
         String isDone;
         if (authorservice.updateAuthor(author)) {
             isDone = "Success";

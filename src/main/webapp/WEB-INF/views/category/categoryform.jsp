@@ -62,7 +62,7 @@
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">Book Category</label>
                                         <div class="uk-form-controls">
-                                            <form:input type="text" path="category" id="category" class="uk-input"/>
+                                            <form:input type="text" path="category" id="category" required="required" class="uk-input"/>
                                             <div class="has-error">
                                                 <form:errors path="category" class="help-inline"/>
                                             </div>
@@ -74,10 +74,10 @@
                                         <div class="uk-form-controls">
                                             <c:choose>
                                                 <c:when test="${edit}">
-                                                    <input type="submit" value="Update" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/authors/' />">Cancel</a>
+                                                    <input type="submit" value="Update" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/categories/' />">Cancel</a>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <input type="submit" value="Save" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/authors/' />">Cancel</a>
+                                                    <input type="submit" value="Save" class="uk-button uk-button-secondary"/> or <a href="<c:url value='/categories/' />">Cancel</a>
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
