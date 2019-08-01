@@ -77,7 +77,7 @@
                                                   uk-img></td>
                                         <td>{{book.title}}</td>
                                         <td><input name="quant" class="uk-input uk-form-width-xsmall" type="number" value="1"
-                                                    min="1"></td>
+                                                   min="1"></td>
                                         <td class="uk-text-bold">{{book.price}}</td>
                                         <td><a href="" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
                                     </tr>
@@ -122,8 +122,9 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <a href="" class="uk-button uk-button-default">Procced to checkout <span
-                                            uk-icon="icon:  arrow-right"></span></a>
+                                    <!--                                    <a href="" class="uk-button uk-button-default">Procced to checkout <span
+                                                                                uk-icon="icon:  arrow-right"></span></a>-->
+                                    <div id="paypal-button-container" ></div>
                                 </div>
                             </div>
 
@@ -146,6 +147,32 @@
 
 
 </div>
+<script
+    src="https://www.paypal.com/sdk/js?client-id=AWRjZ6AVM5S5U_vwnjWbXyjpzRIZ-GXp5HA-T0IEzufSchjHjixT0-sSB0btoWTqyHCeSY_c9yQFkFnY">
+</script>
+
+<script>
+    paypal.Buttons({
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                        amount: {
+                            value: '0.01'
+                        }
+                    }]
+            });
+        },
+        onApprove: function (data, actions) {
+            // Capture the funds from the transaction
+            return actions.order.capture().then(function (details) {
+                // Show a success message to your buyer
+                alert('Transaction completed by ' + details.payer.name.given_name);
+            });
+        }
+    }).render('#paypal-button-container');
+</script>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit-icons.min.js"></script> 
@@ -155,27 +182,27 @@
 <script>
 
 
-                                            const myApp = angular.module("myApp", []);
-                                            myApp.controller("MainCtrl", ['$scope', '$http', mainCtrl]);
+      const myApp = angular.module("myApp", []);
+      myApp.controller("MainCtrl", ['$scope', '$http', mainCtrl]);
 
-                                            function mainCtrl($scope, $http) {
-                                                $scope.order = '-added';
-                                                $scope.total = 0;
+      function mainCtrl($scope, $http) {
+          $scope.order = '-added';
+          $scope.total = 0;
 
-                                                let sum = 0;
-                                                
-                                               
+          let sum = 0;
 
 
-                                                $scope.books = ${booksArray};
-                                                
-                                                  angular.forEach($scope.books, function (book) {
-                                                  
-                                                    sum += book.price;
-                                                });
-                                                $scope.total = sum;
 
-                                            }
+
+          $scope.books = ${booksArray};
+
+          angular.forEach($scope.books, function (book) {
+
+              sum += book.price;
+          });
+          $scope.total = sum;
+
+      }
 </script>
 
 
