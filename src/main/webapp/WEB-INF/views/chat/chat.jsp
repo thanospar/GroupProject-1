@@ -44,11 +44,11 @@
                         <div class="col-auto">
                             <form:select ng-change="selectChange($event)" path="subject" class="form-control" ng-model="subjectsel" id="subjectsel">
                                 <form:option value="General" label="General"/>
-                                <form:option value="Support" label="Support"/>
-                                <form:option value="Sales" label="Sales"/>
+                                <form:option value="Books" label="Books"/>
+                                <form:option value="Comics" label="Comics"/>
                             </form:select>
                         </div>
-                        <form:input path="message" name="message" type="text" id="message" class="form-control" placeholder="Type a new message"/>
+                        <form:input path="message" name="message" type="text" id="message" class="form-control" ng-model="currentMsg" placeholder="Type a new message"/>
                         <button class="btn btn-warning">Send</button>
                     </div>
                 </form:form>
@@ -70,9 +70,9 @@
         <script>
 
                     const myApp = angular.module("myApp", []);
-                    myApp.controller("MainCtrl", ['$scope', '$http', mainCtrl]);
-                    function mainCtrl($scope, $http) {
-                        let inputName = document.querySelector("#getname");
+                    myApp.controller("MainCtrl", ['$scope', '$interval', '$window',mainCtrl]);
+                    function mainCtrl($scope, $interval, $window) {
+                        
                         let loggedName = document.querySelector("#loggedName").innerText;
                         $scope.subjectsel = "General";
                         if (loggedName) {
@@ -85,6 +85,10 @@
 
                         if (sessionStorage.getItem('subject')) {
                             $scope.subjectsel = sessionStorage.getItem('subject');
+                        }
+                        if (sessionStorage.getItem('msg')) {
+                            $scope.currentMsg = sessionStorage.getItem('msg');
+                            sessionStorage.removeItem('msg');
                         }
 
                         $scope.nameEntered = function (keyEvent) {
@@ -107,6 +111,25 @@
                             $scope.subjectsel = inputName2.value;
                             sessionStorage.setItem('subject', inputName2.value);
                         }
+                        
+                        $interval(function(){
+                            $scope.currentMsg = document.querySelector("#message").value;
+                            if($scope.previewsMessage === $scope.currentMsg){
+                                console.log("idio prev me current");
+                                sessionStorage.setItem('msg', $scope.currentMsg);
+                                $window.location.replace("http://localhost:8080/GroupProject/chat/");
+                            }
+                            else if(!$scope.currentMsg){
+                                console.log("keno current");
+                                $window.location.replace("http://localhost:8080/GroupProject/chat/");
+                            }
+                            else{
+                                $scope.previewsMessage = $scope.currentMsg;
+                                console.log("den einai idia h keno");
+                            }
+                
+                        },7000);
+                        
                         $scope.messages =${messages};
                     }
 
