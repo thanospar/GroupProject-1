@@ -62,7 +62,7 @@
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">First Name</label>
                                         <div class="uk-form-controls">
-                                            <form:input type="text" path="firstName" id="firstName" class="uk-input"/>
+                                            <form:input type="text" path="firstName" id="firstName" required="required" class="uk-input"/>
                                             <div class="has-error">
                                                 <form:errors path="firstName" class="help-inline"/>
                                             </div>
@@ -71,7 +71,7 @@
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">Last Name</label>
                                         <div class="uk-form-controls">
-                                            <form:input type="text" path="lastName" id="lastName" class="uk-input" />
+                                            <form:input type="text" path="lastName" id="lastName" required="required" class="uk-input" />
                                             <div class="has-error">
                                                 <form:errors path="lastName" class="help-inline"/>
                                             </div>

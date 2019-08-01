@@ -62,7 +62,7 @@
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">Book Category</label>
                                         <div class="uk-form-controls">
-                                            <form:input type="text" path="category" id="category" class="uk-input"/>
+                                            <form:input type="text" path="category" id="category" required="required" class="uk-input"/>
                                             <div class="has-error">
                                                 <form:errors path="category" class="help-inline"/>
                                             </div>

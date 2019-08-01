@@ -3,9 +3,11 @@ package com.group.groupproject.controllers;
 import com.group.groupproject.entities.Category;
 import com.group.groupproject.services.CategoryService;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +47,10 @@ public class CategoryController {
     }
 
     @PostMapping("formAddCategory")
-    public String saveCategory(ModelMap model, @ModelAttribute("categ") Category category) {
+    public String saveCategory(ModelMap model, @Valid @ModelAttribute("categ") Category category, BindingResult result) {
+        if (result.hasErrors()){
+            return "category/categoryform";
+        }
         String isDone;
         if (categoryservice.saveCategory(category)) {
             isDone = "Success";
@@ -64,7 +69,10 @@ public class CategoryController {
     }
 
     @PostMapping("formUpdateCategory")
-    public String updateCategory(ModelMap model, @ModelAttribute("categ") Category category) {
+    public String updateCategory(ModelMap model, @Valid @ModelAttribute("categ") Category category, BindingResult result) {
+        if (result.hasErrors()){
+            return "category/categoryformUpdate";
+        }
         String isDone;
         if (categoryservice.updateCategory(category)) {
             isDone = "Success";

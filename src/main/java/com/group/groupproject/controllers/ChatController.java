@@ -27,17 +27,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequestMapping("/chat/")
 public class ChatController {
 
-    
     List<ChatMessage> chatMessages = new ArrayList();
 
     @RequestMapping(method = RequestMethod.GET)
     public String serveMessages(ModelMap model) {
-if(chatMessages.isEmpty()){
-    chatMessages.add(new ChatMessage("ilias","Hello how is going?","Sales"));
-    chatMessages.add(new ChatMessage("giannis","im fine, you?","Sales"));}
+        if (chatMessages.isEmpty()) {
+            chatMessages.add(new ChatMessage("ilias", "Hello how is going?", "Sales"));
+            chatMessages.add(new ChatMessage("giannis", "im fine, you?", "Sales"));
+        }
         ChatMessage cmessage = new ChatMessage();
         JSONArray messages = new JSONArray(chatMessages);
-        
+
         model.addAttribute("messages", messages);
         model.addAttribute("cmessage", cmessage);
         return "/chat/chat";
@@ -46,7 +46,7 @@ if(chatMessages.isEmpty()){
     @RequestMapping(method = RequestMethod.POST)
     public String postMessage(@ModelAttribute("cmessage") ChatMessage cmessage, ModelMap model) {
 
-        chatMessages.add(0,cmessage);
+        chatMessages.add(0, cmessage);
         return "redirect:/chat/";
     }
 
