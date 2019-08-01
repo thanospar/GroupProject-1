@@ -76,6 +76,7 @@
                                             <option value="">All</option>
                                             <option value="Fantasy">Fantasy</option>
                                             <option value="Horror">Horror</option>
+                                            <option value="Novel">Novel</option>
                                             <option value="Science Fiction">Science Fiction</option>
                                         </select>
                                     </div>

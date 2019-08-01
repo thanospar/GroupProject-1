@@ -37,32 +37,37 @@ public class HomeController {
     PublisherDao publisherDao;
     @Autowired
     InvoiceService invoiceService;
-    
+
     @Autowired
     UserService userService;
-    
+
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
 
         return "index";
     }
-    
+
     @GetMapping(value = "shop")
     public String shop(ModelMap model) {
         List<Book> books = bookService.findAllBooks();
-        
+
         JSONArray booksArray = new JSONArray(books);
         model.addAttribute("booksArray", booksArray);
-        
+
         model.addAttribute("books", books);
         return "/shop";
     }
-    
-    @RequestMapping(value = { "/single-product-{id}" }, method = RequestMethod.GET)
-	public String singleProduct(@PathVariable("id") int id, ModelMap model) {
-		Book book = bookService.findById(id);
-                model.addAttribute("book", book);
-		return "/singleproduct";
-	}
+
+    @GetMapping(value = "cart")
+    public String cart(ModelMap model) {
+        return "/cart";
+    }
+
+    @RequestMapping(value = {"/single-product-{id}"}, method = RequestMethod.GET)
+    public String singleProduct(@PathVariable("id") int id, ModelMap model) {
+        Book book = bookService.findById(id);
+        model.addAttribute("book", book);
+        return "/singleproduct";
+    }
 
 }
