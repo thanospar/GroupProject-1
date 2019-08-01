@@ -99,6 +99,20 @@
                                         </div>
                                     </div>
                                     <div class="uk-margin">
+                                        <label class="uk-form-label" for="form-horizontal-text">Special</label>
+                                        <div class="uk-form-controls">
+                                            <form:input list="specials" type="text" path="special" name="special" id="special" class="uk-input" />
+                                            <datalist id="specials">
+                                                <c:forEach items="${specials}" var="special">
+                                                    <option value="${special}">${special}</option>
+                                                </c:forEach>
+                                            </datalist>
+                                            <div class="has-error">
+                                                <form:errors path="special" class="help-inline"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
                                         <label class="uk-form-label" for="form-horizontal-text">Authors</label>
                                         <div class="uk-form-controls">
                                             <form:select path="authors" items="${authors}" multiple="true" itemValue="id" itemLabel="lastName" class="uk-select" />

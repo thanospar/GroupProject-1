@@ -108,7 +108,7 @@
                                                 </c:forEach>
                                             </datalist>
                                             <div class="has-error">
-                                                <form:errors path="bookSeries" class="help-inline"/>
+                                                <form:errors path="special" class="help-inline"/>
                                             </div>
                                         </div>
                                     </div>
