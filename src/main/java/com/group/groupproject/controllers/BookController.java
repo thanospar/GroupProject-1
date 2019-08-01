@@ -11,10 +11,12 @@ import com.group.groupproject.services.PublisherService;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import javax.validation.Valid;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -79,7 +81,10 @@ public class BookController {
     }
 
     @PostMapping("formAddBook")
-    public String saveBook(ModelMap model, @ModelAttribute("book") Book book) {
+    public String saveBook(ModelMap model, @Valid @ModelAttribute("book") Book book, BindingResult result) {
+        if (result.hasErrors()){
+            return "book/bookregister";
+        }
         String isDone;
         if (bookservice.saveBook(book)) {
             isDone = "Success";
@@ -106,7 +111,10 @@ public class BookController {
     }
 
     @PostMapping("formUpdateBook")
-    public String updateBook(ModelMap model, @ModelAttribute("book") Book book) {
+    public String updateBook(ModelMap model, @Valid @ModelAttribute("book") Book book, BindingResult result ) {
+        if (result.hasErrors()){
+            return "book/bookformUpdate";
+        }
         String isDone;
         if (bookservice.updateBook(book)) {
             isDone = "Success";

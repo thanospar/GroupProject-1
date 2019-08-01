@@ -6,9 +6,11 @@ import com.group.groupproject.entities.Publisher;
 import com.group.groupproject.services.BookService;
 import com.group.groupproject.services.PublisherService;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,7 +55,10 @@ public class PublisherController {
     }
     
     @PostMapping("formAddPublisher")
-    public String savePublisher(ModelMap model, @ModelAttribute("publisher") Publisher publisher) {
+    public String savePublisher(ModelMap model, @Valid @ModelAttribute("publisher") Publisher publisher, BindingResult result) {
+        if (result.hasErrors()){
+            return "publisher/publisherform";
+        }
         String isDone;
         if (publisherservice.savePublisher(publisher)) {
             isDone = "Success";
@@ -72,7 +77,10 @@ public class PublisherController {
     }
     
     @PostMapping("formUpdatePublisher")
-    public String updatePublisher(ModelMap model, @ModelAttribute("publisher") Publisher publisher) {
+    public String updatePublisher(ModelMap model, @Valid @ModelAttribute("publisher") Publisher publisher, BindingResult result) {
+        if (result.hasErrors()){
+            return "publisher/publisherformUpdate";
+        }
         String isDone;
         if (publisherservice.updatePublisher(publisher)) {
             isDone = "Success";
