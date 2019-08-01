@@ -54,6 +54,17 @@ public class BookServiceImpl implements BookService {
     
     @Override
     @Transactional
+    public List<Book> findBooksToBuy(String ids) {
+        String[] idsArray = ids.split(",");
+        Integer[] idsInt = new Integer[idsArray.length];
+        for (int i=0; i<idsArray.length; i++){
+            idsInt[i] = Integer.parseInt(idsArray[i]);
+        }
+        return bookdao.findBooksToBuy(idsInt);
+    }
+
+    @Override
+    @Transactional
     public boolean saveBook(Book book) {
         return bookdao.saveBook(book);
     }
@@ -69,7 +80,6 @@ public class BookServiceImpl implements BookService {
     public boolean deleteBook(Book book) {
         return bookdao.deleteBook(book);
     }
-
-    
+   
     
 }

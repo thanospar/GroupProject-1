@@ -58,16 +58,20 @@ public class HomeController {
         return "/shop";
     }
 
-    @GetMapping(value = "cart")
-    public String cart(ModelMap model) {
-        return "/cart";
-    }
-
     @RequestMapping(value = {"/single-product-{id}"}, method = RequestMethod.GET)
     public String singleProduct(@PathVariable("id") int id, ModelMap model) {
         Book book = bookService.findById(id);
         model.addAttribute("book", book);
         return "/singleproduct";
+    }
+    
+    @RequestMapping(value = {"cart/{ids}"}, method = RequestMethod.GET)
+    public String cart(@PathVariable("ids") String ids, ModelMap model) {
+        
+        JSONArray booksArray = new JSONArray(bookService.findBooksToBuy(ids));
+        model.addAttribute("booksArray", booksArray);
+        
+        return "/cart";
     }
 
 }

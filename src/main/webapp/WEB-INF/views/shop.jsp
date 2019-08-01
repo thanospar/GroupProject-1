@@ -66,8 +66,6 @@
                             <h4><span class="uk-text-primary" uk-ratio="1.5" uk-icon="icon: settings"></span> Filters</h4>
                             <form class="uk-form-stacked">
                                  
-
-
                                 <div class="uk-margin">
                                     <label class="uk-form-label uk-text-primary" for="form-stacked-select">Select Category</label>
                                     <div  class="uk-form-controls">
