@@ -47,9 +47,9 @@
             </div>
             <div class="uk-container ">
                 <ul class="uk-breadcrumb">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Shop</a></li>
-                    <li><span></span></li>
+                    <li><a href="<c:url value='/' />">Home</a></li>
+                    
+                    <li><span>Shop</span></li>
                 </ul>
 
             </div>
@@ -135,7 +135,7 @@
                                         class="">
                                         <a href="<c:url value='/single-product-{{book.id}}' />" class=" ">
                                             <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
-                                               <img class="product" src="<c:url value='/static/images/{{book.urlPath}}' />"  width="180" alt="" >
+                                               <img class="product" src="<c:url value='/static/images/{{book.urlPath}}' />" width="180" alt="" >
                                                 <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-padding-remove">
                                                     
                                                     <a href="<c:url value='/single-product-{{book.id}}' />"  class="uk-button uk-button-primary uk-width-1-1 "><span class="uk-margin-small-right" uk-icon="icon: cart"></span>Buy now</a>

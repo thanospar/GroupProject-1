@@ -58,6 +58,12 @@ public class HomeController {
         return "/shop";
     }
     
+     @GetMapping(value = "cart")
+    public String shopCart(ModelMap model) {
+ 
+        return "/cart";
+    }
+    
     @RequestMapping(value = { "/single-product-{id}" }, method = RequestMethod.GET)
 	public String singleProduct(@PathVariable("id") int id, ModelMap model) {
 		Book book = bookService.findById(id);

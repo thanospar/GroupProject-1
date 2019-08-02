@@ -31,8 +31,8 @@
       
         <div class="uk-container ">
             <ul class="uk-breadcrumb">
-                <li><a href="">Home</a></li>
-                <li><a href="">Shop</a></li>
+                <li><a href="<c:url value='/' />">Home</a></li>
+                <li><a href="<c:url value='/shop' />">Shop</a></li>
                 <li><span>${book.title}</span></li>
             </ul>
 
