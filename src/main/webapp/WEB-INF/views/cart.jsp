@@ -31,18 +31,8 @@
              style="background-image: url(<c:url value='/static/images/3584.jpg' />)">
             <div class="uk-container uk-text-center">
                 <div class="uk-margin uk-padding-small">
-                    <h3></h3>
-                    <form action=""
-                          class="uk-search uk-search-default">
-
-                        <input class="uk-search-input" type="search" placeholder="Enter the Title, Author, or ISBN" ng-model="titlesel">
-                        <div> <button type="submit" class="uk-search-icon-flip search uk-icon uk-search-icon"
-                                      uk-search-icon=""><svg width="20" height="20" viewBox="0 0 20 20"
-                                                   xmlns="http://www.w3.org/2000/svg" data-svg="search-icon">
-                                <circle fill="none" stroke="#000" stroke-width="1.1" cx="9" cy="9" r="7"></circle>
-                                <path fill="none" stroke="#000" stroke-width="1.1" d="M14,14 L18,18 L14,14 Z"></path>
-                                </svg></button></div>
-                    </form>
+                  
+                    
                 </div>
             </div>
             <div class="uk-container ">
@@ -60,8 +50,8 @@
             <div class="uk-container">
                 <div class="uk-grid" uk-grid>
                     <div class="uk-width-2-3">
-                       
-
+                        <h3>Cart</h3>
+                        <form>
                             <table class="uk-table uk-table-striped cart-table  uk-table-middle">
                                 <thead>
                                     <tr>
@@ -72,25 +62,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     <tr class= "" ng-repeat="book in books">
                                         <td> <img class="product" src="<c:url value='/static/images/{{book.urlPath}}' />" class="img-cart" data-src="images/book3.jpg" width="70px"  alt=""
                                                   uk-img></td>
                                         <td class="">{{book.title}}</td>
-                                        <td><button ng-click="quant>=1 ? quant=quant -1 : quant= 0 " ng-init="quant=1" href="" uk-icon="icon: minus-circle"></button> {{quant}} <a ng-click="quant = quant + 1" href="" uk-icon="icon: plus-circle"></a></td>
-                                        <td class="uk-text-bold">{{book.price}}</td>
+                                         <td><input class="uk-input uk-form-width-xsmall qvalue" type="number" value="1"
+                                                min="1"></td>
+                                        <td class="uk-text-bold qvalue">{{book.price}}</td>
                                         <td><a href="" style="color:red;" class="uk-align-center" uk-tooltip="Delete" ng-click="deleteRow($index)" uk-icon="icon: trash"></a></td>
                                     </tr>
 
 
                                 </tbody>
                             </table>
-                            <div class="uk-flex uk-flex-between  ">
-                                <a href="" class="uk-button uk-button-default"><span
+                            </form>
+                            
+                       <div class="uk-flex uk-flex-between  ">
+                                <a href="<c:url value='/shop' />" class="uk-button uk-button-default"><span
                                         uk-icon="icon:  arrow-left"></span>Back to shop</a>
-                                
+                                <button ng-click="quantRow()" class="uk-button uk-button-primary">Update cart</button>
 
                             </div>
-                      
                        
 
 
@@ -110,13 +103,13 @@
 
                                         </tr>
                                         <tr>
-                                            <td>VAT</td>
-                                            <td>24%</td>
+                                            <td>Shipping</td>
+                                            <td>Free</td>
 
                                         </tr>
                                         <tr>
                                             <td class="uk-text-bold">Total</td>
-                                            <td class="uk-text-bold">{{totalvat}} €</td>
+                                            <td class="uk-text-bold">{{total}} €</td>
 
                                         </tr>
                                         </tbody>
@@ -160,14 +153,13 @@
                                             function mainCtrl($scope, $http) {
                                                 $scope.order = '-added';
                                                 $scope.total = 0;
-                                             
+                                               
                                                 let sum = 0;
-                                                 
-                                                
-                                               
-                                               
                                                 
 
+//                                                $scope.findSum = function (){
+//                                                    
+//                                                }
                                                 $scope.books = [
                                                     {
                                                         "id": 1,
@@ -374,13 +366,37 @@
                                                         }
                                                     }
                                                     
-                                                ]
+                                                ];
+                                                
+                                                $scope.quantRow= function () {
+                                                  
+                                               
+                                                let qvalues= document.querySelectorAll(".qvalue");
+                                               
+                                                       Sum(qvalues);
+                                                       
+                                                
+                                                    };
+                                                    
+                                                    function Sum(e){
+                                                        let totalsum=0;
+                                                        for(i=0;i<e.length;i=i+2){
+                                                            
+                                                            totalsum+=e[i].value * e[i+1].innerText;
+                                                            
+                                                            
+                                                        }
+                                                        console.log(totalsum);
+                                                        $scope.total = totalsum;
+                                                    }
+                                                    
                                                 
                                                 $scope.deleteRow= function (i) {
                                                      $scope.books.splice(i, 1);
                                                    let del=  $scope.books[i].price;
-                                                $scope.total = $scope.total-del;
-                                                console.log($scope.quant);
+                                                           //$scope.total = $scope.total-del;
+                                                 $scope.quantRow();
+                                             
                                                 
                                                     };
                                                      
@@ -389,11 +405,13 @@
                                               
                                                     sum += book.price;
                                                 });
-                                                
                                                 $scope.total = sum;
                                                 
+                                                
                                                
-                                            $scope.totalvat= $scope.total + $scope.total*0.24;
+                                            
+                                            
+                                            
 
                                             }
 </script>

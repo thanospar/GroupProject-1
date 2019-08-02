@@ -48,7 +48,6 @@
             <div class="uk-container ">
                 <ul class="uk-breadcrumb">
                     <li><a href="<c:url value='/' />">Home</a></li>
-                    
                     <li><span>Shop</span></li>
                 </ul>
 
