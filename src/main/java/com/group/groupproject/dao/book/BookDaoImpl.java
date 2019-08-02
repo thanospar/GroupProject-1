@@ -65,6 +65,13 @@ public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao {
     }
 
     @Override
+    public List<Book> findBooksToBuy(Integer[] ids) {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.in("id", ids ));
+        return (List<Book>) criteria.list();
+    }
+    
+    @Override
     public boolean saveBook(Book book) {
         return persist(book);
     }
@@ -78,5 +85,6 @@ public class BookDaoImpl extends AbstractDao<Integer, Book> implements BookDao {
     public boolean deleteBook(Book book) {
         return delete(book);
     }
+
 
 }

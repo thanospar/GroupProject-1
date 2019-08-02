@@ -66,8 +66,6 @@
                             <h4><span class="uk-text-primary" uk-ratio="1.5" uk-icon="icon: settings"></span> Filters</h4>
                             <form class="uk-form-stacked">
                                  
-
-
                                 <div class="uk-margin">
                                     <label class="uk-form-label uk-text-primary" for="form-stacked-select">Select Category</label>
                                     <div  class="uk-form-controls">
@@ -76,6 +74,7 @@
                                             <option value="">All</option>
                                             <option value="Fantasy">Fantasy</option>
                                             <option value="Horror">Horror</option>
+                                            <option value="Novel">Novel</option>
                                             <option value="Science Fiction">Science Fiction</option>
                                         </select>
                                     </div>
@@ -136,9 +135,9 @@
                                         <a href="<c:url value='/single-product-{{book.id}}' />" class=" ">
                                             <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
                                                <img class="product" src="<c:url value='/static/images/{{book.urlPath}}' />"  width="180" alt="" >
-                                                <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-padding-remove">
-                                                    
-                                                    <a href="<c:url value='/single-product-{{book.id}}' />"  class="uk-button uk-button-primary uk-width-1-1 "><span class="uk-margin-small-right" uk-icon="icon: cart"></span>Buy now</a>
+                                               <div ng-click="buyClicked($event)" class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-padding-remove">
+                                                   <p style="display:none">{{book.id}}</p>
+                                                    <a href="<c:url value='' />"  class="uk-button uk-button-primary uk-width-1-1 "><span class="uk-margin-small-right" uk-icon="icon: cart"></span>Buy now</a>
                                                 </div>
                                             </div>  
                                         
@@ -171,10 +170,6 @@
         </div>
     </div>
     <!-- section -->
-
-
-
-
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit.min.js"></script>
@@ -187,257 +182,26 @@
 
                                                 const myApp = angular.module("myApp", []);
                                                 myApp.controller("MainCtrl", ['$scope', '$http', mainCtrl]);
-
+                                                
                                                 function mainCtrl($scope, $http) {
                                                      $scope.order = '-added';
-                                                    $scope.books = [
-                                                        {
-                                                            "id": 1,
-                                                            "title": "Foundation",
-                                                            "summary": "The Foundation series is Isaac Asimov’s iconic masterpiece. Unfolding against the backdrop of a crumbling Galactic Empire, the story of Hari Seldon’s two Foundations is a lasting testament to an extraordinary imagination, one whose unprecedented scale shaped science fiction as we know it today. The Galactic Empire has prospered for twelve thousand years. Nobody suspects that the heart of the thriving Empire is rotten, until psychohistorian Hari Seldon uses his new science to foresee its terrible fate. Exiled to the desolate planet Terminus, Seldon establishes a colony of the greatest minds in the Empire, a Foundation which holds the key to changing the fate of the galaxy. However, the death throes of the Empire breed hostile new enemies, and the young Foundation’s fate will be threatened first.",
-                                                            "isbn": "9789604972661",
-                                                            "cover": "Paperback",
-                                                            "yearPublished": 2011,
-                                                            "urlPath": "foundation.jpg",
-                                                            "price": 10,
-                                                            "bookSeries": "Foundation",
-                                                            "quantity": 11,
-                                                            "authors": [
-                                                                {
-                                                                    "id": 1,
-                                                                    "firstName": "Isaac",
-                                                                    "lastName": "Asimov",
-                                                                    "dateOfBirth": "1920-01-02",
-                                                                    "dateOfDeath": "1992-04-06",
-                                                                    "biography": "Isaac Asimov (/ˈaɪzᵻk ˈæzᵻmɒv/; born Isaak Yudovich Ozimov; circa January 2, 1920 - April 6, 1992) was an American author and professor of biochemistry at Boston University, best known for his works of science fiction and for his popular science books. Asimov was prolific and wrote or edited more than 500 books and an estimated 90,000 letters and postcards. His books have been published in 9 of the 10 major categories of the Dewey Decimal Classification.",
-                                                                    "urlPath": "IssacAsimov.jpg"
-                                                                }
-                                                            ],
-                                                            "categories": [
-                                                                {
-                                                                    "id": 2,
-                                                                    "category": "Fantasy"
-                                                                }
-                                                            ],
-                                                            "publisher": {
-                                                                "id": 2,
-                                                                "brand": "Anubis",
-                                                                "info": "info about Anubis"
-                                                            }
-                                                        },
-                                                        {
-                                                            "id": 2,
-                                                            "title": "Foundation and Empire",
-                                                            "summary": "The Foundation series is Isaac Asimov s iconic masterpiece. Unfolding against the backdrop of a crumbling Galactic Empire, the story of Hari Seldon s two Foundations is a lasting testament to an extraordinary imagination, one whose unprecedented scale shaped science fiction as we know it today. The First Foundation survived two centuries of barbarism as the once-mighty Galactic Empire descended into chaos. Now it mist prepare for war against the remnants of the Empire as the Imperial fleet advances on their planet, Terminus. Hari Seldon predicted this war; he even prepared his Foundation for it. But he couldn t foresee the birth of the mutant Mule. In possession of a power which reduces fearsome opposition to devoted slaves, the Mule poses a terrible threat to Seldon s Foundation.",
-                                                            "isbn": "9789604972661",
-                                                            "cover": "Paperback",
-                                                            "yearPublished": 2012,
-                                                            "urlPath": "foundationempire.jpg",
-                                                            "price": 9,
-                                                            "bookSeries": "Foundation",
-                                                            "quantity": 22,
-                                                            "authors": [
-                                                                {
-                                                                    "id": 1,
-                                                                    "firstName": "Isaac",
-                                                                    "lastName": "Asimov",
-                                                                    "dateOfBirth": "1920-01-02",
-                                                                    "dateOfDeath": "1992-04-06",
-                                                                    "biography": "Isaac Asimov (/ˈaɪzᵻk ˈæzᵻmɒv/; born Isaak Yudovich Ozimov; circa January 2, 1920 - April 6, 1992) was an American author and professor of biochemistry at Boston University, best known for his works of science fiction and for his popular science books. Asimov was prolific and wrote or edited more than 500 books and an estimated 90,000 letters and postcards. His books have been published in 9 of the 10 major categories of the Dewey Decimal Classification.",
-                                                                    "urlPath": "IssacAsimov.jpg"
-                                                                }
-                                                            ],
-                                                            "categories": [
-                                                                {
-                                                                    "id": 2,
-                                                                    "category": "Fantasy"
-                                                                }
-                                                            ],
-                                                            "publisher": {
-                                                                "id": 2,
-                                                                "brand": "Anubis",
-                                                                "info": "info about Anubis"
-                                                            }
-                                                        },
-                                                        {
-                                                            "id": 3,
-                                                            "title": "Second Foundation",
-                                                            "summary": "The Foundation series is Isaac Asimov’s iconic masterpiece. Unfolding against the backdrop of a crumbling Galactic Empire, the story of Hari Seldon’s two Foundations is a lasting testament to an extraordinary imagination, one whose unprecedented scale shaped science fiction as we know it today. The Galactic Empire has prospered for twelve thousand years. Nobody suspects that the heart of the thriving Empire is rotten, until psychohistorian Hari Seldon uses his new science to foresee its terrible fate. Exiled to the desolate planet Terminus, Seldon establishes a colony of the greatest minds in the Empire, a Foundation which holds the key to changing the fate of the galaxy. However, the death throes of the Empire breed hostile new enemies, and the young Foundation’s fate will be threatened first.",
-                                                            "isbn": "9789604972661",
-                                                            "cover": "Paperback",
-                                                            "yearPublished": 2014,
-                                                            "urlPath": "secondfoundation.jpg",
-                                                            "price": 11,
-                                                            "bookSeries": "Foundation",
-                                                            "quantity": 13,
-                                                            "authors": [
-                                                                {
-                                                                    "id": 1,
-                                                                    "firstName": "Isaac",
-                                                                    "lastName": "Asimov",
-                                                                    "dateOfBirth": "1920-01-02",
-                                                                    "dateOfDeath": "1992-04-06",
-                                                                    "biography": "Isaac Asimov (/ˈaɪzᵻk ˈæzᵻmɒv/; born Isaak Yudovich Ozimov; circa January 2, 1920 - April 6, 1992) was an American author and professor of biochemistry at Boston University, best known for his works of science fiction and for his popular science books. Asimov was prolific and wrote or edited more than 500 books and an estimated 90,000 letters and postcards. His books have been published in 9 of the 10 major categories of the Dewey Decimal Classification.",
-                                                                    "urlPath": "IssacAsimov.jpg"
-                                                                }
-                                                            ],
-                                                            "categories": [
-                                                                {
-                                                                    "id": 2,
-                                                                    "category": "Fantasy"
-                                                                }
-                                                            ],
-                                                            "publisher": {
-                                                                "id": 2,
-                                                                "brand": "Anubis",
-                                                                "info": "info about Anubis"
-                                                            }
-                                                        },
-                                                        {
-                                                            "id": 4,
-                                                            "title": "Weaveworld",
-                                                            "summary": "Reissue of the highly acclaimed thriller by the world’s most outstanding dark fantasist. WEAVEWORLD is an epic adventure of the imagination. It begins with a carpet in which a world of rapture and enchantment is hiding; a world which comes to life, alerting the dark forces and beginning a desperate battle to preserve the last vestiges of magic which Humankind still has access to. WEAVEWORLD is a book of visions and horrors, a story of quest, titanic struggles, of love and of hope. It is a triumph of imagination and storytelling, an adventure, a nightmare, a promise… ‘Barker’s fecundity of invention is beyond praise. In a world of hard-bitten horror and originality, Clive Barker dislocates your mind.’ THE MAIL ON SUNDAY.",
-                                                            "isbn": "978-960-620-453-1",
-                                                            "cover": "Paperback",
-                                                            "yearPublished": 2009,
-                                                            "urlPath": "weaveworld.jpg",
-                                                            "price": 18,
-                                                            "bookSeries": null,
-                                                            "quantity": 46,
-                                                            "authors": [
-                                                                {
-                                                                    "id": 2,
-                                                                    "firstName": "Clive",
-                                                                    "lastName": "Barker",
-                                                                    "dateOfBirth": "1952-10-05",
-                                                                    "dateOfDeath": null,
-                                                                    "biography": "Barker is an author of horror/fantasy. He began writing horror early in his career, mostly in the form of short stories (collected in Books of Blood 1–6) and the Faustian novel The Damnation Game (1985). Later he moved towards modern-day fantasy and urban fantasy with horror elements in Weaveworld (1987), The Great and Secret Show (1989), the world-spanning Imajica (1991), and Sacrament (1996). When Books of Blood were first published in the United States in paperback, Stephen King was quoted on the book covers: \"I have seen the future of horror and his name is Clive Barker.\"[5] As influences on his writing, Barker lists Herman Melville, Edgar Allan Poe, Ray Bradbury, William S. Burroughs, William Blake, and Jean Cocteau, among others. He is the writer of the best-selling Abarat series, and plans on producing two more novels in the series.",
-                                                                    "urlPath": "CliveBarker.jpg"
-                                                                }
-                                                            ],
-                                                            "categories": [
-                                                                {
-                                                                    "id": 3,
-                                                                    "category": "Horror"
-                                                                }
-                                                            ],
-                                                            "publisher": {
-                                                                "id": 3,
-                                                                "brand": "BELL",
-                                                                "info": "info about BELL"
-                                                            }
-                                                        },
-                                                        {
-                                                            "id": 5,
-                                                            "title": "Hyperion",
-                                                            "summary": "It is the 29th century and the universe of the Human Hegemony is under threat. Invasion by the warlike Ousters looms, and the mysterious schemes of the secessionist AI TechnoCore bring chaos ever closer. On the eve of disaster, with the entire galaxy at war, seven pilgrims set fourth on a final voyage to the legendary Time Tombs on Hyperion, home to the Shrike, a lethal creature, part god and part killing machine, whose powers transcend the limits of time and space. The pilgrims have resolved to die before discovering anyhting less than the secrets of the universe itself.",
-                                                            "isbn": "9780575076372",
-                                                            "cover": "Paperback",
-                                                            "yearPublished": 2005,
-                                                            "urlPath": "hyperion.jpg",
-                                                            "price": 14,
-                                                            "bookSeries": "Hyperion Cantos",
-                                                            "quantity": 13,
-                                                            "authors": [
-                                                                {
-                                                                    "id": 3,
-                                                                    "firstName": "Dan",
-                                                                    "lastName": "Simmons",
-                                                                    "dateOfBirth": "1948-04-04",
-                                                                    "dateOfDeath": null,
-                                                                    "biography": "Dan Simmons (born April 4, 1948) is an American science fiction and horror writer. He is the author of the Hyperion Cantos and the Ilium/Olympos cycles, among other works which span the science fiction, horror, and fantasy genres, sometimes within a single novel. A typical example of Simmons intermingling of genres is Song of Kali (1985), winner of the World Fantasy Award. He also writes mysteries and thrillers, some of which feature the continuing character Joe Kurtz.",
-                                                                    "urlPath": "DanSimmons.jpg"
-                                                                }
-                                                            ],
-                                                            "categories": [
-                                                                {
-                                                                    "id": 4,
-                                                                    "category": "Science Fiction"
-                                                                }
-                                                            ],
-                                                            "publisher": {
-                                                                "id": 2,
-                                                                "brand": "Anubis",
-                                                                "info": "info about Anubis"
-                                                            }
-                                                        },
-                                                        {
-                                                            "id": 6,
-                                                            "title": "The Fall of Hyperion",
-                                                            "summary": "The mysterious Time Tombs are opening and the Shrike that has risen from them may well control the fate of all mankind. The Ousters are laying seige to the Hegemony of Man and the AIs we created have turned against us to build the Ultimate Intelligence; God. The God of Machines. His genesis could mean annihilation for man. Something is drawing the hegemony, the Ousters, the AIs, the entire universe to the Shrike.",
-                                                            "isbn": "9780575099487",
-                                                            "cover": "Paperback",
-                                                            "yearPublished": 2012,
-                                                            "urlPath": "hyperionfall.jpg",
-                                                            "price": 15,
-                                                            "bookSeries": "Hyperion Cantos",
-                                                            "quantity": 19,
-                                                            "authors": [
-                                                                {
-                                                                    "id": 3,
-                                                                    "firstName": "Dan",
-                                                                    "lastName": "Simmons",
-                                                                    "dateOfBirth": "1948-04-04",
-                                                                    "dateOfDeath": null,
-                                                                    "biography": "Dan Simmons (born April 4, 1948) is an American science fiction and horror writer. He is the author of the Hyperion Cantos and the Ilium/Olympos cycles, among other works which span the science fiction, horror, and fantasy genres, sometimes within a single novel. A typical example of Simmons intermingling of genres is Song of Kali (1985), winner of the World Fantasy Award. He also writes mysteries and thrillers, some of which feature the continuing character Joe Kurtz.",
-                                                                    "urlPath": "DanSimmons.jpg"
-                                                                }
-                                                            ],
-                                                            "categories": [
-                                                                {
-                                                                    "id": 4,
-                                                                    "category": "Science Fiction"
-                                                                }
-                                                            ],
-                                                            "publisher": {
-                                                                "id": 2,
-                                                                "brand": "Anubis",
-                                                                "info": "info about Anubis"
-                                                            }
-                                                        },
-                                                        {
-                                                            "id": 7,
-                                                            "title": "yyyyyyyy",
-                                                            "summary": "yyyyyyyyyy",
-                                                            "isbn": "yyyyyyyyyyyyyy",
-                                                            "cover": "Paperback",
-                                                            "yearPublished": 1902,
-                                                            "urlPath": "yyyyyyyyyyyyyyy",
-                                                            "price": 3,
-                                                            "bookSeries": "yyyyyyyyyyyyy",
-                                                            "quantity": 3,
-                                                            "authors": [
-                                                                {
-                                                                    "id": 1,
-                                                                    "firstName": "Isaac",
-                                                                    "lastName": "Asimov",
-                                                                    "dateOfBirth": "1920-01-02",
-                                                                    "dateOfDeath": "1992-04-06",
-                                                                    "biography": "Isaac Asimov (/ˈaɪzᵻk ˈæzᵻmɒv/; born Isaak Yudovich Ozimov; circa January 2, 1920 - April 6, 1992) was an American author and professor of biochemistry at Boston University, best known for his works of science fiction and for his popular science books. Asimov was prolific and wrote or edited more than 500 books and an estimated 90,000 letters and postcards. His books have been published in 9 of the 10 major categories of the Dewey Decimal Classification.",
-                                                                    "urlPath": "IssacAsimov.jpg"
-                                                                }
-                                                            ],
-                                                            "categories": [
-                                                                {
-                                                                    "id": 3,
-                                                                    "category": "Horror"
-                                                                },
-                                                                {
-                                                                    "id": 2,
-                                                                    "category": "Fantasy"
-                                                                }
-                                                            ],
-                                                            "publisher": {
-                                                                "id": 1,
-                                                                "brand": "Dioptra",
-                                                                "info": "info about Dioptra"
-                                                            }
-                                                        }
-                                                    ]
+                                                     
+                                                     $scope.buyClicked = function(event){
+                                                         event.preventDefault();
+                                                         let buy = event.currentTarget.querySelector("p").innerText;
+                                                         if ($scope.toBuy){
+                                                             $scope.toBuy = $scope.toBuy+","+buy;
+                                                         }
+                                                         else{
+                                                             $scope.toBuy = buy;
+                                                         }
+                                                         console.log($scope.toBuy);
+                                                     }
+                                                     
+                                                    $scope.books = ${booksArray};
 
 
                                                 }
-</script>
 </script>
 
 </body>

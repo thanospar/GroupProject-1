@@ -11,6 +11,7 @@ public interface BookDao {
     List<Book> findByTitleOrISBN(String search);
     List<String> findBookSeries();
     List<String> findBookSpecials();
+    List<Book> findBooksToBuy(Integer[] ids);
     boolean saveBook(Book book);
     boolean updateBook(Book book); 
     boolean deleteBook(Book book);
