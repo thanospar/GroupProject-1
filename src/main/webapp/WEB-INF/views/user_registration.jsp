@@ -114,7 +114,7 @@
                                         </div>
                                     </div>
                                     <div class="uk-margin">
-                                        <label class="uk-form-label" for="form-horizontal-text">Roles</label>
+                                        
                                         <div class="uk-form-controls">
                                             <form:select path="userProfiles" style="display:none" items="${user.userProfiles}" multiple="true" itemValue="id" itemLabel="type" class="uk-select" />
                                             <div class="has-error">

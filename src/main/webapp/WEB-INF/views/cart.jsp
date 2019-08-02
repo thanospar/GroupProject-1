@@ -182,27 +182,30 @@
 <script>
 
 
-      const myApp = angular.module("myApp", []);
-      myApp.controller("MainCtrl", ['$scope', '$http', mainCtrl]);
+    const myApp = angular.module("myApp", []);
+    myApp.controller("MainCtrl", ['$scope', '$http', mainCtrl]);
 
-      function mainCtrl($scope, $http) {
-          $scope.order = '-added';
-          $scope.total = 0;
+    function mainCtrl($scope, $http) {
+        $scope.order = '-added';
+        $scope.total = 0;
 
-          let sum = 0;
-
-
+        let sum = 0;
 
 
-          $scope.books = ${booksArray};
+        let countItems = sessionStorage.getItem('toBuy').split(",");
 
-          angular.forEach($scope.books, function (book) {
+        document.getElementById("buyCount").innerText = countItems.length;
 
-              sum += book.price;
-          });
-          $scope.total = sum;
 
-      }
+        $scope.books = ${booksArray};
+
+        angular.forEach($scope.books, function (book) {
+
+            sum += book.price;
+        });
+        $scope.total = sum;
+
+    }
 </script>
 
 
