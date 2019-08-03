@@ -100,7 +100,7 @@ public class HomeController {
         model.addAttribute("user", user);
         model.addAttribute("edit", false);
         model.addAttribute("loggedinuser", getPrincipal());
-        return "/user_registration";
+        return "/loginRegistration";
     }
 
     @RequestMapping(value = {"/newuser"}, method = RequestMethod.POST)
@@ -108,13 +108,13 @@ public class HomeController {
             ModelMap model) {
 
         if (result.hasErrors()) {
-            return "/user_registration";
+            return "/loginRegistration";
         }
 
         if (!userService.isUserSSOUnique(user.getId(), user.getSsoId())) {
             FieldError ssoError = new FieldError("user", "ssoId", messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
             result.addError(ssoError);
-            return "/user_registration";
+            return "/loginRegistration";
         }
 
         userService.saveUser(user);
@@ -122,7 +122,7 @@ public class HomeController {
         model.addAttribute("success", "User " + user.getFirstName() + " " + user.getLastName() + " registered successfully");
         model.addAttribute("loggedinuser", getPrincipal());
         //return "success";
-        return "user/registrationsuccess";
+        return "/shop";
     }
 
     private String getPrincipal() {

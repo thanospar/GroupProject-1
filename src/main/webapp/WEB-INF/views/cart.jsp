@@ -47,8 +47,8 @@
             </div>
             <div class="uk-container ">
                 <ul class="uk-breadcrumb">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Shop</a></li>
+                    <li><a href="<c:url value='/' />">Home</a></li>
+                    <li><a href="<c:url value='/shop' />">Shop</a></li>
                     <li><span></span></li>
                 </ul>
 
@@ -72,29 +72,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="book in books">
-                                        <td> <img class="product" src="<c:url value='/static/images/{{book.urlPath}}' />" class="img-cart" data-src="images/book3.jpg" width="80px" height="40px" alt=""
+                                    <tr class= "" ng-repeat="book in books">
+                                        <td> <img class="product" src="<c:url value='/static/images/{{book.urlPath}}' />" class="img-cart" data-src="images/book3.jpg" width="70px"  alt=""
                                                   uk-img></td>
-                                        <td>{{book.title}}</td>
-                                        <td><input name="quant" class="uk-input uk-form-width-xsmall" type="number" value="1"
+                                        <td class="">{{book.title}}</td>
+                                        <td><input class="uk-input uk-form-width-xsmall qvalue" type="number" value="1"
                                                    min="1"></td>
-                                        <td class="uk-text-bold">{{book.price}}</td>
-                                        <td><a href="" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
+                                        <td class="uk-text-bold qvalue">{{book.price}}</td>
+                                        <td><a href="" style="color:red;" class="uk-align-center" uk-tooltip="Delete" ng-click="deleteRow($index)" uk-icon="icon: trash"></a></td>
                                     </tr>
 
 
                                 </tbody>
                             </table>
-                            <div class="uk-flex uk-flex-between  ">
-                                <a href="" class="uk-button uk-button-default"><span
-                                        uk-icon="icon:  arrow-left"></span>Back to shop</a>
-                                <button type="submit" class="uk-button uk-button-primary">Update cart</button>
-
-                            </div>
                         </form>
-                        </form>
+                        <div class="uk-flex uk-flex-between  ">
+                            <a href="<c:url value='/shop' />" class="uk-button uk-button-default"><span
+                                    uk-icon="icon:  arrow-left"></span>Back to shop</a>
+                            <button ng-click="quantRow()" class="uk-button uk-button-primary">Update cart</button>
 
-
+                        </div>
 
                     </div>
                     <div class="uk-width-1-3 ">
@@ -107,7 +104,7 @@
 
                                         <tr class="">
                                             <td class="uk-text-bold uk-flex uk-flex-between">Subtotal</td>
-                                            <td>54.5 €</td>
+                                            <td>{{total}} €</td>
 
                                         </tr>
                                         <tr>
@@ -122,9 +119,11 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <!--                                    <a href="" class="uk-button uk-button-default">Procced to checkout <span
-                                                                                uk-icon="icon:  arrow-right"></span></a>-->
-                                    <div id="paypal-button-container" ></div>
+                                    <a href="" class="uk-button uk-button-default">Procced to checkout <span
+                                            uk-icon="icon:  arrow-right"></span></a>
+
+
+                                    <!--<div id="paypal-button-container" ></div>-->
                                 </div>
                             </div>
 
@@ -183,9 +182,9 @@
 
 
     const myApp = angular.module("myApp", []);
-    myApp.controller("MainCtrl", ['$scope', '$http', mainCtrl]);
+    myApp.controller("MainCtrl", ['$scope', mainCtrl]);
 
-    function mainCtrl($scope, $http) {
+    function mainCtrl($scope) {
         $scope.order = '-added';
         $scope.total = 0;
 
@@ -198,6 +197,38 @@
 
 
         $scope.books = ${booksArray};
+
+        $scope.quantRow = function () {
+
+
+            let qvalues = document.querySelectorAll(".qvalue");
+
+            Sum(qvalues);
+
+
+        };
+
+        function Sum(e) {
+            let totalsum = 0;
+            for (i = 0; i < e.length; i = i + 2) {
+
+                totalsum += e[i].value * e[i + 1].innerText;
+
+
+            }
+            console.log(totalsum);
+            $scope.total = totalsum;
+        }
+
+
+        $scope.deleteRow = function (i) {
+            $scope.books.splice(i, 1);
+            let del = $scope.books[i].price;
+            //$scope.total = $scope.total-del;
+            $scope.quantRow();
+
+
+        };
 
         angular.forEach($scope.books, function (book) {
 
