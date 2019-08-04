@@ -185,15 +185,21 @@
 
                                             function mainCtrl($scope, $http) {
                                                 $scope.order = '-added';
-
+                                                $scope.urlPath = "http://localhost:8080/GroupProject/cart/";
+                                                
+                                                if(sessionStorage.getItem('toBuy')){
+                                                    $scope.toBuy = sessionStorage.getItem('toBuy');
+                                                    
+                                                    let countItems = $scope.toBuy.split(",");
+                                                    document.getElementById("buyCount").innerText = countItems.length;
+                                                }
+                                                
                                                 $scope.buyClicked = function (event) {
                                                     event.preventDefault();
                                                     let buy = event.currentTarget.querySelector("p").innerText;
 
                                                     if ($scope.toBuy) {
-                                                        if (!$scope.toBuy.includes(buy)) {
                                                             $scope.toBuy = $scope.toBuy + "," + buy;
-                                                        }
 
                                                     } else {
                                                         $scope.toBuy = buy;

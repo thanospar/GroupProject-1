@@ -2,6 +2,7 @@ package com.group.groupproject.services;
 
 import com.group.groupproject.dao.book.BookDao;
 import com.group.groupproject.entities.Book;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,12 +56,21 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public List<Book> findBooksToBuy(String ids) {
+        
         String[] idsArray = ids.split(",");
         Integer[] idsInt = new Integer[idsArray.length];
         for (int i=0; i<idsArray.length; i++){
             idsInt[i] = Integer.parseInt(idsArray[i]);
         }
-        return bookdao.findBooksToBuy(idsInt);
+        List<Book> books = bookdao.findBooksToBuy(idsInt);
+        Arrays.sort(idsInt);
+        for (int i=0; i<idsInt.length-1; i++){
+            if(idsInt[i] == idsInt[i+1]){
+                books.add(bookdao.findById(idsInt[i]));
+            }
+        }
+        return books;
+        
     }
 
     @Override
