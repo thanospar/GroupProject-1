@@ -22,7 +22,7 @@
                 
                         <li><a href="<c:url value="/user/" />" uk-icon="icon: user"></a>
                         </li>
-                        <li><a  href="<c:url value="/cart/{{toBuy}}" />" uk-icon="icon: cart"></a>
+                        <li><a  href="<c:url value="/cart/{{toBuy}}" />" uk-icon="icon: cart"><span class="uk-badge" id="buyCount"></span></a>
                        
 
                         </li>

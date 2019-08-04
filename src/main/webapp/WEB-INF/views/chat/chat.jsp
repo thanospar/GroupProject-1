@@ -18,13 +18,13 @@
         </style>
     </head>
     <body ng-app="myApp" ng-controller="MainCtrl" ng-cloak>
-        <div class="container bg-info p-1">
+        <div class="container p-1" style="background-color:#306C48" >
             <span id="loggedName" style="display:none"><security:authorize access="isAuthenticated()"><security:authentication property="principal.username" /></security:authorize></span>
                 <h1>Chat App</h1>
                 <div ng-if="loggedname">
-                    <h4>Wellcome {{loggedname}}</h4>
-                    <div ng-if="notlogged === false">
-                        <button ng-click="clearSessionName()">Exit</button>
+                    <h4 class="d-inline">Wellcome {{loggedname}}</h4>
+                    <div class="d-inline" ng-if="notlogged === false">
+                        <button class="btn ml-2 mb-1" style="background-color:tomato;" ng-click="clearSessionName()">Exit</button>
                     </div>
                 </div>
                 <div ng-if="!loggedname">
