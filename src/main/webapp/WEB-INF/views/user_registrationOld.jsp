@@ -38,14 +38,14 @@
     <body>
         <div>
             <!-- camvas -->
-            <%@include file="camvas.jsp" %>
+            <%@include file="./user/camvas.jsp" %>
             <!-- main menu -->
             <div class="uk-grid uk-grid-collapse" uk-grid>
-                <%@include file="authheader.jsp" %>	
+                <%@include file="./user/authheader.jsp" %>	
                 <!-- table -->
 
                 <div class="uk-width-4-5 uk-width-expand@s admin">
-                    <%@include file="adminHeader.jsp" %>
+                    <%@include file="./user/adminHeader.jsp" %>
                     <div id="main" class="uk-section">
                         <div  class="uk-container">
                             <div class="uk-card uk-card-default uk-card-body">
@@ -114,9 +114,9 @@
                                         </div>
                                     </div>
                                     <div class="uk-margin">
-                                        <label class="uk-form-label" for="form-horizontal-text">Roles</label>
+                                        
                                         <div class="uk-form-controls">
-                                            <form:select path="userProfiles" items="${roles}" multiple="true" itemValue="id" itemLabel="type" class="uk-select" />
+                                            <form:select path="userProfiles" style="display:none" items="${user.userProfiles}" multiple="true" itemValue="id" itemLabel="type" class="uk-select" />
                                             <div class="has-error">
                                                 <form:errors path="userProfiles" class="help-inline"/>
                                             </div>
