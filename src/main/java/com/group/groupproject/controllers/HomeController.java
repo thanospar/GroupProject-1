@@ -64,6 +64,18 @@ public class HomeController {
         return "/cart";
     }
     
+     @GetMapping(value = "order")
+    public String order(ModelMap model) {
+ 
+        return "/orderdetails";
+    }
+    
+     @GetMapping(value = "account")
+    public String account(ModelMap model) {
+ 
+        return "/userinfo";
+    }
+    
     @RequestMapping(value = { "/single-product-{id}" }, method = RequestMethod.GET)
 	public String singleProduct(@PathVariable("id") int id, ModelMap model) {
 		Book book = bookService.findById(id);

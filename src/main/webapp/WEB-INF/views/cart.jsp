@@ -394,8 +394,8 @@
                                                 $scope.deleteRow= function (i) {
                                                      $scope.books.splice(i, 1);
                                                    let del=  $scope.books[i].price;
-                                                           //$scope.total = $scope.total-del;
-                                                 $scope.quantRow();
+                                                           
+//                                                 $scope.quantRow();
                                              
                                                 
                                                     };
