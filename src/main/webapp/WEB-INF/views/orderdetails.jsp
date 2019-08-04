@@ -82,7 +82,7 @@
 
                                 <p class="uk-text-center uk-margin-medium-top"><span ratio="1.5"  uk-icon="icon: credit-card"></span></p>
                                 <h5 class="uk-text-center uk-margin-remove-top" >Order Total</h5> 
-                                <h2 class="uk-text-center uk-margin-remove-top" >78.5 €</h2>
+                                <h2 class="uk-text-center uk-margin-remove-top" >78.5 € <span class="uk-text-meta"> + VAT</span></h2>
                                 <div class="uk-card-footer uk-flex uk-flex-center">
                                    <a class="uk-button uk-button-primary ">Pay with Paypal</a> 
                                 </div>
