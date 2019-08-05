@@ -36,6 +36,12 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     @Transactional
+    public List<Invoice> findByUser(User user) {
+        return invoicedao.findByUser(user);
+    }
+    
+    @Override
+    @Transactional
     public boolean saveInvoice(User user, String ids) {
 
         Invoice invoice = new Invoice();
@@ -62,5 +68,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     public boolean deleteInvoice(Invoice invoice) {
         return invoicedao.deleteInvoice(invoice);
     }
+
+    
 
 }

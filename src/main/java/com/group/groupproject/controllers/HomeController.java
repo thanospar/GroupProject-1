@@ -117,9 +117,7 @@ public class HomeController {
         if (userService.findBySSO(getPrincipal()) != null) {
 
             User user = userService.findBySSO(getPrincipal());
-            //bring users invoices
-            //find books through invoices
-            //return listbook
+            System.out.println(invoiceService.findByUser(user).get(0).getBoughts());
         }
         
         return "/userinfo";

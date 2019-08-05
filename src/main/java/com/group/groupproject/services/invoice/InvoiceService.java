@@ -9,7 +9,7 @@ public interface InvoiceService {
     Invoice findById(int id);
 
     List<Invoice> findAllInvoices();
-
+    List<Invoice> findByUser(User user);
     boolean saveInvoice(User user, String ids);
 
     boolean updateInvoice(Invoice invoice);
