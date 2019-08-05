@@ -84,13 +84,23 @@ public class HomeController {
 
     @RequestMapping(value = {"cart/{ids}"}, method = RequestMethod.GET)
     public String cart(@PathVariable("ids") String ids, ModelMap model) {
-
+        
+        
         JSONArray booksArray = new JSONArray(bookService.findBooksToBuy(ids));
         model.addAttribute("booksArray", booksArray);
 
         return "/cart";
     }
 
+        @RequestMapping(value = {"orderdetails/{ids}"}, method = RequestMethod.GET)
+    public String orderdetails(@PathVariable("ids") String ids, ModelMap model) {
+
+        JSONArray booksArray = new JSONArray(bookService.findBooksToBuy(ids));
+        model.addAttribute("booksArray", booksArray);
+
+        return "/orderdetails";
+    }
+    
     @RequestMapping(value = {"/newuser"}, method = RequestMethod.GET)
     public String newUser(ModelMap model) {
         User user = new User();
