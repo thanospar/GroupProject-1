@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -21,20 +22,29 @@ public class Bought implements Serializable {
     @Column(name = "bought_id", nullable = false)
     private Integer id;
 
-    @NotEmpty
+    @NotNull
     @Column(name = "price")
-    private int price;
+    private Integer price;
 
-    @NotEmpty
+    @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "book_id") 
     private Book book;
 
-    @NotEmpty
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "invoice_id") 
     private Invoice invoice;
 
+    public Bought() {
+    }
+
+    public Bought(int price, Book book, Invoice invoice) {
+        this.price = price;
+        this.book = book;
+        this.invoice = invoice;
+    }
+
+    
     public Integer getId() {
         return id;
     }
@@ -43,14 +53,15 @@ public class Bought implements Serializable {
         this.id = id;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
+    
     public Book getBook() {
         return book;
     }

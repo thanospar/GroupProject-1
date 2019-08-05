@@ -5,6 +5,7 @@ import com.group.groupproject.dao.book.BookDao;
 import com.group.groupproject.dao.publisher.PublisherDao;
 import com.group.groupproject.entities.Author;
 import com.group.groupproject.entities.Book;
+import com.group.groupproject.entities.Bought;
 import com.group.groupproject.entities.Invoice;
 import com.group.groupproject.entities.Publisher;
 import com.group.groupproject.entities.user.User;
@@ -15,6 +16,7 @@ import com.group.groupproject.services.invoice.InvoiceService;
 import com.group.groupproject.services.user.UserProfileService;
 import com.group.groupproject.services.user.UserService;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -84,15 +86,14 @@ public class HomeController {
 
     @RequestMapping(value = {"cart/{ids}"}, method = RequestMethod.GET)
     public String cart(@PathVariable("ids") String ids, ModelMap model) {
-        
-        
+
         JSONArray booksArray = new JSONArray(bookService.findBooksToBuy(ids));
         model.addAttribute("booksArray", booksArray);
 
         return "/cart";
     }
 
-        @RequestMapping(value = {"orderdetails/{ids}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"orderdetails/{ids}"}, method = RequestMethod.GET)
     public String orderdetails(@PathVariable("ids") String ids, ModelMap model) {
 
         JSONArray booksArray = new JSONArray(bookService.findBooksToBuy(ids));
@@ -100,7 +101,30 @@ public class HomeController {
 
         return "/orderdetails";
     }
-    
+
+    @RequestMapping(value = {"setInvoice/{ids}"}, method = RequestMethod.GET)
+    public String setInvoice(@PathVariable("ids") String ids, ModelMap model) {
+        if (userService.findBySSO(getPrincipal()) != null) {
+
+            User user = userService.findBySSO(getPrincipal());
+            invoiceService.saveInvoice(user, ids);
+        }
+        return "redirect:/shop";
+    }
+
+    @GetMapping(value = "userinfo")
+    public String userInfo(ModelMap model) {
+        if (userService.findBySSO(getPrincipal()) != null) {
+
+            User user = userService.findBySSO(getPrincipal());
+            //bring users invoices
+            //find books through invoices
+            //return listbook
+        }
+        
+        return "/userinfo";
+    }
+
     @RequestMapping(value = {"/newuser"}, method = RequestMethod.GET)
     public String newUser(ModelMap model) {
         User user = new User();

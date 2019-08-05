@@ -1,6 +1,7 @@
 package com.group.groupproject.services.invoice;
 
 import com.group.groupproject.entities.Invoice;
+import com.group.groupproject.entities.user.User;
 import java.util.List;
 
 public interface InvoiceService {
@@ -9,7 +10,7 @@ public interface InvoiceService {
 
     List<Invoice> findAllInvoices();
 
-    boolean saveInvoice(Invoice invoice);
+    boolean saveInvoice(User user, String ids);
 
     boolean updateInvoice(Invoice invoice);
 

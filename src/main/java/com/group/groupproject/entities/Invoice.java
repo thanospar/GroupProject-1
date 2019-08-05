@@ -5,6 +5,7 @@ import com.group.groupproject.converter.LocalDatePersistenceConverter;
 import com.group.groupproject.entities.user.User;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,7 +37,7 @@ public class Invoice implements Serializable {
     private User user;
     
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
-    private Set<Bought> boughts;
+    private List<Bought> boughts;
 
     public Integer getId() {
         return id;
@@ -62,13 +63,14 @@ public class Invoice implements Serializable {
         this.user = user;
     }
 
-    public Set<Bought> getBoughts() {
+    public List<Bought> getBoughts() {
         return boughts;
     }
 
-    public void setBoughts(Set<Bought> boughts) {
+    public void setBoughts(List<Bought> boughts) {
         this.boughts = boughts;
     }
+
 
     @Override
     public String toString() {

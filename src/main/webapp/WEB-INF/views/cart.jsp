@@ -208,7 +208,9 @@
                                                             }
                                                         }
                                                         sessionStorage.setItem('toBuy', buyList.slice(0, -1));
-                                                        $scope.toBuy = buyList.slice(0, -1);
+                                                       
+        $scope.toBuy = buyList.slice(0, -1);
+        document.getElementById("buyCount").innerText = $scope.toBuy.split(",").length;
                                                         $scope.total = totalsum;
                                                     }
 

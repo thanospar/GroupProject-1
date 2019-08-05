@@ -193,6 +193,9 @@
                                                     let countItems = $scope.toBuy.split(",");
                                                     document.getElementById("buyCount").innerText = countItems.length;
                                                 }
+                                                else {
+                                                    document.getElementById("buyCount").innerText = 0;
+                                                }
                                                 
                                                 $scope.buyClicked = function (event) {
                                                     event.preventDefault();

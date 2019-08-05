@@ -163,7 +163,8 @@
                                                 // Capture the funds from the transaction
                                                 return actions.order.capture().then(function (details) {
                                                     // Show a success message to your buyer
-                                                    alert('Transaction completed by ' + details.payer.name.given_name);
+                                                    sessionStorage.removeItem('toBuy');
+                                                    document.location = "/GroupProject/setInvoice/"+$scope.toBuy;
                                                 });
                                             },
                                             onError: function (err) {
