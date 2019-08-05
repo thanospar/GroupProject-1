@@ -66,9 +66,9 @@ public class HomeController {
     }
 
     @GetMapping(value = "shop")
-    public String shop(@RequestParam(required=false) String search ,ModelMap model) {
+    public String shop(@RequestParam(required = false) String search, ModelMap model) {
         List<Book> books = bookService.findAllBooks();
-        if(search != null){
+        if (search != null) {
             model.addAttribute("search", search);
         }
         JSONArray booksArray = new JSONArray(books);
@@ -114,22 +114,16 @@ public class HomeController {
 
     @GetMapping(value = "userinfo")
     public String userInfo(ModelMap model) {
-User user = new User();
+        User user = new User();
         List<Book> books = new ArrayList();
         if (userService.findBySSO(getPrincipal()) != null) {
 
             user = userService.findBySSO(getPrincipal());
-            List<Invoice> invoices = invoiceService.findByUser(user);
-            List<Bought> boughts = new ArrayList();
-            for (Invoice inv : invoices) {
-                boughts.addAll(inv.getBoughts());
-            }
-            for (Bought bou : boughts) {
-                books.add(bou.getBook());
-            }
+            books = invoiceService.findBooksBought(user);
+
         }
         JSONArray booksArray = new JSONArray(books);
-        JSONObject  userObject = new JSONObject(user);
+        JSONObject userObject = new JSONObject(user);
         model.addAttribute("booksArray", booksArray);
         model.addAttribute("userObject", userObject);
         return "/userinfo";
