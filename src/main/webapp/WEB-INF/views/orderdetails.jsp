@@ -84,7 +84,7 @@
 
                                 <p class="uk-text-center uk-margin-medium-top"><span ratio="1.5"  uk-icon="icon: credit-card"></span></p>
                                 <h5 class="uk-text-center uk-margin-remove-top" >Order Total</h5> 
-                                <h2 class="uk-text-center uk-margin-remove-top" >{{total}} <span class="uk-text-meta"> &euro;</span></h2>
+                                <h2 class="uk-text-center uk-margin-remove-top" >{{total}} <span class="uk-text-meta"> &dollar;</span></h2>
                                 <div class="uk-card-footer uk-flex uk-flex-center">
                                     <div id="paypal-button-container" ></div> 
                                 </div>
@@ -108,26 +108,6 @@
         src="https://www.paypal.com/sdk/js?client-id=AWRjZ6AVM5S5U_vwnjWbXyjpzRIZ-GXp5HA-T0IEzufSchjHjixT0-sSB0btoWTqyHCeSY_c9yQFkFnY">
     </script>
 
-    <script>
-        paypal.Buttons({
-            createOrder: function (data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                            amount: {
-                                value: '0.01'
-                            }
-                        }]
-                });
-            },
-            onApprove: function (data, actions) {
-                // Capture the funds from the transaction
-                return actions.order.capture().then(function (details) {
-                    // Show a success message to your buyer
-                    alert('Transaction completed by ' + details.payer.name.given_name);
-                });
-            }
-        }).render('#paypal-button-container');
-    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit-icons.min.js"></script> 
@@ -135,40 +115,62 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
 
     <script>
-        const myApp = angular.module("myApp", []);
-        myApp.controller("MainCtrl", ['$scope', '$http', mainCtrl]);
-        function mainCtrl($scope, $http) {
-            $scope.order = '-added';
-            $scope.total = 0;
+                                    const myApp = angular.module("myApp", []);
+                                    myApp.controller("MainCtrl", ['$scope', '$http', mainCtrl]);
+                                    function mainCtrl($scope, $http) {
+                                        $scope.order = '-added';
+                                        $scope.total = 0;
 
-            let sum = 0;
-            if (sessionStorage.getItem('toBuy')) {
-                $scope.toBuy = sessionStorage.getItem('toBuy');
+                                        let sum = 0;
+                                        if (sessionStorage.getItem('toBuy')) {
+                                            $scope.toBuy = sessionStorage.getItem('toBuy');
 
-                let countItems = $scope.toBuy.split(",");
-                document.getElementById("buyCount").innerText = countItems.length;
-            }
-            let booksArr = ${booksArray};
-            booksArr.sort(function (a, b) {
-                return a.id - b.id;
-            });
-            let booksFinalList = [];
+                                            let countItems = $scope.toBuy.split(",");
+                                            document.getElementById("buyCount").innerText = countItems.length;
+                                        }
+                                        let booksArr = ${booksArray};
+                                        booksArr.sort(function (a, b) {
+                                            return a.id - b.id;
+                                        });
+                                        let booksFinalList = [];
 
-            for (let b of booksArr) {
-                if (booksFinalList.find(book => book.id === b.id)) {
-                    let index = booksFinalList.findIndex(book => book.id === b.id);
-                    booksFinalList[index].count += 1;
-                } else {
-                    booksFinalList.push({id: b.id, urlPath: b.urlPath, price: b.price, title: b.title, quantity: b.quantity, count: 1});
-                }
-            }
-            $scope.books = booksFinalList;
-            angular.forEach($scope.books, function (book) {
+                                        for (let b of booksArr) {
+                                            if (booksFinalList.find(book => book.id === b.id)) {
+                                                let index = booksFinalList.findIndex(book => book.id === b.id);
+                                                booksFinalList[index].count += 1;
+                                            } else {
+                                                booksFinalList.push({id: b.id, urlPath: b.urlPath, price: b.price, title: b.title, quantity: b.quantity, count: 1});
+                                            }
+                                        }
+                                        $scope.books = booksFinalList;
+                                        angular.forEach($scope.books, function (book) {
 
-                sum += book.price * book.count;
-            });
-            $scope.total = sum;
-        }
+                                            sum += book.price * book.count;
+                                        });
+                                        $scope.total = sum;
+
+                                        paypal.Buttons({
+                                            createOrder: function (data, actions) {
+                                                return actions.order.create({
+                                                    purchase_units: [{
+                                                            amount: {
+                                                                value: $scope.total
+                                                            }
+                                                        }]
+                                                });
+                                            },
+                                            onApprove: function (data, actions) {
+                                                // Capture the funds from the transaction
+                                                return actions.order.capture().then(function (details) {
+                                                    // Show a success message to your buyer
+                                                    alert('Transaction completed by ' + details.payer.name.given_name);
+                                                });
+                                            },
+                                            onError: function (err) {
+                                                alert('Somethin went wrong!');
+                                            }
+                                        }).render('#paypal-button-container');
+                                    }
     </script>
 
 
