@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -65,13 +66,14 @@ public class HomeController {
     }
 
     @GetMapping(value = "shop")
-    public String shop(ModelMap model) {
+    public String shop(@RequestParam(required=false) String search ,ModelMap model) {
         List<Book> books = bookService.findAllBooks();
-
+        if(search != null){
+            model.addAttribute("search", search);
+        }
         JSONArray booksArray = new JSONArray(books);
         model.addAttribute("booksArray", booksArray);
 
-        model.addAttribute("books", books);
         return "/shop";
     }
 
