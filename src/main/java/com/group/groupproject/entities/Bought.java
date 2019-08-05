@@ -77,6 +77,11 @@ public class Bought implements Serializable {
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
     }
+
+    @Override
+    public String toString() {
+        return "Bought{" + "id=" + id + ", price=" + price + ", book=" + book + ", invoice=" + invoice + '}';
+    }
     
     
 }

@@ -1,7 +1,5 @@
 package com.group.groupproject.controllers;
 
-import com.group.groupproject.dao.author.AuthorDao;
-import com.group.groupproject.dao.book.BookDao;
 import com.group.groupproject.dao.publisher.PublisherDao;
 import com.group.groupproject.entities.Author;
 import com.group.groupproject.entities.Book;
@@ -15,7 +13,6 @@ import com.group.groupproject.services.BookService;
 import com.group.groupproject.services.invoice.InvoiceService;
 import com.group.groupproject.services.user.UserProfileService;
 import com.group.groupproject.services.user.UserService;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +20,7 @@ import java.util.Locale;
 import java.util.Set;
 import javax.validation.Valid;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -114,12 +112,24 @@ public class HomeController {
 
     @GetMapping(value = "userinfo")
     public String userInfo(ModelMap model) {
+User user = new User();
+        List<Book> books = new ArrayList();
         if (userService.findBySSO(getPrincipal()) != null) {
 
-            User user = userService.findBySSO(getPrincipal());
-            System.out.println(invoiceService.findByUser(user).get(0).getBoughts());
+            user = userService.findBySSO(getPrincipal());
+            List<Invoice> invoices = invoiceService.findByUser(user);
+            List<Bought> boughts = new ArrayList();
+            for (Invoice inv : invoices) {
+                boughts.addAll(inv.getBoughts());
+            }
+            for (Bought bou : boughts) {
+                books.add(bou.getBook());
+            }
         }
-        
+        JSONArray booksArray = new JSONArray(books);
+        JSONObject  userObject = new JSONObject(user);
+        model.addAttribute("booksArray", booksArray);
+        model.addAttribute("userObject", userObject);
         return "/userinfo";
     }
 

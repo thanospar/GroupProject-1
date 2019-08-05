@@ -23,7 +23,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
     </head>
 
-    <body >
+    <body ng-app="myApp" ng-controller="MainCtrl" ng-cloak>
         <!-- nav bar -->
         <%@include file="navigation.jsp" %>
         <!-- hero image -->
@@ -73,13 +73,13 @@
                                 <div uk-grid>
                                     <div>
                                         <h5 class="uk-text-primary">First Name</h5>
-                                        <p>thanos</p>
+                                        <p>{{user.firstName}}</p>
                                         <h5 class="uk-text-primary">E-mail</h5>
-                                        <p>thanos@gmail.com</p>
+                                        <p>{{user.email}}</p>
                                     </div>
                                     <div>
                                         <h5 class="uk-text-primary">Last Name</h5>
-                                        <p>Paraskevas</p>
+                                        <p>{{user.lastName}}</p>
 
 
                                     </div>
@@ -154,6 +154,21 @@
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
 
+    <script>
+
+
+        const myApp = angular.module("myApp", []);
+        myApp.controller("MainCtrl", ['$scope', mainCtrl]);
+
+        function mainCtrl($scope) {
+            
+            let booksArr = ${booksArray};
+            
+            $scope.user = ${userObject};
+            console.log($scope.user);
+//            console.log(booksArr);
+        }
+    </script>
 
 
 
