@@ -58,7 +58,7 @@ public class Book implements Serializable {
 
     @NotNull
     @Column(name = "quantity")
-    private int quantity;
+    private Integer quantity;
 
     @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
@@ -105,13 +105,15 @@ public class Book implements Serializable {
         this.special = special;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
+    
 
     public void setPrice(int price) {
         this.price = price;

@@ -23,7 +23,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
     </head>
 
-    <body >
+    <body ng-app="myApp" ng-controller="MainCtrl" ng-cloak>
         <!-- nav bar -->
         <%@include file="navigation.jsp" %>
         <!-- hero image -->
@@ -73,13 +73,13 @@
                                 <div uk-grid>
                                     <div>
                                         <h5 class="uk-text-primary">First Name</h5>
-                                        <p>thanos</p>
+                                        <p>{{user.firstName}}</p>
                                         <h5 class="uk-text-primary">E-mail</h5>
-                                        <p>thanos@gmail.com</p>
+                                        <p>{{user.email}}</p>
                                     </div>
                                     <div>
                                         <h5 class="uk-text-primary">Last Name</h5>
-                                        <p>Paraskevas</p>
+                                        <p>{{user.lastName}}</p>
 
 
                                     </div>
@@ -110,9 +110,9 @@
 
                                     <thead>
                                         <tr>
-                                            <th>Table Heading</th>
-                                            <th>Table Heading</th>
-                                            <th>Table Heading</th>
+                                            <th>Title</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -123,17 +123,17 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>Table Data</td>
-                                            <td>Table Data</td>
-                                            <td>Table Data</td>
+                                        <tr ng-repeat="book in books">
+                                            <td>{{book.title}}</td>
+                                            <td>{{book.count}}</td>
+                                            <td>{{book.price}}</td>
                                         </tr>
 
                                     </tbody>
                                 </table>
                             </div>
                             <div class="uk-card-footer">
-                                <a href="#" class="uk-button uk-button-text">Continue Shopping</a>
+                                <a href="<c:url value='/shop' />" class="uk-button uk-button-text">Continue Shopping</a>
                             </div>
                         </div>
                     </li>
@@ -154,6 +154,33 @@
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
 
+    <script>
+
+
+                                            const myApp = angular.module("myApp", []);
+                                            myApp.controller("MainCtrl", ['$scope', mainCtrl]);
+
+                                            function mainCtrl($scope) {
+
+
+                                                $scope.user = ${userObject};
+                                                let booksArr = ${booksArray};
+                                                booksArr.sort(function (a, b) {
+                                                    return a.id - b.id;
+                                                });
+                                                let booksFinalList = [];
+
+                                                for (let b of booksArr) {
+                                                    if (booksFinalList.find(book => book.id === b.id)) {
+                                                        let index = booksFinalList.findIndex(book => book.id === b.id);
+                                                        booksFinalList[index].count += 1;
+                                                    } else {
+                                                        booksFinalList.push({id: b.id, urlPath: b.urlPath, price: b.price, title: b.title, quantity: b.quantity, count: 1});
+                                                    }
+                                                }
+                                                $scope.books = booksFinalList;
+                                            }
+    </script>
 
 
 

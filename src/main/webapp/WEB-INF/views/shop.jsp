@@ -35,7 +35,7 @@
                     <form action=""
                           class="uk-search uk-search-default">
 
-                        <input class="uk-search-input" type="search" placeholder="Enter the Title, Author, or ISBN" ng-model="titlesel">
+                        <input class="uk-search-input" type="search" placeholder="Enter the Title" ng-model="titlesel">
                         <div> <button type="submit" class="uk-search-icon-flip search uk-icon uk-search-icon"
                                       uk-search-icon=""><svg width="20" height="20" viewBox="0 0 20 20"
                                                    xmlns="http://www.w3.org/2000/svg" data-svg="search-icon">
@@ -86,8 +86,9 @@
 
                                                 <option value="">All</option>
                                                 <option value="Asimov">Asimov</option>
-                                                <option value="Barker">Barker</option>
+                                                <option value="Barker">Barker</option>Yalom
                                                 <option value="Simmons">Simmons</option>
+                                                <option value="Yalom">Yalom</option>
                                             </select>
 
                                         </div>
@@ -187,11 +188,19 @@
                                                 $scope.order = '-added';
                                                 $scope.urlPath = "http://localhost:8080/GroupProject/cart/";
                                                 
+                                                let search = '${search}';
+                                                if(search){
+                                                $scope.titlesel = search;
+                                            }
+                                                console.log(search);
                                                 if(sessionStorage.getItem('toBuy')){
                                                     $scope.toBuy = sessionStorage.getItem('toBuy');
                                                     
                                                     let countItems = $scope.toBuy.split(",");
                                                     document.getElementById("buyCount").innerText = countItems.length;
+                                                }
+                                                else {
+                                                    document.getElementById("buyCount").innerText = 0;
                                                 }
                                                 
                                                 $scope.buyClicked = function (event) {

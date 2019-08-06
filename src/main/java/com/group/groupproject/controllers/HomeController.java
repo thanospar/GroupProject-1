@@ -1,10 +1,9 @@
 package com.group.groupproject.controllers;
 
-import com.group.groupproject.dao.author.AuthorDao;
-import com.group.groupproject.dao.book.BookDao;
 import com.group.groupproject.dao.publisher.PublisherDao;
 import com.group.groupproject.entities.Author;
 import com.group.groupproject.entities.Book;
+import com.group.groupproject.entities.Bought;
 import com.group.groupproject.entities.Invoice;
 import com.group.groupproject.entities.Publisher;
 import com.group.groupproject.entities.user.User;
@@ -14,13 +13,14 @@ import com.group.groupproject.services.BookService;
 import com.group.groupproject.services.invoice.InvoiceService;
 import com.group.groupproject.services.user.UserProfileService;
 import com.group.groupproject.services.user.UserService;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import javax.validation.Valid;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -65,13 +66,14 @@ public class HomeController {
     }
 
     @GetMapping(value = "shop")
-    public String shop(ModelMap model) {
+    public String shop(@RequestParam(required = false) String search, ModelMap model) {
         List<Book> books = bookService.findAllBooks();
-
+        if (search != null) {
+            model.addAttribute("search", search);
+        }
         JSONArray booksArray = new JSONArray(books);
         model.addAttribute("booksArray", booksArray);
 
-        model.addAttribute("books", books);
         return "/shop";
     }
 
@@ -84,15 +86,14 @@ public class HomeController {
 
     @RequestMapping(value = {"cart/{ids}"}, method = RequestMethod.GET)
     public String cart(@PathVariable("ids") String ids, ModelMap model) {
-        
-        
+
         JSONArray booksArray = new JSONArray(bookService.findBooksToBuy(ids));
         model.addAttribute("booksArray", booksArray);
 
         return "/cart";
     }
 
-        @RequestMapping(value = {"orderdetails/{ids}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"orderdetails/{ids}"}, method = RequestMethod.GET)
     public String orderdetails(@PathVariable("ids") String ids, ModelMap model) {
 
         JSONArray booksArray = new JSONArray(bookService.findBooksToBuy(ids));
@@ -100,7 +101,34 @@ public class HomeController {
 
         return "/orderdetails";
     }
-    
+
+    @RequestMapping(value = {"setInvoice/{ids}"}, method = RequestMethod.GET)
+    public String setInvoice(@PathVariable("ids") String ids, ModelMap model) {
+        if (userService.findBySSO(getPrincipal()) != null) {
+
+            User user = userService.findBySSO(getPrincipal());
+            invoiceService.saveInvoice(user, ids);
+        }
+        return "redirect:/shop";
+    }
+
+    @GetMapping(value = "userinfo")
+    public String userInfo(ModelMap model) {
+        User user = new User();
+        List<Book> books = new ArrayList();
+        if (userService.findBySSO(getPrincipal()) != null) {
+
+            user = userService.findBySSO(getPrincipal());
+            books = invoiceService.findBooksBought(user);
+
+        }
+        JSONArray booksArray = new JSONArray(books);
+        JSONObject userObject = new JSONObject(user);
+        model.addAttribute("booksArray", booksArray);
+        model.addAttribute("userObject", userObject);
+        return "/userinfo";
+    }
+
     @RequestMapping(value = {"/newuser"}, method = RequestMethod.GET)
     public String newUser(ModelMap model) {
         User user = new User();

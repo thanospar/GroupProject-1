@@ -1,7 +1,13 @@
 package com.group.groupproject.services.invoice;
 
 import com.group.groupproject.dao.invoice.InvoiceDao;
+import com.group.groupproject.entities.Book;
+import com.group.groupproject.entities.Bought;
 import com.group.groupproject.entities.Invoice;
+import com.group.groupproject.entities.user.User;
+import com.group.groupproject.services.BookService;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,9 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("invoiceService")
 public class InvoiceServiceImpl implements InvoiceService {
-    
+
     @Autowired
     private InvoiceDao invoicedao;
+
+    @Autowired
+    private BookService bookService;
 
     @Override
     @Transactional
@@ -27,7 +36,40 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     @Transactional
-    public boolean saveInvoice(Invoice invoice) {
+    public List<Invoice> findByUser(User user) {
+        return invoicedao.findByUser(user);
+    }
+
+    @Override
+    @Transactional
+    public List<Book> findBooksBought(User user) {
+
+        List<Book> books = new ArrayList();
+        List<Invoice> invoices = findByUser(user);
+        List<Bought> boughts = new ArrayList();
+        for (Invoice inv : invoices) {
+            boughts.addAll(inv.getBoughts());
+        }
+        for (Bought bou : boughts) {
+            books.add(bou.getBook());
+        }
+        return books;
+    }
+
+    @Override
+    @Transactional
+    public boolean saveInvoice(User user, String ids) {
+
+        Invoice invoice = new Invoice();
+        invoice.setDate(LocalDate.now());
+        invoice.setUser(user);
+        List<Book> books = bookService.findBooksToBuy(ids);
+
+        List<Bought> boughts = new ArrayList();
+        for (Book b : books) {
+            boughts.add(new Bought(b.getPrice(), b, invoice));
+        }
+        invoice.setBoughts(boughts);
         return invoicedao.saveInvoice(invoice);
     }
 
@@ -43,6 +85,4 @@ public class InvoiceServiceImpl implements InvoiceService {
         return invoicedao.deleteInvoice(invoice);
     }
 
-    
-    
 }
