@@ -1,7 +1,7 @@
 package com.group.groupproject.controllers;
 
 import com.group.groupproject.entities.Category;
-import com.group.groupproject.services.CategoryService;
+import com.group.groupproject.services.category.CategoryService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

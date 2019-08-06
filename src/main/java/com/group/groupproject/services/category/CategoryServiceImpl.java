@@ -1,4 +1,4 @@
-package com.group.groupproject.services;
+package com.group.groupproject.services.category;
 
 import com.group.groupproject.dao.category.CategoryDao;
 import com.group.groupproject.entities.Category;

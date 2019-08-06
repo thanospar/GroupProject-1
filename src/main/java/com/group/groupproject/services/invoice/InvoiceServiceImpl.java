@@ -5,7 +5,7 @@ import com.group.groupproject.entities.Book;
 import com.group.groupproject.entities.Bought;
 import com.group.groupproject.entities.Invoice;
 import com.group.groupproject.entities.user.User;
-import com.group.groupproject.services.BookService;
+import com.group.groupproject.services.book.BookService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

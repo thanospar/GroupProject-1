@@ -1,5 +1,5 @@
 
-package com.group.groupproject.services;
+package com.group.groupproject.services.author;
 
 import com.group.groupproject.entities.Author;
 import java.util.List;

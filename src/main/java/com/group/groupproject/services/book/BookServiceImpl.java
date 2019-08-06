@@ -1,4 +1,4 @@
-package com.group.groupproject.services;
+package com.group.groupproject.services.book;
 
 import com.group.groupproject.dao.book.BookDao;
 import com.group.groupproject.entities.Book;

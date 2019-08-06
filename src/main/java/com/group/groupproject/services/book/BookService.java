@@ -1,4 +1,4 @@
-package com.group.groupproject.services;
+package com.group.groupproject.services.book;
 
 import com.group.groupproject.entities.Book;
 import java.util.List;
