@@ -203,15 +203,15 @@
                                                       
                                                   }
                                                 }
-
-                                                $scope.books = ${booksArray};
+                                                let bookie = ${booksArray};
+                                                $scope.books = bookie;
                                                 
 
-                                                let categoriesAll = $scope.books.map(book => book.categories[0].category).sort();
+                                                let categoriesAll = bookie.map(book => book.categories[0].category).sort();
                                                 let categoriesDistinct = [...new Set(categoriesAll)]
                                                 $scope.categories = categoriesDistinct;
                                                 
-                                                let authorsAll = $scope.books.map(book => book.authors[0].lastName).sort();
+                                                let authorsAll = bookie.map(book => book.authors[0].lastName).sort();
                                                 let authorsDistinct = [...new Set(authorsAll)]
                                                 $scope.authors = authorsDistinct;
 
