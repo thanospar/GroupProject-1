@@ -1,15 +1,11 @@
 package com.group.groupproject.controllers;
 
 import com.group.groupproject.dao.publisher.PublisherDao;
-import com.group.groupproject.entities.Author;
 import com.group.groupproject.entities.Book;
-import com.group.groupproject.entities.Bought;
-import com.group.groupproject.entities.Invoice;
-import com.group.groupproject.entities.Publisher;
 import com.group.groupproject.entities.user.User;
 import com.group.groupproject.entities.user.UserProfile;
-import com.group.groupproject.services.AuthorService;
-import com.group.groupproject.services.BookService;
+import com.group.groupproject.services.author.AuthorService;
+import com.group.groupproject.services.book.BookService;
 import com.group.groupproject.services.invoice.InvoiceService;
 import com.group.groupproject.services.user.UserProfileService;
 import com.group.groupproject.services.user.UserService;

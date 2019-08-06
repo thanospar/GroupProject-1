@@ -1,4 +1,4 @@
-package com.group.groupproject.services;
+package com.group.groupproject.services.publisher;
 
 import com.group.groupproject.dao.publisher.PublisherDao;
 import com.group.groupproject.entities.Publisher;
