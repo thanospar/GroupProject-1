@@ -24,13 +24,7 @@
 <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-        <style>
-            .admin {  display: flex;
-                      justify-content: flex-end;  }
-            .admin-color{background: #306C48 ;color:white;}
-            .width{width:40%;}
-            .chat{max-height:300px;overflow: auto;}
-        </style>
+       
     </head>
 
     <body ng-app="myApp" ng-controller="MainCtrl" ng-cloak>
@@ -52,7 +46,7 @@
                             <span id="loggedName" style="display:none"><security:authorize access="isAuthenticated()"><security:authentication property="principal.username" /></security:authorize></span>
 
                                 <div class="m-3" ng-if="loggedname">
-                                    <p class="d-inline">Hi! <span style="color: #306C48; text-transform: capitalize;">{{loggedname}}</span> </p>
+                                    <p class="d-inline ">Hi! <span style="color: #306C48; text-transform: capitalize;">{{loggedname}}</span> </p>
                                     <div class="d-inline" ng-if="notlogged === false">
                                         <button class="btn ml-2 mb-1" style="background-color:grey; color:white;" ng-click="clearSessionName()">Exit</button>
                                     </div>

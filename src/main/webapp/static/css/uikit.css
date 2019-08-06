@@ -1898,6 +1898,7 @@ select.uk-form-width-xsmall {
   margin: 0;
   /* 2 */
   border: none;
+  
   /* 3 */
 
   overflow: visible;
@@ -12343,3 +12344,9 @@ background-color: #306c49;
 .login{
     height:85.5vh;
 }
+
+.admin {  display: flex;
+          justify-content: flex-end;  }
+.admin-color{background: #306C48 ;color:white;}
+.width{width:40%;}
+.chat{max-height:300px;overflow: auto;}

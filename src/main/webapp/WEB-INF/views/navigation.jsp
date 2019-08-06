@@ -3,7 +3,7 @@
         style="position: fixed; top: 0px; width: 1265px;">
         <div class="uk-container uk-container-expand">
             <nav class="uk-navbar">
-                <div class="uk-navbar-center"><a href="" class="uk-navbar-item uk-logo"><img src="<c:url value='/static/images/booklogo.png' />" class="uk-margin-small-right" style="height:75px;">
+                <div class="uk-navbar-center"><a href="<c:url value='/' />" class="uk-navbar-item uk-logo"><img src="<c:url value='/static/images/booklogo.png' />" class="uk-margin-small-right" style="height:75px;">
                     </a></div>
                     <div class="uk-navbar-left">
                             <ul class="uk-navbar-nav">
@@ -20,10 +20,17 @@
                     <ul class="uk-navbar-nav ">
                         
                 
-                        <li><a href="<c:url value="/user/" />" uk-icon="icon: user"></a>
+                        <li><a href="<c:url value="/user/" />" ratio="1.2" uk-icon="icon: user"></a>
                         </li>
-                        <li><a  href="<c:url value="/user/" />" uk-icon="icon: cart"></a>
-                       
+                        <li><a  href="<c:url value="/user/" />"  ratio="1.2" uk-icon="icon: cart"><span class="uk-badge uk-padding-bottom">2</span></a>
+                       <div class="uk-navbar-dropdown">
+                                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: user"></span> Profile</a></li>
+                                                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Settings</a></li>
+                                                <li class="uk-nav-divider"></li>
+                                                <li><a href="<c:url value="/user/logout" />" ><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Log out</a></li>
+                                            </ul>
+                                        </div>
 
                         </li>
                     </ul>
@@ -49,7 +56,7 @@
             <a href="#"><span class="uk-margin-small-right" uk-icon="icon: info"></span>About</a>
             
         </li>
-        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: receiver"></span>Contact</a></li>
+        <li><a href="<c:url value='/chat/' />"><span class="uk-margin-small-right" uk-icon="icon: users"></span>Chat</a></li>
     </ul>
 </div>
     </div>

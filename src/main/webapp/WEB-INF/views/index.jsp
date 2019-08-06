@@ -172,7 +172,10 @@
                     </div>
                     <div>
                         <ul  class="uk-nav uk-nav-default  uk-nav-parent-icon uk-nav-center ">
-                            <li><img class="uk-align-center " data-src="<c:url value='/static/images/booklogowhite.png' />" width="131" height="100" alt="" uk-img> </li>
+                            <li><img class="uk-align-center  uk-margin-top " data-src="<c:url value='/static/images/booklogowhite.png' />" width="170" height="100" alt="" uk-img>
+                                                
+
+                            </li>
                             
 
 
