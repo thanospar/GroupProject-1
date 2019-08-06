@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 import javax.validation.Valid;
 import org.json.JSONArray;
@@ -80,6 +81,12 @@ public class HomeController {
         return "/singleproduct";
     }
 
+    @RequestMapping(value = {"cart/", "orderdetails/"}, method = RequestMethod.GET)
+    public String cart( ModelMap model) {
+
+        return "redirect:/shop";
+    }
+    
     @RequestMapping(value = {"cart/{ids}"}, method = RequestMethod.GET)
     public String cart(@PathVariable("ids") String ids, ModelMap model) {
 
