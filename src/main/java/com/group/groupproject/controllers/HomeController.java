@@ -58,7 +58,10 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
-
+         List<Book> books = bookService.findAllBooks();
+        
+        JSONArray booksArray = new JSONArray(books);
+        model.addAttribute("booksArray", booksArray);
         return "index";
     }
 

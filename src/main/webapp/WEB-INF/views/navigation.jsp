@@ -37,6 +37,7 @@
             
         </li>
         <li><a href="<c:url value='/chat/' />"><span class="uk-margin-small-right" uk-icon="icon: users"></span>Chat</a></li>
+        <li><a href="<c:url value='/newuser' />"><span class="uk-margin-small-right" uk-icon="icon: user"></span>Register</a></li>
     </ul>
         </div>
     </div>

@@ -64,7 +64,7 @@
 
                                     </div>
                                     <div class="uk-width-expand">
-                                        <h3 class="uk-card-title uk-margin-remove-bottom">Title</h3>
+                                        <h3 class="uk-card-title uk-margin-remove-bottom">{{user.firstName}} {{user.lastName}}</h3>
                                         <p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                             <div class="uk-card-footer">
-                                <a href="#" class="uk-button uk-button-text">Edit account</a>
+                               <a href="<c:url value="/user/logout" />">Logout</a>
                             </div>
                         </div>
 
@@ -115,13 +115,7 @@
                                             <th>Price</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <td>Table Footer</td>
-                                            <td>Table Footer</td>
-                                            <td>Table Footer</td>
-                                        </tr>
-                                    </tfoot>
+                                   
                                     <tbody>
                                         <tr ng-repeat="book in books">
                                             <td>{{book.title}}</td>

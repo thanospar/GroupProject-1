@@ -80,7 +80,7 @@
                                 </form:form>
                                 <div id="messeges">
 
-                                    <div ng-class="{ ' admin ':'{{message.name}}'=== '{{loggedname}}' }"  ng-repeat="message in messages| filter:{subject:subjectsel}">
+                                    <div ng-class="{ ' adminchat ':'{{message.name}}'=== '{{loggedname}}' }"  ng-repeat="message in messages| filter:{subject:subjectsel}">
 
                                         <div  ng-class="{ '  admin-color ':'{{message.name}}'=== '{{loggedname}}' }" class="width card  shadow m-1 ">
                                             <div class="card-body">

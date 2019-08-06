@@ -50,10 +50,12 @@
                 <div uk-slider>
                     <div class="uk-position-relative">
                         <div class="uk-slider-container uk-dark">
+                            
                             <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m">
-                                <li ng-repeat="book in books| filter :{title:titlesel, categories :{ category : categorysel }, authors :{ lastName : authorsel }}">
+                                <li ng-repeat="book in list ">
                                     <a href="<c:url value='/single-product-{{book.id}}' />" class=" ">
                                         <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
+                                             <div class="uk-card-badge uk-label uk-label-warning">Best Seller</div>
                                             <img class="product" src="<c:url value='/static/images/{{book.urlPath}}' />"  width="180" alt="" >
                                             <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default ">
                                                 <h4 class="uk-text-center uk-text-secondary uk-margin-small">{{book.title}}</h4>
@@ -115,6 +117,11 @@
                                                           myApp.controller("MainCtrl", ['$scope', '$http', mainCtrl]);
 
                                                           function mainCtrl($scope, $http) {
+                                                               $scope.books = ${booksArray};
+                                                               
+                                                               let listfiltered = $scope.books.filter(books => books.special === "Best Seller");
+                                                              
+                                                               $scope.list=listfiltered;
                                                               $scope.order = '-added';
                                                               if (sessionStorage.getItem('toBuy')) {
                                                                   $scope.toBuy = sessionStorage.getItem('toBuy');

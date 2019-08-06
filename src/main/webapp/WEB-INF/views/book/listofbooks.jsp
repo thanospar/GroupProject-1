@@ -77,7 +77,7 @@
                                             <c:forEach items="${books}" var="book">
                                             <tr>
                                                 <td>${book.title}</td>
-                                                <td>${book.summary}</td>
+                                                <td><div class="uk-overflow-auto uk-height-max-small" >${book.summary}</div></td>
                                                 <td>${book.isbn}</td>
                                                 <td>${book.yearPublished}</td>
                                                 <td><a href="<c:url value='formUpdateBook/${book.id}' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
