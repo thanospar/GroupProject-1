@@ -2,7 +2,7 @@
 
     <div class="uk-navbar-left uk-light">
 
-        <img class="uk-align-center " data-src="<c:url value='/static/images/booklogowhite.png' />" width="131" height="100" alt="" uk-img>
+    <img  class="uk-align-center " data-src="<c:url value='/static/images/booklogowhite.png' />" width="131" height="100" alt="" uk-img>
     </div>
     <ul class="uk-nav-default uk-nav-parent-icon uk-padding-small " uk-nav>
         <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: desktop"></span> Dashboard</a></li>

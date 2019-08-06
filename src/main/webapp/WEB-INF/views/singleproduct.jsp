@@ -20,9 +20,10 @@
   <link href="<c:url value='/static/css/uikit.css' />" rel="stylesheet"></link>
 
         <link href="https://fonts.googleapis.com/css?family=Audiowide&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="MainCtrl" ng-cloak>
     <!-- nav bar -->
     <%@include file="navigation.jsp" %>
 <!-- hero image -->
@@ -31,8 +32,8 @@
       
         <div class="uk-container ">
             <ul class="uk-breadcrumb">
-                <li><a href="">Home</a></li>
-                <li><a href="">Shop</a></li>
+                <li><a href="<c:url value='/' />">Home</a></li>
+                <li><a href="<c:url value='/shop' />">Shop</a></li>
                 <li><span>${book.title}</span></li>
             </ul>
 
@@ -77,7 +78,8 @@
             </div>
         </div>
 <!-- section -->
-
+<!-- footer -->
+        <%@include file="footer.jsp" %>
    
 
 
@@ -87,7 +89,26 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit-icons.min.js"></script> 
 
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+    <script>
 
+
+                                                          const myApp = angular.module("myApp", []);
+                                                          myApp.controller("MainCtrl", ['$scope', '$http', mainCtrl]);
+
+                                                          function mainCtrl($scope, $http) {
+                                                              $scope.order = '-added';
+                                                              if (sessionStorage.getItem('toBuy')) {
+                                                                  $scope.toBuy = sessionStorage.getItem('toBuy');
+
+                                                                  let countItems = $scope.toBuy.split(",");
+                                                                  document.getElementById("buyCount").innerText = countItems.length;
+                                                              } else {
+                                                                  document.getElementById("buyCount").innerText = 0;
+                                                              }
+
+
+                                                          }
+    </script>
         
 </body>
 
