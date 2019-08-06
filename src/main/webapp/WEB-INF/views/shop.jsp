@@ -66,7 +66,7 @@
                                         <div  class="uk-form-controls">
                                             <select class="uk-select" id="sel" ng-options="c for c in categories" ng-model="categorysel">
 
-                                                <option value="">All</option>
+                                                <!--<option value="">All</option>-->
                                             </select>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                         <div class="uk-form-controls">
                                             <select  class="uk-select" id="sel2" ng-options="a for a in authors" ng-model="authorsel">
 
-                                                <option value="">All</option>
+                                                <!--<option value="">All</option>-->
                                             </select>
 
                                         </div>
