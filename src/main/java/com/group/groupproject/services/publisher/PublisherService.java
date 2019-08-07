@@ -1,4 +1,4 @@
-package com.group.groupproject.services;
+package com.group.groupproject.services.publisher;
 
 import com.group.groupproject.entities.Publisher;
 import java.util.List;

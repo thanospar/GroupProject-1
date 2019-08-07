@@ -5,7 +5,7 @@ import com.group.groupproject.entities.Book;
 import com.group.groupproject.entities.Bought;
 import com.group.groupproject.entities.Invoice;
 import com.group.groupproject.entities.user.User;
-import com.group.groupproject.services.BookService;
+import com.group.groupproject.services.book.BookService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Autowired
     private InvoiceDao invoicedao;
-    
+
     @Autowired
     private BookService bookService;
 
@@ -39,7 +39,23 @@ public class InvoiceServiceImpl implements InvoiceService {
     public List<Invoice> findByUser(User user) {
         return invoicedao.findByUser(user);
     }
-    
+
+    @Override
+    @Transactional
+    public List<Book> findBooksBought(User user) {
+
+        List<Book> books = new ArrayList();
+        List<Invoice> invoices = findByUser(user);
+        List<Bought> boughts = new ArrayList();
+        for (Invoice inv : invoices) {
+            boughts.addAll(inv.getBoughts());
+        }
+        for (Bought bou : boughts) {
+            books.add(bou.getBook());
+        }
+        return books;
+    }
+
     @Override
     @Transactional
     public boolean saveInvoice(User user, String ids) {
@@ -48,10 +64,10 @@ public class InvoiceServiceImpl implements InvoiceService {
         invoice.setDate(LocalDate.now());
         invoice.setUser(user);
         List<Book> books = bookService.findBooksToBuy(ids);
-        
+
         List<Bought> boughts = new ArrayList();
-        for (Book b : books){
-            boughts.add(new Bought(b.getPrice(),b,invoice));
+        for (Book b : books) {
+            boughts.add(new Bought(b.getPrice(), b, invoice));
         }
         invoice.setBoughts(boughts);
         return invoicedao.saveInvoice(invoice);
@@ -68,7 +84,5 @@ public class InvoiceServiceImpl implements InvoiceService {
     public boolean deleteInvoice(Invoice invoice) {
         return invoicedao.deleteInvoice(invoice);
     }
-
-    
 
 }

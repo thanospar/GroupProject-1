@@ -2,8 +2,8 @@ package com.group.groupproject.controllers;
 
 import com.group.groupproject.entities.Author;
 import com.group.groupproject.entities.Book;
-import com.group.groupproject.services.AuthorService;
-import com.group.groupproject.services.BookService;
+import com.group.groupproject.services.author.AuthorService;
+import com.group.groupproject.services.book.BookService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

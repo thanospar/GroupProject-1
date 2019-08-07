@@ -5,7 +5,6 @@
 
 
 
-<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -32,59 +31,46 @@
 
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
 
-        <script>$(document).ready( function () {
-    $('#tbl').DataTable();
-        } );  </script>   
-        
+        <script>$(document).ready(function () {
+                $('#tbl').DataTable();
+            });</script>   
+
     </head>
 
     <body>
         <div>
             <!-- camvas -->
-             <%@include file="../user/camvas.jsp" %>
+            <%@include file="../user/camvas.jsp" %>
             <!-- main menu -->
             <div class="uk-grid uk-grid-collapse" uk-grid>
                 <%@include file="../user/authheader.jsp" %>	
                 <!-- table -->
 
                 <div class="uk-width-4-5 uk-width-expand@s admin">
-                   <%@include file="../user/adminHeader.jsp" %>
+                    <%@include file="../user/adminHeader.jsp" %>
                     <div id="main" class="uk-section">
                         <div  class="uk-container">
-                              <h3 class="uk-card-title na">Books</h3>
-                                 
-                            <div class="uk-card uk-card-default uk-card-body">
-                                <div class=" uk-padding-small ">
-                                   <a href="<c:url value='formAddBook' />"  class="uk-button uk-button-secondary  "  uk-toggle>Add new</a>
-                                   
-                                </div>
-                                   <h2>${isDone}</h2>
+                            <h3 class="uk-card-title na">Orders</h3>
                                 <table id="tbl" class="uk-table uk-table-hover uk-table-divider">
                                     <thead>
                                         <tr>
-                                            <th>Title</th>
-                                            <th>Summary</th>
-                                            <th>Isbn</th>
-                                            <th>Year</th>
-                                           
-                                            <th></th>
-                                            <th></th>
-
-                                        </tr>
+                                            <th>Id</th>
+                                            <th>Date of Order</th>
+                                            <th>Customer Last Name</th>
+                                            <th>Customer First Name</th>
+                                            
                                     </thead>
                                     <tbody>
-                                        
-                                            <c:forEach items="${books}" var="book">
+
+                                        <c:forEach items="${invoices}" var="invoice">
                                             <tr>
-                                                <td>${book.title}</td>
-                                                <td><div class="uk-overflow-auto uk-height-max-small" >${book.summary}</div></td>
-                                                <td>${book.isbn}</td>
-                                                <td>${book.yearPublished}</td>
-                                                <td><a href="<c:url value='formUpdateBook/${book.id}' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
-                                                <td><a href="<c:url value='deleteBook/${book.id}' />" style="color:red;" class="uk-align-center" uk-tooltip="Delete" uk-icon="icon: trash"></a></td>
+                                                <td>${invoice.id}</td>
+                                                <td>${invoice.date}</td>
+                                                <td>${invoice.user.lastName}</td>
+                                                <td>${invoice.user.firstName}</td>
                                             </tr>
                                         </c:forEach>
-                                        
+
 
 
                                     </tbody>
@@ -102,7 +88,9 @@
             </div>
 
         </div>
- 
+
     </body>
 
 </html>
+
+

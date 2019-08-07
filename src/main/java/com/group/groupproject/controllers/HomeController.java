@@ -1,15 +1,11 @@
 package com.group.groupproject.controllers;
 
 import com.group.groupproject.dao.publisher.PublisherDao;
-import com.group.groupproject.entities.Author;
 import com.group.groupproject.entities.Book;
-import com.group.groupproject.entities.Bought;
-import com.group.groupproject.entities.Invoice;
-import com.group.groupproject.entities.Publisher;
 import com.group.groupproject.entities.user.User;
 import com.group.groupproject.entities.user.UserProfile;
-import com.group.groupproject.services.AuthorService;
-import com.group.groupproject.services.BookService;
+import com.group.groupproject.services.author.AuthorService;
+import com.group.groupproject.services.book.BookService;
 import com.group.groupproject.services.invoice.InvoiceService;
 import com.group.groupproject.services.user.UserProfileService;
 import com.group.groupproject.services.user.UserService;
@@ -17,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 import javax.validation.Valid;
 import org.json.JSONArray;
@@ -33,6 +30,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -60,18 +58,22 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
-
+         List<Book> books = bookService.findAllBooks();
+        
+        JSONArray booksArray = new JSONArray(books);
+        model.addAttribute("booksArray", booksArray);
         return "index";
     }
 
     @GetMapping(value = "shop")
-    public String shop(ModelMap model) {
+    public String shop(@RequestParam(required = false) String search, ModelMap model) {
         List<Book> books = bookService.findAllBooks();
-
+        if (search != null) {
+            model.addAttribute("search", search);
+        }
         JSONArray booksArray = new JSONArray(books);
         model.addAttribute("booksArray", booksArray);
 
-        model.addAttribute("books", books);
         return "/shop";
     }
 
@@ -82,6 +84,12 @@ public class HomeController {
         return "/singleproduct";
     }
 
+    @RequestMapping(value = {"cart/", "orderdetails/"}, method = RequestMethod.GET)
+    public String cart( ModelMap model) {
+
+        return "redirect:/shop";
+    }
+    
     @RequestMapping(value = {"cart/{ids}"}, method = RequestMethod.GET)
     public String cart(@PathVariable("ids") String ids, ModelMap model) {
 
@@ -112,22 +120,16 @@ public class HomeController {
 
     @GetMapping(value = "userinfo")
     public String userInfo(ModelMap model) {
-User user = new User();
+        User user = new User();
         List<Book> books = new ArrayList();
         if (userService.findBySSO(getPrincipal()) != null) {
 
             user = userService.findBySSO(getPrincipal());
-            List<Invoice> invoices = invoiceService.findByUser(user);
-            List<Bought> boughts = new ArrayList();
-            for (Invoice inv : invoices) {
-                boughts.addAll(inv.getBoughts());
-            }
-            for (Bought bou : boughts) {
-                books.add(bou.getBook());
-            }
+            books = invoiceService.findBooksBought(user);
+
         }
         JSONArray booksArray = new JSONArray(books);
-        JSONObject  userObject = new JSONObject(user);
+        JSONObject userObject = new JSONObject(user);
         model.addAttribute("booksArray", booksArray);
         model.addAttribute("userObject", userObject);
         return "/userinfo";
