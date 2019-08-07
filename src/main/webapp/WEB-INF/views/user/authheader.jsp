@@ -42,12 +42,8 @@
 
             </ul>
         </li>
-        <li class="uk-parent"><a href="#"><span class="uk-margin-small-right" uk-icon="icon:  cart"></span> Orders </a>
+        <li><a href="<c:url value='/invoices/' />"><span class="uk-margin-small-right" uk-icon="icon:  cart"></span> Orders </a>
 
-            <ul class="uk-nav-sub">
-                <li><a href="#">Add new</a></li>
-                <li><a href="#">View all</a></li>
-            </ul>
         </li>
         <li class="uk-nav-divider"></li>
         <li><a href="<c:url value="/user/logout" />" ><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Log out</a></li>

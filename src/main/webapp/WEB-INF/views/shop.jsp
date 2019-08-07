@@ -66,7 +66,7 @@
                                         <div  class="uk-form-controls">
                                             <select class="uk-select" id="sel" ng-options="c for c in categories" ng-model="categorysel">
 
-                                                <option value="">All</option>
+                                                <!--<option value="">All</option>-->
                                             </select>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                         <div class="uk-form-controls">
                                             <select  class="uk-select" id="sel2" ng-options="a for a in authors" ng-model="authorsel">
 
-                                                <option value="">All</option>
+                                                <!--<option value="">All</option>-->
                                             </select>
 
                                         </div>
@@ -118,7 +118,7 @@
                                                 <img class="product" src="<c:url value='/static/images/{{book.urlPath}}' />"  width="180" alt="" >
                                                 <div ng-click="buyClicked($event)" class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default uk-padding-remove">
                                                     <p style="display:none">{{book.id}}</p>
-                                                    <a href="<c:url value='' />"  class="uk-button uk-button-primary uk-width-1-1 "><span class="uk-margin-small-right" uk-icon="icon: cart"></span>Buy now</a>
+                                                    <a href="#modal-center"  class="uk-button uk-button-primary uk-width-1-1 "uk-toggle><span class="uk-margin-small-right" uk-icon="icon: cart"></span>Buy now</a>
                                                 </div>
                                             </div>
                                         </a>
@@ -137,10 +137,22 @@
             </div>
         </div>
     <div id="my-id"></div>
-        <!-- footer -->
-        <%@include file="footer.jsp" %>
+    
+    <div id="modal-center" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+ <h4 class="uk-text-primary uk-text-center uk-margin">{{bcount}} item{{sletter}} added successfully to card!</h4>
+        <div class="uk-flex uk-flex-between">
+           
+             <button class="uk-button uk-button-default uk-modal-close" type="button">Continue shopping</button>
+    <a  href="<c:url value='/cart/{{toBuy}}' />"  class="uk-button uk-button-primary">Go to cart</a>
+  
+
+</div>
     </div>
 </div>
+        <!-- footer -->
+        <%@include file="footer.jsp" %>
+
 <!-- section -->
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -185,16 +197,21 @@
                                                     sessionStorage.setItem('toBuy', $scope.toBuy);
                                                     let countItems = $scope.toBuy.split(",");
 
-                                                    document.getElementById("buyCount").innerText = countItems.length;
+                                                  $scope.bcount=document.getElementById("buyCount").innerText = countItems.length;
+                                                  if ($scope.bcount>1){
+                                                      $scope.sletter="s";
+                                                      
+                                                  }
                                                 }
+                                                let bookie = ${booksArray};
+                                                $scope.books = bookie;
+                                                
 
-                                                $scope.books = ${booksArray};
-
-                                                let categoriesAll = $scope.books.map(book => book.categories[0].category).sort();
+                                                let categoriesAll = bookie.map(book => book.categories[0].category).sort();
                                                 let categoriesDistinct = [...new Set(categoriesAll)]
                                                 $scope.categories = categoriesDistinct;
                                                 
-                                                let authorsAll = $scope.books.map(book => book.authors[0].lastName).sort();
+                                                let authorsAll = bookie.map(book => book.authors[0].lastName).sort();
                                                 let authorsDistinct = [...new Set(authorsAll)]
                                                 $scope.authors = authorsDistinct;
 

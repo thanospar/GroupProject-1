@@ -173,7 +173,7 @@ public class AppController {
 	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
 	public String accessDeniedPage(ModelMap model) {
 		model.addAttribute("loggedinuser", getPrincipal());
-		return "user/accessDenied";
+		return "redirect:/userinfo";
 	}
 
 	/**

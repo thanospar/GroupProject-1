@@ -27,7 +27,12 @@ public class InvoiceDaoImpl extends AbstractDao<Integer, Invoice> implements Inv
     public List<Invoice> findAllInvoices() {
         
         Criteria criteria = createEntityCriteria();
-        return (List<Invoice>) criteria.list();
+        List<Invoice> invoices = (List<Invoice>) criteria.list();
+        for (int i = 0; i < invoices.size(); i++) {
+            Hibernate.initialize(invoices.get(i).getUser());
+            Hibernate.initialize(invoices.get(i).getBoughts());
+        }
+        return invoices;
     }
 
     @Override

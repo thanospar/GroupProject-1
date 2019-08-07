@@ -80,7 +80,7 @@
                                                 <td>${author.lastName}</td>
                                                 <td>${author.dateOfBirth}</td>
                                                 <td>${author.dateOfDeath}</td>
-                                                <td>${author.biography}</td>
+                                                <td><div class="uk-overflow-auto uk-height-max-small" >${author.biography}</div></td>
                                                 <td>${author.urlPath}</td>
 
                                                 <td><a href="<c:url value='formUpdateAuthor/${author.id}' />" style="color:green;" class="uk-align-center" uk-tooltip="Edit" uk-icon="icon: pencil"></a></td>  
